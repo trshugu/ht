@@ -9,6 +9,11 @@
 ・Qunit
 ・sinon.js
 =================================================
+backbone ワインセラーアプリ
+http://www.adobe.com/jp/devnet/html5/articles/backbone-cellar-pt1.html?sdid=IZXVD
+http://www.adobe.com/jp/devnet/html5/articles/backbone-cellar-pt2.html?sdid=IZXVD
+
+
 http://nayuta-works.com/study_angularjs/#/7
 http://alpha.mixi.co.jp/2011/10798/
 http://sinonjsdoc.readthedocs.org/en/latest/docs/sample/index.html
