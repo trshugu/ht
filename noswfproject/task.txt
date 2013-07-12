@@ -1,3 +1,14 @@
+◆action
+・menuを代替する
+＞・マウスオーバーエフェクトの調査
+
+・トップswfを代替する
+＞・クリッカブルマップ
+＞・画像の切り替え
+
+◆someday
+◆document
+=================================================
 ・CrossSlide
 https://github.com/tobia/CrossSlide
 http://www.hanemaru.com/itemcolumn/11CrossSlide01.html
@@ -8,10 +19,6 @@ http://webmarketing.mizukkou.com/2008/09/crossslide.html
 ・flashlike
 https://github.com/creatorish/flashlike
 
-
-
-menuを変更するために・・・
-あとトップ画にもクリッカブルが必要だった
 
 初期設定スタイルシートをリセットしたほうがいいらしい
 http://ascii.jp/elem/000/000/699/699842/index-3.html
@@ -30,6 +37,13 @@ http://kachibito.net/web-design/224-image-jquery-collection.html
 
 
 
+
+
+
+◆done===========================================
 ＊imgsizerで大きさ調整
 http://ascii.jp/elem/000/000/613/613028/index-3.html
 →IE7あたりの話らしい
+
+
+
