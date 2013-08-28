@@ -1,0 +1,21 @@
+{
+    "android": {
+        "profiles": {
+            "DEFAULT": {
+                "keystore": "./key", 
+                "keypass": "key", 
+                "keyalias": "key", 
+                "storepass": "key"
+            }
+        }, 
+        "sdk": "C:\\adt-bundle-windows-x86-20130522\\sdk"
+    }, 
+    "ios": {
+        "simulatorsdk": "6.1", 
+        "simulatorfamily": "iphone", 
+        "profiles": {
+            "DEFAULT": {}
+        }
+    }, 
+    "general": {}
+}
