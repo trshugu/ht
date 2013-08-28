@@ -637,3 +637,137 @@ ShellError: Failed when running java: Keystore file not found.
 ShellError: Failed when running java: Failed to load keystore data, is the store password correct?
 
 
+2013-08-28 16:20:13,542 [   INFO] Forge tools running at version 3.3.63
+2013-08-28 16:20:13,542 [  DEBUG] Checking for update zip...
+2013-08-28 16:20:15,055 [  DEBUG] Enabled platforms: ['android']
+2013-08-28 16:20:15,055 [WARNING] No profile DEFAULT found for android
+2013-08-28 16:20:15,056 [  DEBUG] Forge build tools version: 3.3.63
+2013-08-28 16:20:15,056 [  DEBUG] main: {"server": "https://trigger.io/api/"}
+2013-08-28 16:20:15,056 [  DEBUG] port: 38394
+2013-08-28 16:20:15,056 [  DEBUG] GET https://trigger.io/api/v1/auth/loggedin
+2013-08-28 16:20:17,270 [  DEBUG] Checking API response for success or error
+2013-08-28 16:20:17,270 [  DEBUG] already authenticated via cookie - continuing
+2013-08-28 16:20:17,270 [  DEBUG] POST https://trigger.io/api/v1/track/
+2013-08-28 16:20:17,270 [  DEBUG] <ForgeTask (android)> running...
+2013-08-28 16:20:17,272 [  DEBUG] <ForgeTask (android)> script:
+[{'do': {'package_android': ()}, 'when': {'platform_is': 'android'}}]
+2013-08-28 16:20:17,272 [  DEBUG] Checking to see if java is already in the PATH
+2013-08-28 16:20:17,272 [  DEBUG] Running: java -version
+2013-08-28 16:20:18,134 [  DEBUG] Can run java directly from PATH
+2013-08-28 16:20:18,134 [  DEBUG] Using configuration file value u'C:\\adt-bundle-windows-x86-20130522\\sdk' for android.sdk
+2013-08-28 16:20:59,279 [   INFO] Updating local config with {
+    "android.profiles.DEFAULT.keypass": "android", 
+    "android.profiles.DEFAULT.storepass": "android", 
+    "android.profiles.DEFAULT.keystore": "~/.android/debug.keystore", 
+    "android.profiles.DEFAULT.keyalias": "adbkey"
+}
+2013-08-28 16:20:59,279 [   INFO] Creating Android .apk file
+2013-08-28 16:20:59,280 [   INFO] Creating APK with aapt
+2013-08-28 16:20:59,282 [  DEBUG] Running: attrib +h C:\github\ht\trigger\hellapp\.lib
+2013-08-28 16:20:59,395 [  DEBUG] File: android-platform.apk, already downloaded and correct.
+2013-08-28 16:20:59,395 [  DEBUG] Running: C:\adt-bundle-windows-x86-20130522\sdk/build-tools\android-4.2.2\aapt.exe p -F c:\users\ka-suz~1\appdata\local\temp\tmp0k7gj5 -S development\android\res -M development\android\AndroidManifest.xml -I C:\github\ht\trigger\hellapp\.lib\android-platform.apk -A development\android\assets -0 "" --rename-manifest-package io.trigger.forgef203630a0f9411e398151231392b77b0 -f development\android\bin
+2013-08-28 16:21:00,809 [  DEBUG]     (skipping file '.do_not_use' due to ANDROID_AAPT_IGNORE pattern '.*')
+2013-08-28 16:21:01,124 [   INFO] Signing APK with your release key
+2013-08-28 16:21:01,125 [  DEBUG] Running: java -jar .template\lib\apk-signer.jar --keystore C:\github\ht\trigger\hellapp\~\.android\debug.keystore --storepass android --keyalias adbkey --keypass android --out c:\users\ka-suz~1\appdata\local\temp\tmpqrgrgt c:\users\ka-suz~1\appdata\local\temp\tmpnftmpd
+2013-08-28 16:21:01,937 [  DEBUG] Keystore file not found.
+2013-08-28 16:21:01,969 [  ERROR] Failed when running java: Keystore file not found.
+
+2013-08-28 16:21:01,969 [  DEBUG] Traceback (most recent call last):
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\async.py", line 106, in run
+    result = self._target(*self._args, **self._kwargs)
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\main.py", line 450, in package
+    build_to_run=build_to_run,
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\customer_goals.py", line 147, in package_app
+    build_to_run.run()
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\build.py", line 330, in run
+    self._call_with_params(task_method, task_args)
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\build.py", line 289, in _call_with_params
+    return method(self, *params)
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\android_tasks.py", line 813, in package_android
+    _sign_zipf_release(lib_path, jre, compressed_zipf_name, signed_zipf_name, signing_info)
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\android_tasks.py", line 495, in _sign_zipf_release
+    zipf_name=zipf_name,
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\android_tasks.py", line 469, in _sign_zipf
+    run_shell(*args)
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\module_dynamic\utils.py", line 346, in run_shell
+    output=state.output.getvalue()
+ShellError: Failed when running java: Keystore file not found.
+
+
+2013-08-28 16:22:17,953 [   INFO] Forge tools running at version 3.3.63
+2013-08-28 16:22:17,953 [  DEBUG] Checking for update zip...
+2013-08-28 16:22:18,180 [  DEBUG] Enabled platforms: ['android']
+2013-08-28 16:22:18,180 [WARNING] No profile DEFAULT found for android
+2013-08-28 16:22:18,180 [  DEBUG] Forge build tools version: 3.3.63
+2013-08-28 16:22:18,180 [  DEBUG] main: {"server": "https://trigger.io/api/"}
+2013-08-28 16:22:18,180 [  DEBUG] port: 38394
+2013-08-28 16:22:18,180 [  DEBUG] GET https://trigger.io/api/v1/auth/loggedin
+2013-08-28 16:22:20,293 [  DEBUG] Checking API response for success or error
+2013-08-28 16:22:20,293 [  DEBUG] already authenticated via cookie - continuing
+2013-08-28 16:22:20,293 [  DEBUG] POST https://trigger.io/api/v1/track/
+2013-08-28 16:22:20,293 [  DEBUG] <ForgeTask (android)> running...
+2013-08-28 16:22:20,293 [  DEBUG] <ForgeTask (android)> script:
+[{'do': {'package_android': ()}, 'when': {'platform_is': 'android'}}]
+2013-08-28 16:22:20,293 [  DEBUG] Checking to see if java is already in the PATH
+2013-08-28 16:22:20,293 [  DEBUG] Running: java -version
+2013-08-28 16:22:20,506 [  DEBUG] Can run java directly from PATH
+2013-08-28 16:22:20,506 [  DEBUG] Using configuration file value u'C:\\adt-bundle-windows-x86-20130522\\sdk' for android.sdk
+2013-08-28 16:22:49,888 [   INFO] Updating local config with {
+    "android.profiles.DEFAULT.keypass": "android", 
+    "android.profiles.DEFAULT.storepass": "android", 
+    "android.profiles.DEFAULT.keystore": "debug.keystore", 
+    "android.profiles.DEFAULT.keyalias": "androiddebugkey"
+}
+2013-08-28 16:22:49,888 [   INFO] Creating Android .apk file
+2013-08-28 16:22:49,897 [   INFO] Creating APK with aapt
+2013-08-28 16:22:49,898 [  DEBUG] Running: attrib +h C:\github\ht\trigger\hellapp\.lib
+2013-08-28 16:22:50,010 [  DEBUG] File: android-platform.apk, already downloaded and correct.
+2013-08-28 16:22:50,010 [  DEBUG] Running: C:\adt-bundle-windows-x86-20130522\sdk/build-tools\android-4.2.2\aapt.exe p -F c:\users\ka-suz~1\appdata\local\temp\tmp7njfed -S development\android\res -M development\android\AndroidManifest.xml -I C:\github\ht\trigger\hellapp\.lib\android-platform.apk -A development\android\assets -0 "" --rename-manifest-package io.trigger.forgef203630a0f9411e398151231392b77b0 -f development\android\bin
+2013-08-28 16:22:50,674 [  DEBUG]     (skipping file '.do_not_use' due to ANDROID_AAPT_IGNORE pattern '.*')
+2013-08-28 16:22:50,937 [   INFO] Signing APK with your release key
+2013-08-28 16:22:50,937 [  DEBUG] Running: java -jar .template\lib\apk-signer.jar --keystore C:\github\ht\trigger\hellapp\debug.keystore --storepass android --keyalias androiddebugkey --keypass android --out c:\users\ka-suz~1\appdata\local\temp\tmplpccfe c:\users\ka-suz~1\appdata\local\temp\tmpbvqwgb
+2013-08-28 16:22:51,150 [  DEBUG] Keystore file not found.
+2013-08-28 16:22:51,153 [  ERROR] Failed when running java: Keystore file not found.
+
+2013-08-28 16:22:51,153 [  DEBUG] Traceback (most recent call last):
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\async.py", line 106, in run
+    result = self._target(*self._args, **self._kwargs)
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\main.py", line 450, in package
+    build_to_run=build_to_run,
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\customer_goals.py", line 147, in package_app
+    build_to_run.run()
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\build.py", line 330, in run
+    self._call_with_params(task_method, task_args)
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\build.py", line 289, in _call_with_params
+    return method(self, *params)
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\android_tasks.py", line 813, in package_android
+    _sign_zipf_release(lib_path, jre, compressed_zipf_name, signed_zipf_name, signing_info)
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\android_tasks.py", line 495, in _sign_zipf_release
+    zipf_name=zipf_name,
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\android_tasks.py", line 469, in _sign_zipf
+    run_shell(*args)
+  File "C:\github\ht\trigger\hellapp\.template\generate_dynamic\module_dynamic\utils.py", line 346, in run_shell
+    output=state.output.getvalue()
+ShellError: Failed when running java: Keystore file not found.
+
+
+2013-08-28 16:23:22,704 [   INFO] Forge tools running at version 3.3.63
+2013-08-28 16:23:22,706 [  DEBUG] Checking for update zip...
+2013-08-28 16:23:22,931 [  ERROR] Something went wrong that we didn't expect:
+2013-08-28 16:23:22,931 [  ERROR] Invalid \escape: line 5 column 32 (char 97)
+2013-08-28 16:23:22,934 [  DEBUG] Traceback (most recent call last):
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\async.py", line 106, in run
+    result = self._target(*self._args, **self._kwargs)
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\main.py", line 445, in package
+    extra_args=unhandled_args,
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\build.py", line 90, in create_build
+    local_config = build_config.load_local()
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\build_config.py", line 80, in load_local
+    local_config_dict = json.loads(local_configs)
+  File "C:\opt\toolkit\trigger-toolkit\dist\build\pyi.win32\forge\outPYZ1.pyz/json", line 326, in loads
+  File "C:\opt\toolkit\trigger-toolkit\dist\build\pyi.win32\forge\outPYZ1.pyz/json.decoder", line 366, in decode
+  File "C:\opt\toolkit\trigger-toolkit\dist\build\pyi.win32\forge\outPYZ1.pyz/json.decoder", line 382, in raw_decode
+ValueError: Invalid \escape: line 5 column 32 (char 97)
+
+2013-08-28 16:23:22,934 [  ERROR] See C:\github\ht\trigger\hellapp\forge-error.log for more details
+2013-08-28 16:23:22,934 [  ERROR] Please contact support@trigger.io

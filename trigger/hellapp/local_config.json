@@ -2,10 +2,10 @@
     "android": {
         "profiles": {
             "DEFAULT": {
-                "keystore": "./key", 
-                "keypass": "key", 
-                "keyalias": "key", 
-                "storepass": "key"
+                "keystore": "C:/Users/ka-suzuki/.android/debug.keystore", 
+                "keypass": "android", 
+                "keyalias": "androiddebugkey", 
+                "storepass": "android"
             }
         }, 
         "sdk": "C:\\adt-bundle-windows-x86-20130522\\sdk"
