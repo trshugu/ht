@@ -771,3 +771,45 @@ ValueError: Invalid \escape: line 5 column 32 (char 97)
 
 2013-08-28 16:23:22,934 [  ERROR] See C:\github\ht\trigger\hellapp\forge-error.log for more details
 2013-08-28 16:23:22,934 [  ERROR] Please contact support@trigger.io
+2013-09-16 21:58:13,174 [   INFO] Forge tools running at version 3.3.64
+2013-09-16 21:58:13,176 [  DEBUG] Checking for update zip...
+2013-09-16 21:58:13,184 [  DEBUG] Forge build tools version: 3.3.64
+2013-09-16 21:58:13,184 [  DEBUG] main: {"server": "https://trigger.io/api/"}
+2013-09-16 21:58:13,186 [  DEBUG] port: 38394
+2013-09-16 21:58:13,186 [  DEBUG] GET https://trigger.io/api/v1/version_check/3/3/64/
+2013-09-16 21:58:15,186 [  DEBUG] Checking API response for success or error
+2013-09-16 21:58:15,186 [   INFO] Update result: you already have the latest tools
+2013-09-16 21:58:15,190 [  DEBUG] GET https://trigger.io/api/v1/auth/loggedin
+2013-09-16 21:58:15,404 [  DEBUG] Checking API response for success or error
+2013-09-16 21:58:41,456 [   INFO] authenticating as "s_zk@yahoo.co.jp"
+2013-09-16 21:58:41,457 [  DEBUG] GET https://trigger.io/api/v1/auth/hello
+2013-09-16 21:58:41,671 [  DEBUG] Checking API response for success or error
+2013-09-16 21:58:41,671 [  DEBUG] POST https://trigger.io/api/v1/auth/verify
+2013-09-16 21:58:42,033 [  DEBUG] Checking API response for success or error
+2013-09-16 21:58:42,036 [   INFO] authentication successful
+2013-09-16 21:58:42,038 [  DEBUG] GET https://trigger.io/api/v1/app/f203630a0f9411e398151231392b77b0/should_fetch_core_instructions
+2013-09-16 21:58:42,252 [  DEBUG] Checking API response for success or error
+2013-09-16 21:58:42,539 [  DEBUG] configuration is identical to last run
+2013-09-16 21:58:42,539 [  DEBUG] POST https://trigger.io/api/v1/reload/buildevent/create
+2013-09-16 21:58:42,802 [  DEBUG] Checking API response for success or error
+2013-09-16 21:58:42,802 [   INFO] Your app configuration has changed since your last build of this platform, performing a remote build of your app. Once this is downloaded future builds will be faster.
+2013-09-16 21:58:42,803 [   INFO] Starting new build
+2013-09-16 21:58:42,806 [   INFO] This could take a while, but will only happen again if you modify config.json
+2013-09-16 21:58:42,809 [  DEBUG] POST https://trigger.io/api/v1/app/f203630a0f9411e398151231392b77b0/build
+2013-09-16 21:59:42,971 [  DEBUG] Checking API response for success or error
+2013-09-16 21:59:42,971 [  ERROR] POST to app/f203630a0f9411e398151231392b77b0/build failed: <Response [404]>
+2013-09-16 21:59:42,974 [  DEBUG] Traceback (most recent call last):
+  File "C:\Users\trahugu\AppData\Local\Trigger Toolkit\build-tools\forge\async.py", line 106, in run
+    result = self._target(*self._args, **self._kwargs)
+  File "C:\Users\trahugu\AppData\Local\Trigger Toolkit\build-tools\forge\main.py", line 377, in development_build
+    build = remote.build(config=reload_config, target=target)
+  File "C:\Users\trahugu\AppData\Local\Trigger Toolkit\build-tools\forge\remote.py", line 740, in build
+    build = self._request_development_build(config, target, id=build.get('id', None))
+  File "C:\Users\trahugu\AppData\Local\Trigger Toolkit\build-tools\forge\remote.py", line 718, in _request_development_build
+    return self._api_post(url, data=data)
+  File "C:\Users\trahugu\AppData\Local\Trigger Toolkit\build-tools\forge\remote.py", line 475, in _api_post
+    _check_api_response_for_error(url, 'POST', resp)
+  File "C:\Users\trahugu\AppData\Local\Trigger Toolkit\build-tools\forge\remote.py", line 136, in _check_api_response_for_error
+    raise RequestError(resp, msg)
+RequestError: POST to app/f203630a0f9411e398151231392b77b0/build failed: <Response [404]>
+
