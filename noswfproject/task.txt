@@ -32,8 +32,6 @@ http://phpspot.org/blog/archives/2011/05/jqueryimagemaps.html
 クリッカプラグイン
 http://bost.bostudio.co.jp/2013/02/responsive-image-maps.html
 
-マウスオーバーエフェクトというらしい
-http://kachibito.net/web-design/224-image-jquery-collection.html
 
 
 
@@ -45,5 +43,7 @@ http://kachibito.net/web-design/224-image-jquery-collection.html
 http://ascii.jp/elem/000/000/613/613028/index-3.html
 →IE7あたりの話らしい
 
+マウスオーバーエフェクトというらしい
+http://kachibito.net/web-design/224-image-jquery-collection.html
 
 
