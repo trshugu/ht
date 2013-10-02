@@ -1,7 +1,7 @@
 /*
 */
 $(document).ready(function() {
-	$("#tmp");
+  $("#tmp");
 });
 
 
@@ -76,19 +76,19 @@ document.write(obj.obj + "<br>");
 // クロージャオンクリックのテスト
 window.onload = function()
 {
-	document.getElementById('btn').onclick = setButtonState();
+  document.getElementById('btn').onclick = setButtonState();
 
-	function setButtonState()
-	{
-		var flag = false;
-		var btn = document.getElementById('btn');
+  function setButtonState()
+  {
+    var flag = false;
+    var btn = document.getElementById('btn');
 
-		return function()
-		{
-			flag = !flag;
-			this.value = flag ? "有効" : "無効";
-		};
-	}
+    return function()
+    {
+      flag = !flag;
+      this.value = flag ? "有効" : "無効";
+    };
+  }
 }
 */
 
@@ -97,11 +97,11 @@ window.onload = function()
 /*
 // BSD/オールマンでクロージャを使ったときの挙動
 function newCounter() {
-	var i = 0;
-	return function() { // 無名関数
-		i = i + 1;
-		return i;
-	}
+  var i = 0;
+  return function() { // 無名関数
+    i = i + 1;
+    return i;
+  }
 }
  
 c1 = newCounter();
@@ -111,12 +111,12 @@ document.write(c1() + "<br>")
 
 function newCounterAllman()
 {
-	var i = 0;
-	return function() // 無名関数
-	{
-		i = i + 1;
-		return i;
-	}
+  var i = 0;
+  return function() // 無名関数
+  {
+    i = i + 1;
+    return i;
+  }
 }
  
 d1 = newCounterAllman();
@@ -131,16 +131,16 @@ document.write(d1() + "<br>")
 Object.prototype.hoge = function() {};
 
 var assoc = {
-	foo: 1,
-	bar: 2,
-	baz: 3
+  foo: 1,
+  bar: 2,
+  baz: 3
 };
 
 for ( var i in assoc ) {
-	// よってhasOwnProperty()で自分自身のメンバ変数かを確認する
-	if ( assoc.hasOwnProperty(i) === true ) {
-		document.write(i + assoc[i] + "<br>");
-	}
+  // よってhasOwnProperty()で自分自身のメンバ変数かを確認する
+  if ( assoc.hasOwnProperty(i) === true ) {
+    document.write(i + assoc[i] + "<br>");
+  }
 }
 */
 
@@ -148,28 +148,28 @@ for ( var i in assoc ) {
 /*
 // draggable
 $(document).ready(function() {
-	$("#tmp").draggable({ distance: 20 });
+  $("#tmp").draggable({ distance: 20 });
 });
 */
 
 /*
 // prev + next
 $(document).ready(function() {
-	$(".prev + .next").css("border", "3px solid red");
+  $(".prev + .next").css("border", "3px solid red");
 });
 */
 
 /*
 // 名前をセレクタで
 $(document).ready(function() {
-	$("input[name=ttb]").css("border", "3px solid red");
+  $("input[name=ttb]").css("border", "3px solid red");
 });
 */
 
 /*
 // classを追加する運用だといいという
 $(document).ready(function() {
-	$(".tmp:odd").css({color: "#f00"}).addClass("odd-view");
+  $(".tmp:odd").css({color: "#f00"}).addClass("odd-view");
 });
 */
 
@@ -177,7 +177,7 @@ $(document).ready(function() {
 /*
 // css
 $(document).ready(function() {
-	$("#tmp").css({color: "#f00"});
+  $("#tmp").css({color: "#f00"});
 });
 
 */
@@ -186,7 +186,7 @@ $(document).ready(function() {
 /*
 // tmpを使用する運用に
 $(document).ready(function() {
-	$("#tmp").click( function(){$(this).slideToggle("slow");} );
+  $("#tmp").click( function(){$(this).slideToggle("slow");} );
 });
 
 */
@@ -230,7 +230,7 @@ alert(allman());
 /*
 // datatable
 $(document).ready( function() {
-	$("#example").dataTable();
+  $("#example").dataTable();
 } );
 */
 
@@ -239,33 +239,33 @@ $(document).ready( function() {
 // datatableサンプル
 function fnFeaturesInit ()
 {
-	// Not particularly modular this - but does nicely :-)
-	$('ul.limit_length>li').each( function(i) {
-		if ( i > 10 ) {
-			this.style.display = 'none';
-		}
-	} );
-	
-	$('ul.limit_length').append( '<li class="css_link">Show more<\/li>' );
-	$('ul.limit_length li.css_link').click( function () {
-		$('ul.limit_length li').each( function(i) {
-			if ( i > 5 ) {
-				this.style.display = 'list-item';
-			}
-		} );
-		$('ul.limit_length li.css_link').css( 'display', 'none' );
-	} );
+  // Not particularly modular this - but does nicely :-)
+  $('ul.limit_length>li').each( function(i) {
+    if ( i > 10 ) {
+      this.style.display = 'none';
+    }
+  } );
+  
+  $('ul.limit_length').append( '<li class="css_link">Show more<\/li>' );
+  $('ul.limit_length li.css_link').click( function () {
+    $('ul.limit_length li').each( function(i) {
+      if ( i > 5 ) {
+        this.style.display = 'list-item';
+      }
+    } );
+    $('ul.limit_length li.css_link').css( 'display', 'none' );
+  } );
 }
 
 $(document).ready( function() {
-	fnFeaturesInit();
-	$('#example').dataTable( {
-		"bJQueryUI": true,
-		"sPaginationType": "full_numbers"
-	} );
-	
-	SyntaxHighlighter.config.clipboardSwf = 'media/javascript/syntax/clipboard.swf';
-	SyntaxHighlighter.all();
+  fnFeaturesInit();
+  $('#example').dataTable( {
+    "bJQueryUI": true,
+    "sPaginationType": "full_numbers"
+  } );
+  
+  SyntaxHighlighter.config.clipboardSwf = 'media/javascript/syntax/clipboard.swf';
+  SyntaxHighlighter.all();
 } );
 */
 

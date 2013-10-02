@@ -6,14 +6,52 @@
 
 <style type="text/css"></style>
 <script type="text/javascript">
+
 $(document).ready(function() {
   $("#tmp").css("color","#f00");
+  new FlashLike(
+    [ 
+      { 
+        url: "image2.jpg",
+        fadeIn: 1000,
+        wait: 2000,
+        live: 1
+      },
+      {
+        url: "image3.jpg",
+        fadeIn: 1000,
+        wait: 2000,
+        live: 1
+      },
+      {
+        url: "image1.jpg",
+        fadeIn: 1000,
+        wait: 2000,
+        top: 10,
+        left: 10,
+        link: "#"
+      }
+    ],
+    {
+      id: "flashlike",
+      width: 60,
+      height: 40,
+      loader: "ajax-loader.gif",
+      loaderWidth: 35,
+      loaderHeight: 35,
+      scene: 0,
+      loop: false
+    }
+  );
 });
+
+
 </script>
 
 </head><body>
 <!--
 -->
+<div id="flashlike"><img src="image1.jpg" /></div>
 
 <div id="tmp">tmp</div>
 

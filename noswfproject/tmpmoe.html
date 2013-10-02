@@ -4,20 +4,29 @@
 
 
 <style type="text/css">
+.menu {position:relative;}
 
+.menu .hover {
+  position:absolute;
+  top:0px;
+  left:0px;
+  float:left;
+  display:none;
+}
 </style>
 <script type="text/javascript">
 
 $(document).ready(function() {
   $("#tmp").css("color","#f00");
   
-  $("#tmp").hover(
-    function () {
-      $("#img").fadeIn("slow");
-    },
-    function () {
-      $("#img").fadeOut("slow");
-    }
+  $("#info").hover(
+    function () {$("#" + this.id + " .hover").fadeIn("slow");},
+    function () {$("#" + this.id + " .hover").fadeOut("fast");}
+  );
+
+  $("#dis").hover(
+    function () {$("#" + this.id + " .hover").fadeIn("slow");},
+    function () {$("#" + this.id + " .hover").fadeOut("fast");}
   );
 });
 
@@ -27,11 +36,22 @@ $(document).ready(function() {
 <!--
 -->
 
-<div id="tmp" style="position:relative">
-  <img src="image1.jpg">
-  <div id="img" style="position:absolute;top:0px;left:0px;float:left;display:none;"><img src="image2.jpg"></div>
-</div>
+<span id="info" class="menu">
+  <a href="#">
+    <img src="image1.jpg">
+    <img class="hover" src="image2.jpg">
+  </a>
+</span>
 
+<span id="dis" class="menu">
+  <a href="#">
+    <img src="image3.jpg">
+    <img class="hover" src="image1.jpg">
+  </a>
+</span>
+<br>
+<br>
+<br>
 ‚ ‚ ‚ 
 
 
