@@ -5,7 +5,7 @@
 
 <style type="text/css">
 .nord{display:none}
-.cont{display:none}
+.leaf{display:none}
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -13,11 +13,11 @@ $(document).ready(function() {
   
   $(".nords").on("click", function() {
     $(this).nextAll().slideToggle();
-    $(this).nextAll().children().slideUp();
+    $(this).nextAll().children().nextAll().slideUp();
   });
   
-  $(".nord").on("click", function() {
-    $(this).children().slideToggle();
+  $(".head").on("click", function() {
+    $(this).nextAll().slideToggle();
   });
   
   $('#accordionui').accordion({header: "h3"});
@@ -36,22 +36,25 @@ $(document).ready(function() {
 ‚ ‚ ‚ <br>
 <div class="accordion">
   <div class="nords">toptop</div>
-  <div class="nord">111
-    <div class="cont">content</div>
-    <div class="cont">content</div>
-    <div class="cont">content</div>
+  <div class="nord">
+    <div class="head">111</div>
+    <div class="leaf">content</div>
+    <div class="leaf">content</div>
+    <div class="leaf">content</div>
   </div>
-  <div class="nord">222
-    <div class="cont">content</div>
-    <div class="cont">content</div>
-    <div class="cont">content</div>
-    <div class="cont">content</div>
+  <div class="nord">
+    <div class="head">222</div>
+    <div class="leaf">content</div>
+    <div class="leaf">content</div>
+    <div class="leaf">content</div>
+    <div class="leaf">content</div>
   </div>
-  <div class="nord">3333
-    <div class="cont">content</div>
-    <div class="cont">content</div>
-    <div class="cont">content</div>
-    <div class="cont">content</div>
+  <div class="nord">
+    <div class="head">3333</div>
+    <div class="leaf">content</div>
+    <div class="leaf">content</div>
+    <div class="leaf">content</div>
+    <div class="leaf">content</div>
   </div>
 </div>
 <br>
