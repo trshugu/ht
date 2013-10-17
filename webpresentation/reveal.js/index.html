@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      reveal.js - The HTML Presentation Framework
+    </title>
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="width=(device-width, initial-scale=1.0, maximum-scale=1.0,)user-scalable=no" name="viewport">
+      <link href="css/reveal.min.css" rel="stylesheet">
+        <link href="css/theme/default.css" id="theme" rel="stylesheet">
+          <!--For syntax highlighting-->
+          <link href="lib/css/zenburn.css" rel="stylesheet">
+            <!--If the query includes 'print-pdf', use the PDF print sheet-->
+            <script type="text/javascript">
+              | document.write( '' );
+                /![if lt IE 9]
+              | <script src="lib/js/html5shiv.js"></script>
+            </script>
+          </link>
+        </link>
+      </link>
+    </meta>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>
+            Reveal.js
+          </h1>
+          <h3>
+            HTML Presentations Made Easy
+          </h3>
+          <p>
+            <small>Created byあああいいう<a href="http://hakim.se"></a>\/<a href="http://twitter.com/hakimel"></a></small>
+          </p>
+        </section>
+        <section>
+          <h2>
+            Heads Up
+          </h2>
+          <p>
+            reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser withsupport for CSS 3D transforms to see it in its full glory.
+          </p>
+          <aside class="notes">
+            Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+          </aside>
+        </section>
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script type="text/javascript">
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+      
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+      
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+  </body>
+</html>

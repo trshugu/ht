@@ -1,3 +1,11 @@
+reveal.js
+http://qiita.com/ryurock/items/9c6de36b9d6a716e7992
+http://takazudo.github.io/presentation-oocss-sass/#/
+https://github.com/hakimel/reveal.js/
+http://lab.hakim.se/reveal-js/#/
+
+
+
 3D‚ÈƒvƒŒƒ[ƒ“
 http://dontkry.com/jmpress.js/
 3D‚ÈƒvƒŒƒ[ƒ“
