@@ -1,11 +1,114 @@
-﻿doctype html
+doctype html
 html
   head
-    meta charset="utf-8"
+    meta charset="utf-8"/
     title asdfadsf
   body.sample
     
-
+    / 埋め込みエンジン
+      ruby:
+        @aaa="asdf"
+      
+      h1 ああ#{@aaa}あああ
+    
+    / アスタリスクによってハッシュ
+      .card*{'data-url'=>333, 'data-id'=>111} ペア
+    
+    / 属性の結合
+      a.menu class="highlight" href="http://slim-lang.com/" Slim-lang.com
+      a class=["menu","highlight"]
+      a class=:menu,:highlight
+    
+    / 属性値の true, false や nil は真偽値として 評価される
+      input type="text" disabled="disabled"
+      input type="text" disabled=true
+      input(type="text" disabled)
+      
+      input type="text"
+      input type="text" disabled=false
+      input type="text" disabled=nil
+    
+    
+    / =のあとに直接rbコードを用いた属性
+      a href=("asdf".class)
+    
+    / 属性をバックスラッシュで改行
+      img alt="あいう\
+      えと"
+    
+    / 属性値はデフォルトでエスケープされる
+      a href="&amp;"
+      a href=="&amp;"
+    
+    
+    / 属性を囲んだ場合複数行で書ける
+      h2[id="att"
+        class="klass"
+        style="color:#111;"]
+          | あああ
+    
+    / インラインタグ
+      ul
+        li.first: a href="/a" A リンク
+        li: a[href="/b"] B リンク
+    
+    
+    / 両方
+      a<> href='url1' Link1
+    
+    / 末尾にスペース
+      a> href='url1' Link1
+      a> href='url2' Link2
+    
+    / 先頭にスペース
+      a< href='url1' Link1
+      a< href='url2' Link2
+    
+    
+    / 閉じタグ
+      .klass/
+    
+    / IE コンディショナルコメント
+      /[if IE]
+        p もっと良いブラウザを使ってください。
+    
+    
+    / htmlエスケープなし出力
+      == "asdf" \
+         .class
+      
+      == "<br>"
+      =  "<br>"
+    
+    / 出力
+      = "asdf" \
+         .class
+    
+    / 制御コード
+      - if 1 != 1
+        | ftur
+      - else
+        | fale
+    
+    
+    / 行コピー
+      
+      '
+        かいぎょう１
+        かいぎょう２
+      p
+        | あああ
+      
+      p
+        ' いいい
+    
+    / パイプはコピー
+      p
+        | pipe<br>
+          doあい
+            doあい
+          doあい
+    
     /#contents
     /  h1 Sample File
     / img src="http://www.e2esound.com/images/yterajima.jpg" alt="terjima"

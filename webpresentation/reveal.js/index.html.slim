@@ -17,7 +17,8 @@ html
     javascript:
       document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
 
-    /![if lt IE 9] <script src="lib/js/html5shiv.js"></script> [endif]
+    /[if lt IE 9]
+      | <script src="lib/js/html5shiv.js"></script>
   body
     .reveal
       .slides
@@ -29,6 +30,10 @@ html
               | Created byあああいいう
               a href="http://hakim.se" sd
               a href="http://twitter.com/hakimel"
+          p 
+            | あか<br>
+              いい
+              e
         
         section
           h2 Heads Up
