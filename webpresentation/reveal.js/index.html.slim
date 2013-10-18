@@ -2,30 +2,32 @@ doctype html
 html
   head
     meta charset="utf-8"
-    title reveal.js - The HTML Presentation Framework
+    title The HTML Presentation Framework
     meta content="yes" name="apple-mobile-web-app-capable"
     meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"
     meta content="width=(device-width, initial-scale=1.0, maximum-scale=1.0,)user-scalable=no" name="viewport"
-      link href="css/reveal.min.css" rel="stylesheet"
-        link#theme href="css/theme/default.css" rel="stylesheet"
-          /! For syntax highlighting
-          link href="lib/css/zenburn.css" rel="stylesheet"
-            /! If the query includes 'print-pdf', use the PDF print sheet
-            javascript:
-              | document.write( '' );
-                /![if lt IE 9]
-              | <script src="lib/js/html5shiv.js"></script>
+    
+    link href="css/reveal.min.css" rel="stylesheet"
+    link#theme href="css/theme/default.css" rel="stylesheet"
+    
+    /! For syntax highlighting
+    link href="lib/css/zenburn.css" rel="stylesheet"
+    
+    /! If the query includes 'print-pdf', use the PDF print sheet
+    javascript:
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+
+    /![if lt IE 9] <script src="lib/js/html5shiv.js"></script> [endif]
   body
     .reveal
       .slides
         section
-          h1 Reveal.js
+          h1 Revあ
           h3 HTML Presentations Made Easy
           p
             small
               | Created byあああいいう
-              a href="http://hakim.se"
-              | \/
+              a href="http://hakim.se" sd
               a href="http://twitter.com/hakimel"
         
         section
@@ -36,6 +38,11 @@ html
           aside.notes
             | Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
         
+    
+    
+    
+    
+    /! script
     script src="lib/js/head.min.js"
     script src="js/reveal.min.js"
     javascript:
