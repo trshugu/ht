@@ -19,6 +19,7 @@ html
 
     /[if lt IE 9]
       | <script src="lib/js/html5shiv.js"></script>
+    
   body
     .reveal
       .slides
@@ -50,6 +51,7 @@ html
     /! script
     script src="lib/js/head.min.js"
     script src="js/reveal.min.js"
+    script src="remotes.ne.min.js"
     javascript:
       Reveal.initialize({
         controls: true,
@@ -70,5 +72,27 @@ html
           { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
         ]
       });
-
-
+      
+      new Remotes("preview")
+      .on("swipe-left", function(e){ 
+      /* what happens when i swipe left on my phone? */ 
+        Reveal.left();
+      })
+      .on("swipe-right", function(e){ 
+        /* what happens when i swipe right on my phone? */ 
+      })
+      .on("swipe-up", function(e){ 
+        /* let's go up */ 
+      })
+      .on("swipe-down", function(e){ 
+        /* it's going down */ 
+      })
+      .on("tap", function(e){ 
+        /* and the screen explodes */ 
+      })
+      .on("hold", function(e){ 
+        /* hold on */ 
+      })
+      .on("release", function(e){ 
+        /* hands off */ 
+      }); 

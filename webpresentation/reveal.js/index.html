@@ -51,6 +51,7 @@
     <!--script-->
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.min.js"></script>
+    <script src="remotes.ne.min.js"></script>
     <script type="text/javascript">
       Reveal.initialize({
         controls: true,
@@ -71,6 +72,30 @@
           { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
         ]
       });
+      
+      new Remotes("preview")
+      .on("swipe-left", function(e){ 
+      /* what happens when i swipe left on my phone? */ 
+        Reveal.left();
+      })
+      .on("swipe-right", function(e){ 
+        /* what happens when i swipe right on my phone? */ 
+      })
+      .on("swipe-up", function(e){ 
+        /* let's go up */ 
+      })
+      .on("swipe-down", function(e){ 
+        /* it's going down */ 
+      })
+      .on("tap", function(e){ 
+        /* and the screen explodes */ 
+      })
+      .on("hold", function(e){ 
+        /* hold on */ 
+      })
+      .on("release", function(e){ 
+        /* hands off */ 
+      }); 
     </script>
   </body>
 </html>
