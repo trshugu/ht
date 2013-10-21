@@ -51,7 +51,6 @@
     <!--script-->
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.min.js"></script>
-    <script src="remotes.ne.min.js"></script>
     <script type="text/javascript">
       Reveal.initialize({
         controls: true,
@@ -69,18 +68,19 @@
           { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
           { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
         ]
       });
       
       new Remotes("preview")
       .on("swipe-left", function(e){ 
       /* what happens when i swipe left on my phone? */ 
-        Reveal.left();
+        Reveal.next();
       })
       .on("swipe-right", function(e){ 
         /* what happens when i swipe right on my phone? */ 
-        Reveal.right();
+        Reveal.prev();
       })
       .on("swipe-up", function(e){ 
         /* let's go up */ 
@@ -90,6 +90,7 @@
       })
       .on("tap", function(e){ 
         /* and the screen explodes */ 
+        Reveal.toggleOverview();
       })
       .on("hold", function(e){ 
         /* hold on */ 

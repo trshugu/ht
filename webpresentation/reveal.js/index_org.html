@@ -32,7 +32,6 @@
             <small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
           </p>
         </section>
-
         <section>
           <h2>Heads Up</h2>
           <p>
@@ -348,7 +347,9 @@ function linkify( selector ) {
         progress: true,
         history: true,
         center: true,
-        
+        keyboard: {
+          13: function(){ Reveal.getCurrentSlide() }
+        },
         theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
         transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
         
@@ -362,6 +363,7 @@ function linkify( selector ) {
           { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
         ]
       });
+      
     </script>
 
   </body>

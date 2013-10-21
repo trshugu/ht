@@ -1,0 +1,164 @@
+◆Configuration
+Reveal.initialize({
+    // コントローラーを右下に表示
+    controls: true,
+
+    // プログレスバーを下部に表示
+    progress: true,
+
+    // ブラウザヒストリにスライドの履歴を保存する
+    history: false,
+
+    // キーボード操作
+    keyboard: true,
+
+    // タッチ操作
+    touch: true,
+
+    // オーバービューモード
+    overview: true,
+
+    // 縦センタリング
+    center: true,
+
+    // ループ
+    loop: false,
+
+    // 右から左へ
+    rtl: false,
+
+    // 自動スライド/ミリ秒  data-autoslide属性で指定可能
+    autoSlide: 0,
+
+    // マウスホイール
+    mouseWheel: false,
+
+    // 遷移スタイル
+    transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+    // 遷移速度
+    transitionSpeed: 'default', // default/fast/slow
+
+    // Transition style for full page backgrounds
+    backgroundTransition: 'default' // default/linear/none
+
+});
+
+
+◆Dependencies
+Reveal.initialize({
+    dependencies: [
+        // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+        { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+        // Interpret Markdown in <section> elements
+        { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
+        // Syntax highlight for <code> elements
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+        // Zoom in and out with Alt+click
+        { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Speaker notes
+        { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Remote control your reveal.js presentation using a touch device
+        { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // MathJax
+        { src: 'plugin/math/math.js', async: true }
+    ]
+});
+
+
+◆API
+// Navigation
+Reveal.slide( indexh, indexv, indexf );
+Reveal.left();
+Reveal.right();
+Reveal.up();
+Reveal.down();
+Reveal.prev();
+Reveal.next();
+Reveal.prevFragment();
+Reveal.nextFragment();
+Reveal.toggleOverview();
+Reveal.togglePause();
+
+// Retrieves the previous and current slide elements
+Reveal.getPreviousSlide();
+Reveal.getCurrentSlide();
+
+Reveal.getIndices(); // { h: 0, v: 0 } }
+
+// State checks
+Reveal.isFirstSlide();
+Reveal.isLastSlide();
+Reveal.isOverview();
+Reveal.isPaused();
+
+
+◆Fragments
+<section>
+    <p class="fragment grow">grow</p>
+    <p class="fragment shrink">shrink</p>
+    <p class="fragment roll-in">roll-in</p>
+    <p class="fragment fade-out">fade-out</p>
+    <p class="fragment highlight-red">highlight-red</p>
+    <p class="fragment highlight-green">highlight-green</p>
+    <p class="fragment highlight-blue">highlight-blue</p>
+</section>
+
+<section>
+    <span class="fragment fade-in">
+        <span class="fragment fade-out">I'll fade in, then out</span>
+    </span>
+</section>
+
+<section>
+    <p class="fragment" data-fragment-index="3">Appears last</p>
+    <p class="fragment" data-fragment-index="1">Appears first</p>
+    <p class="fragment" data-fragment-index="2">Appears second</p>
+</section>
+
+
+◆Fullscreen mode
+Just press [F] on your keyboard to show your presentation in fullscreen mode. Press the [ESC] key to exit fullscreen mode.
+
+◆Embedded media
+Embedded HTML5 <video>/<audio> and YouTube iframes are automatically paused when you navigate away from a slide.
+This can be disabled by decorating your element with a data-ignore attribute.
+<video data-autoplay src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"></video>
+
+◆Stretching elements
+<section>
+    <h2>This video will use up the remaining space on the slide</h2>
+    <video class="stretch" src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"></video>
+</section>
+
+◆PDF Export
+Chromeのみ
+1.Open your presentation with css/print/pdf.css included on the page. 
+  The default index HTML lets you add print-pdf anywhere in the query
+  to include the stylesheet, for example: lab.hakim.se/reveal-js?print-pdf.
+2.Open the in-browser print dialog (CMD+P).
+3.Change the Destination setting to Save as PDF.
+4.Change the Layout to Landscape.
+5.Change the Margins to None.
+6.Click Save.
+
+◆Theming
+default: Gray background, white text, blue links
+beige: Beige background, dark text, brown links
+sky: Blue background, thin white text, blue links
+night: Black background, thick white text, orange links
+serif: Cappuccino background, gray text, brown links
+simple: White background, black text, blue links
+
+<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+
+
+
