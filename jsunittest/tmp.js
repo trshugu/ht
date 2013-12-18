@@ -4,8 +4,16 @@
 
 
 
+/*
+// sinon.js
+var spy = sinon.spy();
+spy("tmp");
+console.log(spy.callCount);
+console.log(spy.args);
 
-
+var clock = sinon.useFakeTimers(new Date('2013-03-24').getTime());
+console.log(clock);
+*/
 
 
 /*
