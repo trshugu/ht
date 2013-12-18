@@ -1,1 +1,1 @@
-git add . && git add -u && git commit -m "ht" && git push
+git add . && git add -u && git commit -m "ht%date%" && git push
