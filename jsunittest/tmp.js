@@ -5,6 +5,23 @@
 
 
 /*
+// Qunit
+test("a basic test example", function() {
+  ok( true, "このテストは成功しました。" );
+  
+  var value = "hello";
+  equal( value, "hello", "helloとなることを期待しています。" );
+  
+  // sinon-qunit-1.0.0.js
+  var spy = sinon.spy();
+  spy("tmp");
+  equal(spy.callCount, 1, "hell...");
+});
+*/
+
+
+
+/*
 // sinon.js
 var spy = sinon.spy();
 spy("tmp");
