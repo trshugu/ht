@@ -1,5 +1,3 @@
-・jsMVC
-・knockout.js
 ・shスクリプト
 
 ・UI Bindings
@@ -45,3 +43,7 @@ Capybara-webkit ＋Sinon.JS
 ＊Ember.js
 ＊D3.js→データビジュアライゼーション
 ＊angular
+
+＊jsMVC
+＊knockout.js
+

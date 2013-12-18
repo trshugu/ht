@@ -4,8 +4,11 @@ $(document).ready(function() {
   $("#tmp");
 });
 
+
+
+
+
 /*
-*/
 // knockout でTodoリスト
 $(function(){
   //Modelを定義
@@ -42,6 +45,7 @@ $(function(){
   //bindingスタート
   ko.applyBindings( new TestappViewModel() );
 });
+*/
 
 
 

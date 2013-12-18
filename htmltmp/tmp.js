@@ -9,6 +9,193 @@ $(document).ready(function() {
 
 
 
+
+/*
+// underscore.js & lodash.js
+
+// underscore.js用共通データ
+var numbers = [1,2,3,4,5];
+var persons = [ 
+  { 
+    name : "jonny", 
+    age : 24, 
+    birth_month : 8, 
+    gender : 0 // 0 : male, 1, female 
+  }, 
+  { 
+    name : "paul", 
+    age : 52, 
+    birth_month : 7, 
+    gender : 1 
+  }, 
+  { 
+    name : "under score", 
+    age : 32, 
+    birth_month : 8, 
+    gender : 0 
+  } 
+];
+*/
+
+
+/*
+// arrays
+_.first([5, 4, 3, 2, 1]);
+_.rest([5, 4, 3, 2, 1]);
+_.rest([5, 4, 3, 2, 1], 3);
+_.last([5, 4, 3, 2, 1]);
+_.compact([0, 1, false, 2, '', 3]);
+_.flatten([1, [2], [3, [[[4]]]]]);
+_.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
+_.uniq([1, 2, 1, 3, 1, 4]);
+//_.intersect([1, 2, 3], [101, 2, 1, 10], [2, 1]); できなかった
+_.indexOf([1, 2, 3], 2);
+_.lastIndexOf([1, 2, 3, 1, 2, 3], 2);
+_.range(0, 30, 5);
+*/
+
+
+/*
+// 要素の個数を返却
+_.size({one : 1, two : 2, three : 3});
+
+// 配列に変換
+(function(){ return _.toArray(arguments).slice(0); })(1, 2, 3);
+
+// 含まれていたらtrue
+_.include([1, 2, 3], 3);
+
+// 関数を実行
+_.invoke([[5, 1, 7], [3, 2, 1]], 'sort');
+
+// 挿入される位置を返却
+_.sortedIndex([10, 20, 30, 40, 50], 35);
+
+// 条件がどれかひとつでも真ならtrue
+_.any([null, 0, 'yes', false]);
+_.any([true, 1, null, 'yes'], function(a){return false;});
+
+// 条件がすべて真ならtrue
+_.all([true, 1, null, 'yes']);
+_.all([true, 1, null, 'yes'], function(a){return true;});
+
+// reject 条件を通過しなかったものを返却
+var odds = _.reject([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+// select 条件を通過したものすべてを返却
+var evens = _.select([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+// detect 条件を通過した一番最初を返却
+var even = _.detect([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+
+// reduceRight 右方向からreduce
+var list = [[0, 1], [2, 3], [4, 5]];
+var flat = _.reduceRight(list, function(a, b) { return a.concat(b); }, []);
+// => [4, 5, 2, 3, 0, 1]
+
+// reduce
+_.reduce([1, 2, 3], function(memo, num){alert("memo:"+ memo+".."+"num:"+num); return memo + num; }, 0)
+
+// map
+_.map([1, 2, 3], function(num){ return num * 3; });
+_.map({one : 1, two : 2, three : 3}, function(num, key){ return num * 3; });
+*/
+
+
+/*
+// numとkeyが逆
+_.each([1, 2, 3], function(num){ alert(num); });
+_.each({one : 1, two : 2, three : 3}, function(num, key){ alert(num); });
+*/
+
+/*
+// sortBy
+var orderByYoung = _.sortBy(persons, function (person) { 
+  return person.age; 
+}); 
+ 
+console.log(JSON.stringify(orderByYoung));
+*/
+
+/*
+// min
+var youngestPerson = _.min(persons, function (person) { 
+  return person.age; 
+}); 
+
+console.log(JSON.stringify(youngestPerson));
+*/
+
+
+/*
+// max
+var oldestPerson = _.max(persons, function (person) { 
+  return person.age; 
+}); 
+ 
+console.log(JSON.stringify(oldestPerson));
+*/
+
+
+/*
+// pluck キーを指定して値を取得
+var names = _.pluck(persons, "name"); 
+console.log("names : " + names);
+*/
+
+/*
+// contains boolが返却
+var isContain1 = _.contains(numbers, 1);
+var isContain2 = _.contains(numbers, 100);
+
+console.log("isContain1 : " + isContain1);
+console.log("isContain2 : " + isContain2);
+*/
+
+
+/*
+// findWhere findと同じく一番最初の値を返却
+var male = _.findWhere(persons, {gender : 0});
+console.log(JSON.stringify(male));
+*/
+
+
+/*
+// where
+var males = _.where(persons, {gender : 0});
+
+console.log(JSON.stringify(males));
+*/
+
+
+/*
+// filter 条件にあう値を全て配列として返却
+var evens = _.filter(numbers, function (number) { 
+  return number % 2 === 0; 
+}); 
+
+console.log("evens : " + evens);
+*/
+
+
+/*
+// find 一番最初にでてくる偶数の値を取得
+var even = _.find(numbers, function (number) { 
+  return number % 2 === 0; 
+}); 
+ 
+console.log("even : " + even);
+*/
+
+
+
+/*
+// each
+_.each(numbers, function (number) { 
+  console.log("number : " + number); 
+});
+*/
+
+
+
 /*
 // 配列をインクリメントすると参照型がわかる
 var b = { key: 1 };
