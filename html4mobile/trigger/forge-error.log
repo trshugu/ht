@@ -8,3 +8,76 @@
     prog=ENTRY_POINT_NAME,
 ForgeError: Source folder "src" does not exist - have you run forge create yet?
 
+2013-12-26 18:19:46,601 [   INFO] Forge tools running at version 3.3.71
+2013-12-26 18:19:46,601 [  DEBUG] Checking for update zip...
+2013-12-26 18:19:46,609 [  DEBUG] Forge build tools version: 3.3.71
+2013-12-26 18:19:46,609 [  DEBUG] main: {"server": "https://trigger.io/api/"}
+2013-12-26 18:19:46,609 [  DEBUG] port: 38394
+2013-12-26 18:19:46,612 [  DEBUG] GET https://trigger.io/api/v1/version_check/3/3/71/
+2013-12-26 18:19:48,575 [  DEBUG] Checking API response for success or error
+2013-12-26 18:19:48,575 [   INFO] Update result: you already have the latest tools
+2013-12-26 18:19:48,601 [  DEBUG] GET https://trigger.io/api/v1/auth/loggedin
+2013-12-26 18:19:48,765 [  DEBUG] Checking API response for success or error
+2013-12-26 18:20:06,415 [   INFO] authenticating as "s_zk@yahoo.co.jp"
+2013-12-26 18:20:06,417 [  DEBUG] GET https://trigger.io/api/v1/auth/hello
+2013-12-26 18:20:06,680 [  DEBUG] Checking API response for success or error
+2013-12-26 18:20:06,680 [  DEBUG] POST https://trigger.io/api/v1/auth/verify
+2013-12-26 18:20:07,193 [  DEBUG] Checking API response for success or error
+2013-12-26 18:20:07,193 [   INFO] authentication successful
+2013-12-26 18:20:07,193 [  DEBUG] GET https://trigger.io/api/v1/project
+2013-12-26 18:20:07,456 [  DEBUG] Checking API response for success or error
+2013-12-26 18:20:25,331 [   INFO] Registering new app "triggertmp" with trigger.io...
+2013-12-26 18:20:25,331 [  DEBUG] POST https://trigger.io/api/v1/app
+2013-12-26 18:20:25,845 [  DEBUG] Checking API response for success or error
+2013-12-26 18:20:25,845 [  ERROR] Forge API call to app went wrong: There was a problem submitting a form:
+project: Select a valid choice. That choice is not one of the available choices.
+2013-12-26 18:20:25,845 [  DEBUG] Traceback (most recent call last):
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\async.py", line 106, in run
+    result = self._target(*self._args, **self._kwargs)
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\main.py", line 286, in create
+    uuid = remote.create(name=answers_to_questions["name"], project=answers_to_questions["project"])
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\remote.py", line 558, in create
+    return self._api_post('app', data=data, cookies=cookies)['data']['uuid']
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\remote.py", line 475, in _api_post
+    _check_api_response_for_error(url, 'POST', resp)
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\remote.py", line 121, in _check_api_response_for_error
+    _raise_if_json_error(content_dict, error_template, resp, url)
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\remote.py", line 81, in _raise_if_json_error
+    raise RequestError(resp, error_message, errors=errors)
+RequestError: Forge API call to app went wrong: There was a problem submitting a form:
+project: Select a valid choice. That choice is not one of the available choices.
+
+2013-12-26 18:20:55,806 [   INFO] Forge tools running at version 3.3.71
+2013-12-26 18:20:55,808 [  DEBUG] Checking for update zip...
+2013-12-26 18:20:55,813 [  DEBUG] Forge build tools version: 3.3.71
+2013-12-26 18:20:55,813 [  DEBUG] main: {"server": "https://trigger.io/api/"}
+2013-12-26 18:20:55,813 [  DEBUG] port: 38394
+2013-12-26 18:20:55,821 [  DEBUG] GET https://trigger.io/api/v1/version_check/3/3/71/
+2013-12-26 18:20:57,983 [  DEBUG] Checking API response for success or error
+2013-12-26 18:20:57,983 [   INFO] Update result: you already have the latest tools
+2013-12-26 18:20:57,989 [  DEBUG] GET https://trigger.io/api/v1/auth/loggedin
+2013-12-26 18:20:58,201 [  DEBUG] Checking API response for success or error
+2013-12-26 18:20:58,201 [  DEBUG] already authenticated via cookie - continuing
+2013-12-26 18:20:58,201 [  DEBUG] GET https://trigger.io/api/v1/project
+2013-12-26 18:20:58,464 [  DEBUG] Checking API response for success or error
+2013-12-26 18:21:25,420 [   INFO] Registering new app "triggertmp" with trigger.io...
+2013-12-26 18:21:25,420 [  DEBUG] POST https://trigger.io/api/v1/app
+2013-12-26 18:21:25,632 [  DEBUG] Checking API response for success or error
+2013-12-26 18:21:25,632 [  ERROR] Forge API call to app went wrong: There was a problem submitting a form:
+project: This field is required.
+2013-12-26 18:21:25,634 [  DEBUG] Traceback (most recent call last):
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\async.py", line 106, in run
+    result = self._target(*self._args, **self._kwargs)
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\main.py", line 286, in create
+    uuid = remote.create(name=answers_to_questions["name"], project=answers_to_questions["project"])
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\remote.py", line 558, in create
+    return self._api_post('app', data=data, cookies=cookies)['data']['uuid']
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\remote.py", line 475, in _api_post
+    _check_api_response_for_error(url, 'POST', resp)
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\remote.py", line 121, in _check_api_response_for_error
+    _raise_if_json_error(content_dict, error_template, resp, url)
+  File "C:\Users\ka-suzuki\AppData\Local\Trigger Toolkit\build-tools\forge\remote.py", line 81, in _raise_if_json_error
+    raise RequestError(resp, error_message, errors=errors)
+RequestError: Forge API call to app went wrong: There was a problem submitting a form:
+project: This field is required.
+
