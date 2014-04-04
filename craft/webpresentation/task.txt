@@ -6,6 +6,7 @@ http://lab.hakim.se/reveal-js/#/
 
 
 
+
 3Dなプレゼン
 http://dontkry.com/jmpress.js/
 3Dなプレゼン
@@ -19,7 +20,6 @@ http://seld.be/notes/introducing-slippy-html-presentations
 deck.js
 http://coliss.com/articles/build-websites/operation/javascript/jquery-plugin-deckjs-for-presentations.html
 →エクステンションをいくつか選択しないといけない
-→→これに決定
 
 jQueryPP
 http://viget.com/inspire/jquery-presentation-plugin

@@ -50,6 +50,7 @@ $(function(){
 
 
 /*
+*/
 // knockout data-bind
 $(function(){
   //ViewModelを定義
@@ -61,7 +62,6 @@ $(function(){
   //bindingスタート
   ko.applyBindings( new TestappViewModel() );
 });
-*/
 
 
 
