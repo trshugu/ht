@@ -1,2 +1,2 @@
-set LANG=ja_JP.UTF-8
+chcp 65001
 slimrb -p index.html.slim >index.html
