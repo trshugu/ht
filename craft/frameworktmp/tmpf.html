@@ -1,13 +1,6 @@
 <!DOCTYPE html><html><head><title>tmp</title>
-<script type="text/javascript" src="jquery-2.0.1.min.js"></script>
-<script type="text/javascript" src="jquery-ui-1.10.3.custom.min.js"></script>
-
-<script type="text/javascript" src="knockout-2.2.1.js"></script>
-<!--script type="text/javascript" src="angular.min.js"></script-->
-<!--script type="text/javascript" src="ember-1.0.0-rc.5.min.js"></script-->
-<!--script src="json2.js"></script>
-<script src="underscore-min.js"></script>
-<script src="backbone-min.js"></script-->
+<script type="text/javascript" src="jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="knockout-3.1.0.js"></script>
 
 <script type="text/javascript" src="tmp.js"></script>
 
@@ -21,6 +14,45 @@
 
 
 
+
+<!--
+// ViewはViewModelを知っているべきでViewModelはViewを知らなくてもよい
+<span data-bind="text: pN1"></span>
+<span data-bind="text: pN2"></span>
+<span data-bind="text: pN3"></span>
+-->
+
+
+<!--
+json
+<table>
+  <thead>
+   <tr>
+    <td>Id</td>
+    <td>Cd</td>
+    <td>Name</td>
+   </tr>
+  </thead>
+  <tbody data-bind='foreach: products'>
+   <tr>
+    <td><span data-bind='text: Id' /></td>
+    <td><span data-bind='text: Cd' /></td>
+    <td><span data-bind='text: Name' /></td>
+   </tr>
+ </tbody>
+</table>
+<button data-bind="click: addJson">追加</button>
+-->
+
+
+
+
+<!--
+wiki曰く
+<p>First name: <input data-bind="value: firstName,valueUpdate: 'afterkeydown'" /></p>
+<p>Last name: <input data-bind="value: lastName,valueUpdate: 'afterkeydown'" /></p>
+<h2>Hello, <span data-bind="text: fullName"> </span>!</h2>
+-->
 
 
 
@@ -39,14 +71,11 @@
 
 
 
-
-
-
 <!--
--->
 knockout data-bindの試し書き
 <p><input type="text" data-bind="value: message, valueUpdate: 'afterkeydown'"></p>
 <p id="result" data-bind="text: message">ここに入力されたテキストと同じものが入る</p>
+-->
 
 
 <!--

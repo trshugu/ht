@@ -9,6 +9,73 @@ $(document).ready(function() {
 
 
 /*
+// ViewはViewModelを知っているべきでViewModelはViewを知らなくてもよい
+$(function(){
+  var vm = {
+    pN1: ko.observable( Date() ),
+    pN2: ko.observable( Date() ),
+    pN3: ko.observable( Date() )
+  };
+  
+  ko.applyBindings(vm);
+});
+*/
+
+
+/*
+// json
+var jsonarr = [
+  { Id:"10", Cd:"01588", Name:"Apple" },
+  { Id:"11", Cd:"05178", Name:"Banana" }
+]
+
+function jsonRet(self)
+{
+  $.each(jsonarr,function(){
+    self.products.push( this );
+  })
+}
+
+$(function(){
+  var productModel = function (src)
+  {
+    var self = this;
+    self.products = ko.observableArray(src);
+    
+    //追加
+    self.addJson = function(obj, e)
+    {
+      jsonRet(self);
+    };
+  };
+  
+  ko.applyBindings(new productModel);
+});
+*/
+
+
+
+/*
+// wiki曰く
+$(function(){
+  function ViewModel()
+  {
+    this.firstName = ko.observable("Planet");
+    this.lastName = ko.observable("Earth");
+    
+    this.fullName = ko.computed(
+      function()
+      {
+        return this.firstName() + " " + this.lastName();
+      },
+      this);
+  }
+  
+  ko.applyBindings(new ViewModel());
+});
+*/
+
+/*
 // knockout でTodoリスト
 $(function(){
   //Modelを定義
@@ -50,7 +117,6 @@ $(function(){
 
 
 /*
-*/
 // knockout data-bind
 $(function(){
   //ViewModelを定義
@@ -62,6 +128,7 @@ $(function(){
   //bindingスタート
   ko.applyBindings( new TestappViewModel() );
 });
+*/
 
 
 
