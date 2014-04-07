@@ -7,6 +7,35 @@ $(document).ready(function() {
 
 
 
+/*
+*/
+$(function(){
+  function Model()
+  {
+    var self = this;
+    self.text = "";
+  }
+  
+  function ViewModel()
+  {
+    var self = this;
+    self.value = ko.observable("asdf");
+    
+    self.btn = function(obj, e)
+    {
+      obj.value( Date() );
+    };
+  }
+  
+  
+  ko.applyBindings(new ViewModel());
+});
+
+function ddd()
+{
+  this.btn;
+}
+
 
 /*
 // View‚ÍViewModel‚ð’m‚Á‚Ä‚¢‚é‚×‚«‚ÅViewModel‚ÍView‚ð’m‚ç‚È‚­‚Ä‚à‚æ‚¢
