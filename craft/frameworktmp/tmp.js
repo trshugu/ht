@@ -7,8 +7,149 @@ $(document).ready(function() {
 
 
 
+
 /*
+// Backbone view
+var V = Backbone.View.extend({
+  events:{
+    "click #addBtn":"onAdd"
+  },
+  initialize:function () {
+    this.$bone = $("#bone");
+    this.render();
+  },
+  render:function () {
+    this.$bone.text('aaa');
+  },
+  onAdd:function () {
+    this.$bone.text('onAdd');
+  }
+  
+});
+
+$(function() {
+  var app = new V({el:$("#cont")});
+});
 */
+
+
+
+/*
+// Backbone RESTful JSON
+var Sina = Backbone.Model.extend({
+  urlRoot: "http://localhost:4567/sina",
+  idAttribute: "_id",
+  defaults: {
+    "content": ""
+  }
+});
+
+var sina = new Sina();
+sina.save({content: "concon"}, {
+  success:function(){
+    console.log("instans");
+    console.log(JSON.stringify(sina));
+  }
+});
+*/
+
+
+
+/*
+// Backbone Routes
+var routetest = Backbone.Router.extend({
+  "routes" : {
+    ""       : 'index',
+    "tmpf.html?aaa=:val" : 'india',
+    "mypage" : 'mypage',
+  },
+  "index" : function() {
+    console.log("ind");
+  },
+  "india" : function(val) {
+    console.log(val);
+  },
+  "mypage" : function() {
+    console.log("mymy");
+  }
+});
+
+$(function() {
+  var router = new routetest();
+  Backbone.history.start();
+});
+*/
+
+
+
+/*
+// knockout タスクリストサンプル
+$(function() {
+  // タスク
+  var TaskViewModel = function(name)
+  {
+    // タスク名
+    this.name = ko.observable(name);
+    
+    // 完了かどうか
+    this.completed = ko.observable(false);
+    
+    // 編集中かどうか
+    this.editing = ko.observable(false);
+    
+    // 編集ビューの切り替え
+    this.toggleEdit = function()
+    {
+      this.editing(!this.editing());
+    };
+    
+    // 削除要求コールバック
+    this.requestRemove = function(task) {
+      // 何もしない
+    };
+    
+    // 削除ボタンのイベントハンドラ
+    this.destroy = function() {
+      if (confirm("削除していいですか？"))
+      {
+        this.requestRemove(this);
+      }
+    };
+  };
+  
+  // アプリケーション
+  var appViewModel = {
+    // 新しいタスクの名前
+    newTaskName: ko.observable(""),
+    
+    // 登録されたタスク
+    tasks: ko.observableArray(),
+    
+    // 登録ボタンのハンドラ
+    addTask: function()
+    {
+      var taskName = this.newTaskName();
+      var newTask = new TaskViewModel(taskName);
+      
+      // タスクを削除するときのコールバックを設定
+      var self = this;
+      newTask.requestRemove = function(task) {
+        self.tasks.remove(task);
+      };
+      
+      this.tasks.push(newTask);
+      this.newTaskName("");
+    }
+  };
+  
+  // ビューにバインド
+  ko.applyBindings(appViewModel);
+});
+*/
+
+
+/*
+// knockout Modelのテスト用
 $(function(){
   function Model()
   {
@@ -35,10 +176,11 @@ function ddd()
 {
   this.btn;
 }
+*/
 
 
 /*
-// ViewはViewModelを知っているべきでViewModelはViewを知らなくてもよい
+// knockout ViewはViewModelを知っているべきでViewModelはViewを知らなくてもよい
 $(function(){
   var vm = {
     pN1: ko.observable( Date() ),
@@ -85,7 +227,7 @@ $(function(){
 
 
 /*
-// wiki曰く
+// knockout wiki曰く
 $(function(){
   function ViewModel()
   {
@@ -249,11 +391,11 @@ var Staff = Backbone.Model.extend({
 
 var tmpStaff = new Staff(); 
 tmpStaff.set({name: "Murata", age: 15, id: 101});
-
 console.log("Staff[" + tmpStaff.cid + "]: " + JSON.stringify(tmpStaff));
 
 var tmpStaff2 = new Staff({name: "Kenichiro", age: 35, id: 102});
 */
+
 
 
 /*

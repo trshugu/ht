@@ -1,6 +1,8 @@
 <!DOCTYPE html><html><head><title>tmp</title>
 <script type="text/javascript" src="jquery-2.1.0.min.js"></script>
-<script type="text/javascript" src="knockout-3.1.0.js"></script>
+<!--script type="text/javascript" src="knockout-3.1.0.js"></script-->
+<script type="text/javascript" src="underscore-min.js"></script>
+<script type="text/javascript" src="backbone-min.js"></script>
 
 <script type="text/javascript" src="tmp.js"></script>
 
@@ -9,17 +11,68 @@
 </head><body>
 <!--
 -->
+<div id="tmp">tmp</div>
 
 
 
+
+
+
+<!--
+// Backbone view
+<div id="cont">
+  <div id="bone">bone</div>
+  <a href="#" id="addBtn">Add</a>
+</div>
+-->
+
+
+<!--
+// knockout タスクリストサンプル
+<div data-bind="foreach: tasks">
+  <div class="task">
+    通常表示するビュー。
+    <div data-bind="visible: !editing()">
+      <input type="checkbox" data-bind="checked: completed" />
+      <span data-bind="if: !completed()"><span data-bind="text: name"></span></span>
+      <del data-bind="if: completed()"><span data-bind="text: name"></span></del>
+      <a href="javascript:void(0);" data-bind="event: { click: toggleEdit }">[edit]</a>
+    </div>
+    
+    編集時に表示するビュー
+    <div data-bind="visible: editing()">
+      <input type="text" data-bind="value: name"/>
+      <input type="button" data-bind="event: { click: toggleEdit }" value="編集終了"/>
+      <input type="button" data-bind="event: { click: destroy }" value="削除"/>
+    </div>
+  </div>
+</div>
+
+form の submit イベントと、appViewModel の addTask メソッドをバインドする
+<form data-bind="event: { submit: addTask }">
+  keyup が発生するたびに、appViewModel.newTaskName の値を更新する
+  <input type="text" data-bind="value: newTaskName, valueUpdate: 'keyup'" />
+  
+  appViewModel.newTaskName が空のときはボタンを無効にする
+  <input type="submit" data-bind="enable: newTaskName().length > 0" value="登録"/>
+</form>
+-->
+
+
+
+
+
+<!--
+// knockout Modelのテスト用
 <span data-bind="text: value"></span>
 <input id="btn" type="button" value="btn" data-bind="click: btn" />
 
 <input id="btn" type="button" value="btn2" onclick="ddd()" />
+-->
 
 
 <!--
-// ViewはViewModelを知っているべきでViewModelはViewを知らなくてもよい
+// knockout ViewはViewModelを知っているべきでViewModelはViewを知らなくてもよい
 <span data-bind="text: pN1"></span>
 <span data-bind="text: pN2"></span>
 <span data-bind="text: pN3"></span>
@@ -51,7 +104,7 @@ json
 
 
 <!--
-wiki曰く
+// knockout wiki曰く
 <p>First name: <input data-bind="value: firstName,valueUpdate: 'afterkeydown'" /></p>
 <p>Last name: <input data-bind="value: lastName,valueUpdate: 'afterkeydown'" /></p>
 <h2>Hello, <span data-bind="text: fullName"> </span>!</h2>
@@ -95,6 +148,5 @@ knockout data-bindの試し書き
 <span id="yourname">Hello, {{yourname}}</span>
 -->
 
-<div id="tmp">tmp</div>
 
 </body></html>
