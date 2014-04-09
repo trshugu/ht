@@ -8,6 +8,48 @@ $(document).ready(function() {
 
 
 
+
+
+
+/*
+// Backbone RESTful JSON2
+var Sina = Backbone.Model.extend({
+  urlRoot: "http://localhost:4567/sina/",
+  idAttribute: "_id",
+  defaults: {
+    "content": ""
+  }
+});
+
+var sina = new Sina();
+// --disable-web-security
+// --allow-file-access-from-files
+
+
+// ˆê——Žæ“¾ fetch
+sina.fetch({content: "concon"}, {
+  success:function(){
+    console.log("instans");
+    console.log(JSON.stringify(sina));
+  }
+});
+
+// id + fetch
+sina.set({id: "sinsin"});
+sina.fetch({
+  success:function(){
+    console.log("instans");
+    console.log(JSON.stringify(sina));
+  }
+});
+
+sina.save();
+sina.destroy();
+*/
+
+
+
+
 /*
 // Backbone view
 var V = Backbone.View.extend({
