@@ -10,6 +10,32 @@ $(document).ready(function() {
 
 
 
+/*
+// Backbone textbox
+var V = Backbone.View.extend({
+  events:{
+    "keyup :input":"logkey",
+    "keypress input":"logkey"
+  },
+  initialize:function () {
+    this.$bone = $("#bone");
+    this.$str = $("#string");
+    this.render();
+  },
+  render:function () {
+    this.$bone.text('aaa');
+  },
+  logkey:function (e) {
+    this.$bone.text( this.$str.val() );
+  }
+  
+});
+
+$(function() {
+  var app = new V({el:$("#cont")});
+});
+*/
+
 
 /*
 // Backbone RESTful JSON2
