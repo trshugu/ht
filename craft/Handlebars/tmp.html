@@ -1,0 +1,43 @@
+<!DOCTYPE html><html><head><title>tmp</title>
+<script type="text/javascript" src="jquery-2.1.0.min.js"></script>
+<link href="" rel="stylesheet">
+
+<script type="text/javascript" src="handlebars-v1.3.0.js"></script>
+<script type="text/javascript" src="tmp.js"></script>
+
+<style type="text/css"></style>
+<script type="text/javascript"></script>
+</head><body>
+<!--
+-->
+
+type="text/x-handlebars-template"としたscript要素でテンプレートをくくる<br>
+<script id="input" type="text/x-handlebars-template">
+
+<div id="tmp">tmp</div><br>
+
+ループ<br>
+{{#each tweets}}
+  <li>{{tweet}} by {{user}}</li>
+{{/each}}
+
+<!--
+変数として動的にしたい部分を{ { } }でくくって名前をつける<br>
+{{val}}<br>
+-->
+
+</script>
+
+<script id="input2" type="text/x-handlebars-template">
+koko
+{{#each this}}
+  <li>{{tweet}} by {{user}}</li>
+{{/each}}
+</script>
+
+
+最終的に出力したい要素を用意する<br>
+<div id="output"></div><br>
+<div id="output2"></div><br>
+
+</body></html>
