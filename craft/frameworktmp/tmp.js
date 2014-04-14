@@ -9,6 +9,15 @@ $(document).ready(function() {
 
 
 
+/*
+// angular ディレクティブのマッチング
+angular.module('myApp', [])
+  .controller("myCont", ["$scope", function($scope) {
+      $scope.name = "temptemp";
+    }
+  ]);
+*/
+
 
 /*
 // Backbone textbox
@@ -383,25 +392,25 @@ function helloCtrl($scope)
 }
 */
 
+
 /*
 // angular
-$(document).ready(function() {
-  $(function(){
-    var elem_in=$("input[name='yourname']"),
-    elem_out=$("#yourname");
-    
-    var showName = function(name){
-      elem_out.text(name);
-    };
-    
-    showName(elem_in.val());
-    
-    elem_in.bind('keyup', function(){
-      setTimeout(showName,  0, $(this).val());
-    });
+$(function(){
+  var elem_in = $("input[name='yourname']");
+  var elem_out = $("#yourname");
+  
+  var showName = function(name){
+    elem_out.text(name);
+  };
+  
+  showName( elem_in.val() );
+  
+  elem_in.bind('keyup', function(){
+    setTimeout( showName, 0, $(this).val() );
   });
 });
 */
+
 
 
 /*
