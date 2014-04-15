@@ -19,6 +19,70 @@
 
 
 
+
+
+<!--
+// angular $http
+<div ng-app="myApp">
+<div ng-controller="myCtrl">
+   <button ng-click="doClick()">click</button>
+  <span ng-bind="val"></span>
+</div>
+</div>
+-->
+
+
+
+<!--
+// angular $document
+<div ng-app="myApp">
+<div ng-controller="myCtrl">
+  <p>$document title: <b ng-bind="title"></b></p>
+  <p>window.document title: <b ng-bind="windowTitle"></b></p>
+</div>
+</div>
+-->
+
+
+
+<!--
+// angular $window
+<div ng-app="myApp">
+<div ng-controller="myCtrl">
+  <input type="text" ng-model="greeting" />
+  <button ng-click="doGreeting(greeting)">alert</button>
+</div>
+</div>
+-->
+
+
+<!--
+// angular $timeout
+<div ng-app="myApp">
+<div ng-controller="myCtrl">
+{{testnum}}
+</div>
+</div>
+-->
+
+
+<!--
+// angular filter filter
+<div ng-app ng-init="names = ['john','risa','mike','jhonasan','kensiro']">
+  <input type="text" ng-model="searchText" />
+  <div ng-repeat="n in names | filter:searchText" >{{n}}</div>
+</div>
+-->
+
+<!--
+// angular date filter
+<div ng-app>
+{{1288323623006 | date:'yyyy/MM/dd'}}<br>
+</div>
+-->
+
+
+
 <!--
 // angular directive
 <div ng-app="myApp">

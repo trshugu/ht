@@ -7,6 +7,121 @@ $(document).ready(function() {
 
 
 
+
+
+/*
+// angular $http
+var myApp = angular.module('myApp', []);
+myApp.controller("myCtrl",["$scope", "$http", function($scope, $http){
+  $scope.val = "asdf";
+  
+  $scope.doClick = function() {
+    $http( {method: "GET", url: ""} )
+    .success( function(d,s,h,c){
+      console.log("adsf");
+      console.log(s);
+      $scope.val = s;
+    } )
+    .error( function(d,s,h,c){
+      console.log("qwer");
+      $scope.val = s;
+    } )
+  };
+
+}]);
+*/
+
+
+
+
+
+/*
+// angular $document
+var myApp = angular.module('myApp', []);
+myApp.controller("myCtrl",["$scope", "$document", function($scope, $document){
+  $scope.title = $document[0].title;
+  $scope.windowTitle = angular.element(window.document)[0].title;
+}]);
+*/
+
+
+
+/*
+// angular noop
+// Ç»Ç…Ç‡çsÇÌÇ»Ç¢ä÷êî
+function foo(callback) {
+  var result = calculateResult();
+  (callback || angular.noop)(result);
+}
+
+function calculateResult(){return "anokutara"}
+
+console.log(foo(null));
+console.log(foo(function(x){ console.log(x+"sannmyaku") }));
+*/
+
+
+/*
+// angular $window
+var myApp = angular.module('myApp', []);
+myApp.controller("myCtrl",["$scope", "$window", function($scope, $window){
+  $scope.greeting = 'Hell, World!';
+  $scope.doGreeting = function(greeting) {
+    $window.open(greeting);
+  };  
+}]);
+*/
+
+
+
+
+/*
+// angular $timeout ÇªÇÃ3
+var myApp = angular.module('myApp', []);
+myApp.controller("myCtrl",["$scope", "$timeout", function($scope, $timeout){
+  $scope.testnum = 0;
+  
+  var func = function(){
+    $scope.testnum++;
+    $timeout(func,1000);
+  }
+  
+  $timeout(func,1000);
+}]);
+*/
+
+
+/*
+// angular $timeout ÇªÇÃ2
+var myApp = angular.module('myApp', []);
+myApp.controller("myCtrl",["$scope", "$timeout", function($scope, $timeout){
+  $scope.testnum = 0;
+  $scope.updateVal = function(){
+    $timeout(function(){
+      $scope.testnum++;
+      $scope.updateVal();
+    },1000);
+  }
+  console.log($scope.updateVal());
+}]);
+*/
+
+/*
+// angular $timeout
+var myApp = angular.module('myApp', []);
+function myCtrl($scope, $timeout){
+  $scope.testnum = 0;
+  $scope.updateVal = function(){
+    $timeout(function(){
+      $scope.testnum++;
+      $scope.updateVal();
+    },1000);
+  }
+  
+  $scope.updateVal();
+}
+*/
+
 /*
 // angular directive
 var myApp = angular.module('myApp', []);
