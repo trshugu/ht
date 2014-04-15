@@ -19,6 +19,45 @@
 
 
 
+<!--
+// angular directive
+<div ng-app="myApp">
+<nini></nini>
+</div>
+-->
+
+<!--
+// angular ng-init
+<div ng-app>
+<div ng-controller="CtrlScope" ng-init='inited = {ff:"33"}'>
+  <div ng-repeat="(key,val) in inited">
+    {{key}}, {{val}} ({{$index}}) {{inited}}
+    <span ng-show="!$first">
+      {{val}}
+    </span>
+  </div>
+</div>
+</div>
+-->
+
+
+<!--
+// angular ng-repeat
+<div ng-app="myApp">
+<div ng-app>
+<div ng-controller="CtrlScope">
+  <div ng-repeat="val in names">
+    {{val}} ({{$index}})
+    <span ng-show="!$first">
+      {{val}}
+    </span>
+  </div>
+</div>
+</div>
+-->
+
+
+
 
 <!--
 // angular ディレクティブのマッチング
@@ -33,6 +72,25 @@
 </div>
 </div>
 -->
+
+<!--
+// angular 動的にモデル書き換え
+<div ng-app>
+<div ng-controller="helloCtrl">
+  <input type="text" ng-model="hello">
+  <span>{{hello}}</span>
+  <button ng-click="goodbye()">Good Byeに変更</button>
+</div>
+</div>
+-->
+
+<!--
+// angular
+<input type="text" name="yourname" value="World"><br>
+<span id="yourname">Hello, {{yourname}}</span>
+-->
+
+
 
 <!--
 // Backbone textbox
@@ -159,23 +217,6 @@ knockout data-bindの試し書き
 <p id="result" data-bind="text: message">ここに入力されたテキストと同じものが入る</p>
 -->
 
-
-<!--
-// angular 動的にモデル書き換え
-<div ng-app>
-<div ng-controller="helloCtrl">
-  <input type="text" ng-model="hello">
-  <span>{{hello}}</span>
-  <button ng-click="goodbye()">Good Byeに変更</button>
-</div>
-</div>
--->
-
-<!--
-// angular
-<input type="text" name="yourname" value="World"><br>
-<span id="yourname">Hello, {{yourname}}</span>
--->
 
 
 </body></html>

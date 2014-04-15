@@ -7,6 +7,35 @@ $(document).ready(function() {
 
 
 
+/*
+// angular directive
+var myApp = angular.module('myApp', []);
+myApp.directive("nini",function(){
+  return {
+    restrict: "E",
+    template:"tanotara"
+  }
+});
+*/
+
+
+
+
+/*
+// angular ng-repeatその2
+function CtrlScope($scope){
+  $scope.names=["sadfdsf","efe","ww"];
+};
+*/
+
+
+/*
+// angular ng-repeat
+var myApp = angular.module('myApp', []);
+myApp.controller("CtrlScope",["$scope", function($scope){
+  $scope.names=["sadfdsf","efe","ww"];
+}]);
+*/
 
 
 /*
@@ -17,6 +46,41 @@ angular.module('myApp', [])
     }
   ]);
 */
+
+
+
+/*
+// angular 動的にモデル書き換え
+function helloCtrl($scope)
+{
+  $scope.hello = "Hello, World";
+  $scope.goodbye = function()
+  {
+    $scope.hello = "Good Bye";
+  }
+}
+*/
+
+
+/*
+// angular
+$(function(){
+  var elem_in = $("input[name='yourname']");
+  var elem_out = $("#yourname");
+  
+  var showName = function(name){
+    elem_out.text(name);
+  };
+  
+  showName( elem_in.val() );
+  
+  elem_in.bind('keyup', function(){
+    setTimeout( showName, 0, $(this).val() );
+  });
+});
+*/
+
+
 
 
 /*
@@ -378,38 +442,6 @@ $(function(){
 });
 */
 
-
-
-/*
-// angular 動的にモデル書き換え
-function helloCtrl($scope)
-{
-  $scope.hello = "Hello, World";
-  $scope.goodbye = function()
-  {
-    $scope.hello = "Good Bye";
-  }
-}
-*/
-
-
-/*
-// angular
-$(function(){
-  var elem_in = $("input[name='yourname']");
-  var elem_out = $("#yourname");
-  
-  var showName = function(name){
-    elem_out.text(name);
-  };
-  
-  showName( elem_in.val() );
-  
-  elem_in.bind('keyup', function(){
-    setTimeout( showName, 0, $(this).val() );
-  });
-});
-*/
 
 
 
