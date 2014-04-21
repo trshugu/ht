@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><title>tmp</title>
+<script type="text/javascript" src="jquery-2.1.0.min.js"></script>
+<link href="" rel="stylesheet">
+
+<script src='http://cdn.ractivejs.org/latest/ractive.js'></script>
+
+
+<style type="text/css"></style>
+<script type="text/javascript"></script>
+</head><body>
+<!--
+-->
+
+<div id="tmp">tmp</div>
+
+<!--
+// ractive
+-->
+<div id="result"></div>
+
+<script id="myTemplate" type="text/ractive">
+<p>こんにちわ{{user}} さん。
+  <strong>{{messages.unread}} 件の未読メッセージがあります。</strong>
+ </p>
+</script>
+
+<script type="text/javascript" src="tmp.js"></script>
+
+
+<!--
+// jsonAPI + ajax テスト
+<input type="button" id="ank" value="get"/>
+<span id="aja"></span>
+-->
+
+
+</body></html>
