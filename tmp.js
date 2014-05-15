@@ -1,10 +1,27 @@
 /*
 */
+
+
+
+
+
+
+
+
+/*
+// ƒgƒbƒv‚Ö
 $(document).ready(function() {
   $("#tmp").css({color: "#f00"});
+  
+  $("#ancho").click(function(){
+    $("html,body").animate({
+      scrollTop: 0
+    }, 800);
+    return false;
+  });
+
 });
-
-
+*/
 
 
 
