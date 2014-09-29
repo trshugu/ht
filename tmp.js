@@ -6,9 +6,37 @@
 
 $(document).ready(function() {
   $("#tmp").css({color: "#f00"});
+  
+  PC();
 });
 
 
+
+
+
+
+/*
+function EV(){
+  console.log("EVda")
+}
+
+function LV(){
+  console.log("LVda")
+}
+
+function PC(){
+  $(function() {
+    this.lV = new LV();
+  })
+  
+  this.eV = new EV();
+  init();
+  
+  function init(){
+    console.log("initda")
+  }
+}
+*/
 
 
 
