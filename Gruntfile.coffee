@@ -7,15 +7,15 @@ module.exports = (grunt)->
         options:
           pretty: true
         expand: true
-        cwd: './'
-        src: './src/*.jade'
+        cwd: './src/'
+        src: '*.jade'
         dest: './'
         ext: '.html'
     coffee:
       compile:
         expand: true
-        cwd: './'
-        src: './src/*.coffee'
+        cwd: './src/'
+        src: '*.coffee'
         dest: './'
         ext: '.js'
     stylus:
@@ -23,9 +23,9 @@ module.exports = (grunt)->
         options:
           compress: false
         expand: true
-        cwd: './'
-        src: './src/*.styl'
-        dest: '././src/'
+        cwd: './src/'
+        src: '*.styl'
+        dest: './'
         ext: '.css'
     watch:
       jade:
