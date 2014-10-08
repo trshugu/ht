@@ -1,11 +1,3 @@
-・shスクリプト
-
-・UI Bindings
-・Compose Views
-・Webpresentation Layer
-・Plays Nicely with Others
-・Qunit
-・sinon.js
 =================================================
 backbone ワインセラーアプリ
 http://www.adobe.com/jp/devnet/html5/articles/backbone-cellar-pt1.html?sdid=IZXVD
@@ -46,4 +38,12 @@ Capybara-webkit ＋Sinon.JS
 
 ＊jsMVC
 ＊knockout.js
+
+・shスクリプト
+・UI Bindings
+・Compose Views
+・Webpresentation Layer
+・Plays Nicely with Others
+・Qunit
+
 
