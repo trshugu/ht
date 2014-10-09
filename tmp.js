@@ -3,31 +3,42 @@
     return $("#tmp").css("color", "#f00");
   });
 
-  $(function() {
-    var M, VM;
-    M = function(value) {
-      var self;
-      self = this;
-      self.text = ko.observable(value);
-    };
-    VM = function() {
-      var self;
-      self = this;
-      self.list = ko.observableArray();
-      self.inputValue = ko.observable("");
-      self.add = function(obj, e) {
-        if (!self.inputValue()) {
-          return;
-        }
-        self.list.unshift(new M(self.inputValue()));
-        self.inputValue("");
-      };
-      self.remove = function(obj, e) {
-        self.list.remove(obj);
-      };
-    };
-    ko.applyBindings(new VM());
-  });
+
+  /*
+   * knockout 解析
+  $ ->
+     * Modelを定義
+    M = (value) ->
+      self = this
+      self.text = ko.observable(value)
+      return
+    
+     * ViewModelを定義
+    VM = ->
+      self = this
+      self.list = ko.observableArray() # todoリスト
+      self.inputValue = ko.observable("") # 追加todoテキスト
+      
+       * 追加
+      self.add = (obj, e) ->
+        return  unless self.inputValue() # 空文字の場合は処理しない
+        
+         * 入力されたテキストでTodoModelを作りTodoリストに挿入
+        self.list.unshift new M(self.inputValue())
+        self.inputValue ""
+        return
+      
+       * 削除
+      self.remove = (obj, e) ->
+         * イベントバインディングで実行される関数の第1引数にはModel、第2引数にはイベントオブジェクトが渡される
+        self.list.remove obj
+        return
+      return
+    
+     * bindingスタート
+    ko.applyBindings new VM()
+    return
+   */
 
 
   /*
@@ -128,15 +139,15 @@
 
 
   /*
-   * knockout data-bind
+   * knockout data-bindの試し書き
   $ ->
      * ViewModelを定義
     TestappViewModel = ->
       self = this
-      self.message = ko.observable("") #初期値は空文字列を指定
+      self.message = ko.observable("") # 初期値は空文字列を指定
       return
     
-     *bindingスタート
+     * bindingスタート
     ko.applyBindings new TestappViewModel()
     return
    */

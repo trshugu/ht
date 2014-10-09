@@ -1,6 +1,7 @@
 $ ->
   $("#tmp").css "color", "#f00"
 
+###
 # knockout 解析
 $ ->
   # Modelを定義
@@ -34,7 +35,7 @@ $ ->
   # bindingスタート
   ko.applyBindings new VM()
   return
-
+###
 
 ###
 # knockout でTodoリスト
@@ -136,15 +137,15 @@ $ ->
 
 
 ###
-# knockout data-bind
+# knockout data-bindの試し書き
 $ ->
   # ViewModelを定義
   TestappViewModel = ->
     self = this
-    self.message = ko.observable("") #初期値は空文字列を指定
+    self.message = ko.observable("") # 初期値は空文字列を指定
     return
   
-  #bindingスタート
+  # bindingスタート
   ko.applyBindings new TestappViewModel()
   return
 ###

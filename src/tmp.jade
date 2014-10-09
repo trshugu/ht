@@ -17,16 +17,16 @@ html
     
 
     //- knockout 解析
-    input(type="text" value="" placeholder="入力" data-bind="value: inputValue")
-    button(data-bind="click: add")
-      | add
+      input(type="text" value="" placeholder="入力" data-bind="value: inputValue")
+      button(data-bind="click: add")
+        | add
 
-    div(data-bind="foreach: list, visible: list().length > 0")
-      div
-        span(data-bind="text: text")
-          | Todo
-        button(data-bind="click: $root.remove")
-          | delete
+      div(data-bind="foreach: list, visible: list().length > 0")
+        div
+          span(data-bind="text: text")
+            | Todo
+          button(data-bind="click: $root.remove")
+            | delete
     
     //- knockout でTodoリスト
       p
@@ -71,18 +71,18 @@ html
         input(type="submit" data-bind="enable: newTaskName().length > 0" value="登録")
       
       
-      //- knockout data-bindの試し書き
-        input(type="text" data-bind="value: message, valueUpdate: 'afterkeydown'")
-        p(id="result" data-bind="text: message") ここに入力されたテキストと同じものが入る
+    //- knockout data-bindの試し書き
+      input(type="text" data-bind="value: message, valueUpdate: 'afterkeydown'")
+      p(id="result" data-bind="text: message") ここに入力されたテキストと同じものが入る
 
-        //- knockout wiki曰く
-          p First name:
-            input(data-bind="value: firstName, valueUpdate: 'afterkeydown'")
-          p Last name: 
-            input(data-bind="value: lastName, valueUpdate: 'afterkeydown'")
-          h2 Hello, 
-            span(data-bind="text: fullName") !
-    
+    //- knockout wiki曰く
+      p First name:
+        input(data-bind="value: firstName, valueUpdate: 'afterkeydown'")
+      p Last name: 
+        input(data-bind="value: lastName, valueUpdate: 'afterkeydown'")
+      h2 Hello, 
+        span(data-bind="text: fullName") !
+  
     
     //- knockout Modelのテスト用
       span(data-bind="text: value")
