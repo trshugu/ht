@@ -1,10 +1,22 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(charset='utf-8')
+    title The HTML Presentation Framework
+    meta(content='yes', name='apple-mobile-web-app-capable')
+    meta(content='black-translucent', name='apple-mobile-web-app-status-bar-style')
+    meta(content='width=(device-width, initial-scale=1.0, maximum-scale=1.0,)user-scalable=no', name='viewport')
+    link(href='css/reveal.min.css', rel='stylesheet')
+    link#theme(href='css/theme/default.css', rel='stylesheet')
+    // For syntax highlighting
+    link(href='lib/css/zenburn.css', rel='stylesheet')
+    // If the query includes 'print-pdf', use the PDF print sheet
+    script(type='text/javascript').
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    // [if lt IE 9]><script src="lib/js/html5shiv.js"></script><![endif
   body
-    block content
-    
-    
-  
+    .reveal
+      .slides
+        block content
+    block script
+
