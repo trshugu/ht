@@ -1,7 +1,7 @@
 gulp = require("gulp")
 jade = require("gulp-jade")
 coffee = require("gulp-coffee")
-stylus= require("gulp-stylus")
+stylus = require("gulp-stylus")
 
 gulp.task 'jade', ->
   gulp.src("src/*.jade")
