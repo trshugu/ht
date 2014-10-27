@@ -4,11 +4,9 @@ html
     meta(content="text/html" charset="utf-8")
     title tmp
     script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
-    script(type="text/javascript", src="bower_components/knockout/dist/knockout.js")
     
     script(type="text/javascript", src="tmp.js")
     link(href="", rel="stylesheet")
-    link(href="http://fonts.googleapis.com/css?family=Oleo+Script" rel="stylesheet" type="text/css")
     link(href="tmp.css", rel="stylesheet")
     
     style(type="text/css")
@@ -17,7 +15,20 @@ html
     #tmp tmp
     
     
+    //- リアルタイム更新
+      script(type="text/javascript", src="bower_components/d3/d3.min.js")
+      script(type="text/javascript", src="bower_components/rickshaw/rickshaw.min.js")
+      #tmp(onclick="add()") tmp
+      #chart
+
+
+    //- rickshaw
+      script(type="text/javascript", src="bower_components/d3/d3.min.js")
+      script(type="text/javascript", src="bower_components/rickshaw/rickshaw.min.js")
+      #chart
+    
     //- handwritten css
+      link(href="http://fonts.googleapis.com/css?family=Oleo+Script" rel="stylesheet" type="text/css")
       h2 tmp
     
 

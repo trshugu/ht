@@ -1,5 +1,67 @@
 $ ->
   $("#tmp").css "color", "#f00"
+  
+
+
+
+
+###
+# リアルタイム更新
+  serie = [
+    {x:1, y:1},{x:2, y:2}
+  ]
+  
+  graph = new Rickshaw.Graph(
+    element: document.querySelector("#chart")
+    width: 300
+    height: 200
+    renderer: 'line'
+    stack: false
+    series: [{
+      color: "steelblue"
+      data: serie
+    }]
+  )
+  
+  graph.render()
+  
+  @add = ->
+    serie.push({x:serie.length + 1, y:serie.length % 2})
+    graph.update()
+###
+
+
+###
+# rickshaw
+  graph = new Rickshaw.Graph(
+    element: document.querySelector("#chart")
+    width: 300
+    height: 200
+    renderer: 'bar'
+    stack: false
+    series: [{
+      color: "steelblue"
+      data: [
+        {x: 0, y: 40}
+        {x: 1, y: 49}
+        {x: 2, y: 38}
+        {x: 3, y: 30}
+        {x: 5, y: 34}
+      ]
+    },{
+      color: "lightblue"
+      data: [
+        {x: 0, y: 20}
+        {x: 1, y: 25}
+        {x: 2, y: 19}
+        {x: 3, y: 15}
+        {x: 5, y: 17}
+      ]}
+    ]
+  )
+  
+  graph.render()
+###
 
 ###
 # knockout 解析
