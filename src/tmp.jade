@@ -4,6 +4,7 @@ html
     meta(content="text/html" charset="utf-8")
     title tmp
     script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
+    script(type="text/javascript", src="bower_components/flotr2/flotr2.min.js")
     
     script(type="text/javascript", src="tmp.js")
     link(href="", rel="stylesheet")
@@ -13,7 +14,29 @@ html
     script(type="text/javascript")
   body
     #tmp tmp
+    #add(onclick="add()") add
+    #graph
     
+    //- リアルタイムflotr2
+    
+    //- flotr2
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #graph {
+        width : 600px;
+        height: 400px;
+        margin: 20px auto;
+      }
+      .graph-title {
+        font-size:16px;
+        font-weight:bold;
+        text-align:center;
+        margin:50px 0 0;
+        }
+      script(type="text/javascript", src="bower_components/flotr2/flotr2.min.js")
+      #graph
     
     //- リアルタイム更新
       script(type="text/javascript", src="bower_components/d3/d3.min.js")

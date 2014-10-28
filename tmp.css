@@ -9,3 +9,8 @@ h2 {
   color: #2b2b2b;
   text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 }
+#graph {
+  width: 600px;
+  height: 400px;
+  margin: 20px auto;
+}

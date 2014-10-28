@@ -1,8 +1,119 @@
 $ ->
   $("#tmp").css "color", "#f00"
   
+  
+  # リアルタイムflotr2
+  d1 =[[]]
+  serie = [
+    {
+      data: d1
+      label: "2012年"
+    }
+  ]
+  
+  render = -> Flotr.draw(
+    document.getElementById("graph")
+    serie
+    legend:
+      position: "se"
+      labelFormatter: (label) -> label
+      backgroundColor: "#D2E8FF"
+    title: "tititi"
+    HtmlText: false
+  )
+  
+  t = 0
+  @add = ->
+    omega = Math.PI/7
+    d1.push([t++, Math.sin(omega * t)])
+    if (d1.length > 10)
+      d1.shift()
+    render()
+  
+  render()
 
 
+
+###
+  # flotr2
+  d1 = [
+    [1, 70],
+    [2, 68],
+    [3, 65],
+    [4, 67],
+    [5, 64],
+    [6, 61],
+    [7, 60],
+    [8, 62],
+    [9, 68],
+    [10, 67],
+    [11, 70],
+    [12, 72]
+  ]
+  d2 = [
+    [1, 70],
+    [2, 69],
+    [3, 70],
+    [4, 71],
+    [5, 69],
+    [6, 70],
+    [7, 69],
+    [8, 68],
+    [9, 69],
+    [10, 70],
+    [11, 73],
+    [12, 79]
+  ]
+  
+  serie = [
+    {
+      data: d1
+      label: "2012年"
+    }
+    {
+      data: d2
+      label: "2000年"
+      pie:
+        explode: 70
+    }
+  ]
+  
+  ticks = [
+    [0, "容姿"]
+    [1, "男らしさ"]
+    [2, "優しさ"]
+    [3, "性格"]
+    [4, "ユーモア"]
+    [5, "財力"]
+  ]
+  
+  Flotr.draw(
+    document.getElementById("graph")
+    serie
+    pie:
+      show: true
+      explode: 7
+    mouse:
+      track: true
+    # radar:
+    #   show: true
+    grid:
+      circular: true,
+      minorHorizontalLines: true
+    yaxis:
+      min: 0,
+      max: 100,
+      minorTickFreq: 1
+    xaxis:
+      ticks: ticks
+    # legend:
+    #   position: "se"
+    #   labelFormatter: (label) -> label
+    #   backgroundColor: "#D2E8FF"
+    HtmlText: false
+  )
+  
+###
 
 
 ###
