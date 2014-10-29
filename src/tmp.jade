@@ -4,7 +4,6 @@ html
     meta(content="text/html" charset="utf-8")
     title tmp
     script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
-    script(type="text/javascript", src="bower_components/flotr2/flotr2.min.js")
     
     script(type="text/javascript", src="tmp.js")
     link(href="", rel="stylesheet")
@@ -13,11 +12,118 @@ html
     style(type="text/css")
     script(type="text/javascript")
   body
-    #tmp tmp
-    #add(onclick="add()") add
-    #graph
+    #tmp(onClick="add()") tmp
     
+    
+    
+    
+    //- raphael
+      script(type="text/javascript", src="bower_components/raphael/raphael-min.js")
+    
+    
+    //- visualize
+      script(type="text/javascript", src="visualize.jQuery.js")
+      link(href="visualize.css", rel="stylesheet")
+      link(href="visualize-dark.css", rel="stylesheet")
+      table#tab
+        caption 2009 Employee Sales by Department
+          thead
+            tr
+              td
+              th(scope='col') food
+              th(scope='col') auto
+              th(scope='col') household
+              th(scope='col') furniture
+              th(scope='col') kitchen
+              th(scope='col') bath
+          tbody
+            tr
+              th(scope='row') Mary
+              td 190
+              td 160
+              td 40
+              td 120
+              td 30
+              td 70
+            tr
+              th(scope='row') Tom
+              td 3
+              td 40
+              td 30
+              td 45
+              td 35
+              td 49
+            tr
+              th(scope='row') Brad
+              td 10
+              td 180
+              td 10
+              td 85
+              td 25
+              td 79
+            tr
+              th(scope='row') Kate
+              td 40
+              td 80
+              td 90
+              td 25
+              td 15
+              td 119
+
+    
+    //- morrisjs
+      script(type="text/javascript", src="bower_components/raphael/raphael-min.js")
+      script(type="text/javascript", src="bower_components/morrisjs/morris.min.js")
+      #morri(style="height: 250px;")
+    
+    //- テーブルデータをグラフに
+      script(type="text/javascript", src="chartify.min.js")
+      table#pac
+        thead
+          tr
+            th not
+            th pac
+        tbody
+          tr
+            td 1.256
+            td 5.027
+    
+    //- アイコン風グラフ
+      script(type="text/javascript", src="bower_components/peity/jquery.peity.min.js")
+      .pie.cha 1/5
+      .pie 226/230
+      .pie 0.52/1.561
+      .pie 1,4
+      .pie 226,134
+      .pie 1,3,4,2,2
+      
+      .line.update 1,4,3,3,4,5,4,4,6,8,3
+      .line 1,4,-3,3,-4,5,4,-4,-6,8,3
+    
+    //- graphene ダメだった
+      script(type="text/javascript", src="bower_components/graphene/graphene-standalone.min.js")
+    
+    //- sigma ダメだった
+      script(type="text/java      #container {
+          max-width: 400px;
+          height: 400px;
+          margin: auto;
+        }
+        
+        sigma.parsers.json('data.json', {
+          container: 'container',
+          settings: {
+            defaultNodeColor: '#ec5148'
+          }
+        });
+      script", src="bower_components/sigma/build/sigma.min.js")
+      script(type="text/javascript", src="bower_components/sigma/build/plugins/sigma.parsers.json.min.js")
+      #container
+      
     //- リアルタイムflotr2
+      script(type="text/javascript", src="bower_components/flotr2/flotr2.min.js")
+      #add(onclick="add()") add
+      #graph
     
     //- flotr2
       body {

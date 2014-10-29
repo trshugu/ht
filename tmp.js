@@ -1,39 +1,114 @@
 (function() {
   $(function() {
-    var d1, render, serie, t;
-    $("#tmp").css("color", "#f00");
-    d1 = [[]];
+    return $("#tmp").css("color", "#f00");
+  });
+
+
+  /*
+     * raphael
+    p = Raphael(10, 50, 320, 200)
+    c = p.circle(50,40,10)
+    c.attr("fill", "#f00")
+    c.attr("stroke", "#fff")
+    
+    anim = Raphael.animation({cx: 10, cy: 20}, 2e3)
+    c.animate(anim)
+    c.animate(anim.delay(500))
+   */
+
+
+  /*
+     * vizualize
+    $("#tab").visualize({type: 'pie', height: '300px', width: '420px'})
+    $("#tab").visualize({type: 'bar', width: '420px'})
+    $("#tab").visualize({type: 'area', width: '420px'})
+    $("#tab").visualize({type: 'line', width: '420px'})
+   */
+
+
+  /*
+     * morrisjs
+    data = [
+      { year: '2008', value: 20 }
+      { year: '2009', value: 10 }
+      { year: '2010', value: 5 }
+      { year: '2011', value: 5 }
+      { year: '2012', value: 20 }
+    ]
+    
+    m = new Morris.Line(
+      element: 'morri'
+      data: data
+      xkey: 'year'
+      ykeys: ['value']
+      labels: ['Value']
+    )
+    
+    @add = ->
+      data.push({ year: '2014', value: 40 })
+      m.setData(data)
+   */
+
+
+  /*
+     * テーブルデータをグラフに
+    $("#pac").chartify('bar',
+      pieChartRotation: -1.256/2
+      showLegend: false
+      colors: ["eeeeee", "ffc000"]
+    )
+   */
+
+
+  /*
+     * アイコン風グラフ
+    $(".pie").peity("pie")
+    $(".line").peity("line",{width:64})
+    charts = $(".update").peity("line",{width:64})
+    
+    @cha = ->
+      $(".cha").text("4/5").change()
+      $(".pie").peity("donut").change()
+       * まとめる系の変換は不可
+       * $(".line").peity("bar")
+      val = charts.text().split(",")
+      val.shift()
+      val.push(Math.round(Math.random()*10))
+      charts.text(val.join(",")).change()
+   */
+
+
+  /*
+     * リアルタイムflotr2
+    d1 =[[]]
     serie = [
       {
-        data: d1,
+        data: d1
         label: "2012年"
       }
-    ];
-    render = function() {
-      return Flotr.draw(document.getElementById("graph"), serie, {
-        legend: {
-          position: "se",
-          labelFormatter: function(label) {
-            return label;
-          },
-          backgroundColor: "#D2E8FF"
-        },
-        title: "tititi",
-        HtmlText: false
-      });
-    };
-    t = 0;
-    this.add = function() {
-      var omega;
-      omega = Math.PI / 7;
-      d1.push([t++, Math.sin(omega * t)]);
-      if (d1.length > 10) {
-        d1.shift();
-      }
-      return render();
-    };
-    return render();
-  });
+    ]
+    
+    render = -> Flotr.draw(
+      document.getElementById("graph")
+      serie
+      legend:
+        position: "se"
+        labelFormatter: (label) -> label
+        backgroundColor: "#D2E8FF"
+      title: "tititi"
+      HtmlText: false
+    )
+    
+    t = 0
+    @add = ->
+      omega = Math.PI/7
+      d1.push([t++, Math.sin(omega * t)])
+      if (d1.length > 10)
+        d1.shift()
+      render()
+    
+    render()
+   */
 
 
   /*
