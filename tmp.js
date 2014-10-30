@@ -5,6 +5,63 @@
 
 
   /*
+   * mocha
+  mocha.setup('bdd')
+  mocha.setup('tdd')
+  
+  assert = chai.assert
+  expect = chai.expect
+  chai.Should()
+  
+  describe "fizzbuzzメソッドのテスト", ->
+    console.log "oyu1"
+    describe "3の場合はFizzが返ってくる", ->
+      assert.equal 2, 2
+      console.log "oyu3"
+   */
+
+
+  /*
+   * jasmine
+  add = (x,y)->
+    x + y
+  
+  console.log "jsafsij"
+  describe('add 関数のテスト', ->
+      it('1 + 1 は 2', ->
+          expect(add(1, 1)).toBe(2);
+      )
+  
+      it('1 + 4 は 5', ->
+          expect(add(1, 4)).toBe(5);
+      )
+  
+      it('10 + 2 は 12', ->
+          expect(add(10, 2)).toBe(5); # わざと失敗させている
+      )
+  )
+   */
+
+
+  /*
+   * qunit
+  test('tetet', ->
+    ok(true, "death")
+    ok(true, "death")
+    ok(true, "death")
+    ok(true, "death")
+  )
+  
+  test('てすと', ->
+    ok(true, "death")
+    ok(true, "地獄")
+    ng(true, "death")
+    ok(true, "death")
+  )
+   */
+
+
+  /*
      * raphael
     p = Raphael(10, 50, 320, 200)
     c = p.circle(50,40,10)

@@ -3,16 +3,42 @@ html
   head
     meta(content="text/html" charset="utf-8")
     title tmp
+    script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
     script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
     
     script(type="text/javascript", src="tmp.js")
-    link(href="", rel="stylesheet")
     link(href="tmp.css", rel="stylesheet")
     
     style(type="text/css")
     script(type="text/javascript")
+    script(type="text/coffeescript")
   body
     #tmp(onClick="add()") tmp
+    
+    
+    //- mocha
+      script(type="text/javascript", src="bower_components/mocha/mocha.js")
+      script(type="text/javascript", src="bower_components/chai/chai.js")
+      link(href="bower_components/mocha/mocha.css", rel="stylesheet")
+    
+    //- jasmine
+      script(type="text/javascript", src="bower_components/jasmine/dist/jasmine-standalone-2.0.3/lib/jasmine-2.0.3/jasmine.js")
+      script(type="text/javascript", src="bower_components/jasmine/dist/jasmine-standalone-2.0.3/lib/jasmine-2.0.3/jasmine-html.js")
+      script(type="text/javascript", src="bower_components/jasmine/dist/jasmine-standalone-2.0.3/lib/jasmine-2.0.3/boot.js")
+      script(type="text/javascript", src="bower_components/jasmine/dist/jasmine-standalone-2.0.3/lib/jasmine-2.0.3/console.js")
+      link(href="bower_components/jasmine/dist/jasmine-standalone-2.0.3/lib/jasmine-2.0.3/jasmine.css", rel="stylesheet")
+      link(rel="shortcut icon" type="image/png" href="bower_components/jasmine/dist/jasmine-standalone-2.0.3/lib/jasmine-2.0.3/jasmine_favicon.png")
+    
+    
+    //- qunit
+      script(type="text/javascript", src="bower_components/qunit/qunit/qunit.js")
+      link(href="bower_components/qunit/qunit/qunit.css", rel="stylesheet")
+      h1#qunit-header QUnit Test Suite
+      h2#qunit-banner
+      #qunit-testrunner-toolbar
+      h2#qunit-userAgent
+      ol#qunit-tests
+      #qunit-fixture test markup, will be hidden
     
     
     
