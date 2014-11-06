@@ -1,6 +1,39 @@
 (function() {
   $(function() {
-    return $("#tmp").css("color", "#f00");
+    var add, block, blockPosition, draggingDeltas, getDelta, xyFromEvent;
+    $("#tmp").css("color", "#f00");
+    xyFromEvent = function(v) {
+      return {
+        x: v.clientX,
+        y: v.clientY
+      };
+    };
+    getDelta = function(t) {
+      return {
+        x: t[1].x - t[0].x,
+        y: t[1].y - t[0].y
+      };
+    };
+    block = $("#clickable-block");
+    draggingDeltas = block.asEventStream('mousedown').flatMap(function() {
+      return $("html").asEventStream('mousemove').map(xyFromEvent).slidingWindow(2, 2).map(getDelta).takeUntil(block.asEventStream('mouseup'));
+    });
+    add = function(p1, p2) {
+      return {
+        x: p1.x + p2.x,
+        y: p1.y + p2.y
+      };
+    };
+    blockPosition = draggingDeltas.scan({
+      x: 0,
+      y: 0
+    }, add);
+    return blockPosition.onValue(function(pos) {
+      return block.css({
+        top: pos.y + "px",
+        left: pos.x + "px"
+      });
+    });
   });
 
 

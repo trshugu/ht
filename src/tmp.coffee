@@ -1,6 +1,24 @@
 $ ->
   $("#tmp").css "color", "#f00"
   
+  xyFromEvent = (v) -> x: v.clientX, y: v.clientY
+  getDelta = (t) -> x: t[1].x - t[0].x, y: t[1].y - t[0].y
+  
+  block = $("#clickable-block")
+  
+  # 移動ベクトルを算出
+  draggingDeltas = block.asEventStream('mousedown').flatMap( ->
+    $("html").asEventStream('mousemove')
+      .map(xyFromEvent)
+      .slidingWindow(2, 2)
+      .map(getDelta)
+      .takeUntil(block.asEventStream('mouseup')
+    )
+  )
+  
+  add = (p1, p2) -> x: p1.x + p2.x, y: p1.y + p2.y
+  blockPosition = draggingDeltas.scan(x: 0, y: 0, add)
+  blockPosition.onValue( (pos) -> block.css(top: pos.y + "px", left: pos.x + "px") )
 
 
 
