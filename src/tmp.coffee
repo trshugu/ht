@@ -7,6 +7,24 @@ $ ->
 
 
 ###
+  # ractive
+  name = "地獄"
+  ractive = new Ractive(
+    el: "#result" # 出力先
+    template: "#myTemplate" # テンプレート
+    data:
+      user: name
+      messages: { total: 11, unread: 4 }
+  )
+  
+  @add = ->
+    ractive.set("user", "世界")
+    ractive.set("messages.unread", ractive.get("messages.unread") + 1)
+    
+###
+
+
+###
   # bacon.js3
   queryMovie = (query) -> $.get("http://api.themoviedb.org/3/search/movie?api_key=9eae05e667b4d5d9fbb75d27622347fe&query=" + query).then( (r) -> r.results)
   

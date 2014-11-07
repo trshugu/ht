@@ -18,6 +18,16 @@ html
     
     
     
+    
+    //- ractive
+      script(type="text/javascript", src="bower_components/ractive/ractive.min.js")
+      #result
+      
+      script#myTemplate(type="text/ractive")
+        {{user}}
+        {{messages.unread}}
+    
+    
     //- bacon.js3
       script(type="text/javascript", src="bower_components/bacon/dist/Bacon.min.js")
       input#input(type="text")
