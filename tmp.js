@@ -1,40 +1,60 @@
 (function() {
   $(function() {
-    var add, block, blockPosition, draggingDeltas, getDelta, xyFromEvent;
+    var counter, down, up;
     $("#tmp").css("color", "#f00");
-    xyFromEvent = function(v) {
-      return {
-        x: v.clientX,
-        y: v.clientY
-      };
-    };
-    getDelta = function(t) {
-      return {
-        x: t[1].x - t[0].x,
-        y: t[1].y - t[0].y
-      };
-    };
-    block = $("#clickable-block");
-    draggingDeltas = block.asEventStream('mousedown').flatMap(function() {
-      return $("html").asEventStream('mousemove').map(xyFromEvent).slidingWindow(2, 2).map(getDelta).takeUntil(block.asEventStream('mouseup'));
+    up = $("#up").asEventStream("click").map(1);
+    down = $("#down").asEventStream("click").map(-1);
+    counter = up.merge(down).scan(0, function(x, y) {
+      return x + y;
     });
-    add = function(p1, p2) {
-      return {
-        x: p1.x + p2.x,
-        y: p1.y + p2.y
-      };
-    };
-    blockPosition = draggingDeltas.scan({
-      x: 0,
-      y: 0
-    }, add);
-    return blockPosition.onValue(function(pos) {
-      return block.css({
-        top: pos.y + "px",
-        left: pos.x + "px"
-      });
-    });
+    return counter.assign($("#counter"), "text");
   });
+
+
+  /*
+  fib = ->
+    b = 0
+    r = 1
+    -> 
+      x = b + r
+      b = r
+      r = x
+      console.log x
+  
+  f = fib()
+  i = 0
+  while i < 100
+    f()
+    i++
+   */
+
+
+  /*
+   * 宣言型アプローチ
+  plus = (a,b)-> a + b
+  console.log [1..10].reduce(plus)
+   */
+
+
+  /*
+     * bacon.js
+    cb = (block) ->
+       * Observable オブジェクト作成
+      block.asEventStream('mousedown').flatMap( ->
+        $("html")
+          .asEventStream('mousemove')
+          .map( (v) -> x: v.clientX, y: v.clientY ) # カーソルの座標をマッピング
+          .slidingWindow(2,2) # 2値の引数
+          .map( (t) -> x: t[1].x - t[0].x, y: t[1].y - t[0].y ) # 座標取得
+          .takeUntil( block.asEventStream('mouseup') )
+      )
+      .scan(x: 0, y: 0, (p1, p2) -> x: p1.x + p2.x, y: p1.y + p2.y) # EventStreamからPropertiesを作成
+      .onValue( (pos) -> block.css(top: pos.y + "px", left: pos.x + "px") ) # バインド
+      
+    
+    cb($("#clickable-block"))
+    cb($("#hukuse"))
+   */
 
 
   /*

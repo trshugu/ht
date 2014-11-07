@@ -10,20 +10,31 @@ html
     script(type="text/javascript", src="tmp.js")
     link(href="tmp.css", rel="stylesheet")
     
-    style(type="text/css").
+    style(type="text/css")
+    script(type="text/javascript")
+    script(type="text/coffeescript")
+  body
+    #tmp(onClick="add()") tmp
+    #up up
+    #down down
+    #counter
+    
+    //- bacon.js
       #clickable-block {
           width:10em;
           height:10em;
           background: #F1C40F;
           position:absolute;
       }
+      #hukuse {
+          width:10em;
+          height:10em;
+          background: #983;
+          position:absolute;
+      }
       div:hover { cursor: pointer; }
-    script(type="text/javascript")
-    script(type="text/coffeescript")
-  body
-    #tmp(onClick="add()") tmp
-    
-    #clickable-block
+      #clickable-block
+      #hukuse
     
     //- mocha
       script(type="text/javascript", src="bower_components/mocha/mocha.js")
