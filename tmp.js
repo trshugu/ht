@@ -5,6 +5,25 @@
 
 
   /*
+     * bacon.js3
+    queryMovie = (query) -> $.get("http://api.themoviedb.org/3/search/movie?api_key=9eae05e667b4d5d9fbb75d27622347fe&query=" + query).then( (r) -> r.results)
+    
+    showMovie = (result) ->
+      link = $("<a/>").attr("href", "https://www.themoviedb.org/movie/" + result.id).text(result.title)
+      $("<div/>").append(link).css "padding", "0.1em 0"
+    
+    movieSearch = (query) ->
+      return Bacon.once([])  if query.length < 3
+      Bacon.fromPromise queryMovie(query)
+    
+    text = $("#input").asEventStream("keydown").debounce(300).map((event) ->  event.target.value ).skipDuplicates()
+    suggestions = text.flatMapLatest(movieSearch)
+    text.awaiting(suggestions).onValue (x) -> $("#results").html "Searching..."  if x
+    suggestions.onValue (results) -> $("#results").html $.map(results, showMovie)
+   */
+
+
+  /*
      * bacon.js2
     up = $("#up").asEventStream("click").map(1)
     down = $("#down").asEventStream("click").map(-1)
