@@ -5,7 +5,6 @@ html
     title tmp
     script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
     script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
-    script(type="text/javascript", src="bower_components/bacon/dist/Bacon.min.js")
     
     script(type="text/javascript", src="tmp.js")
     link(href="tmp.css", rel="stylesheet")
@@ -15,9 +14,12 @@ html
     script(type="text/coffeescript")
   body
     #tmp(onClick="add()") tmp
-    #up up
-    #down down
-    #counter
+    
+    //- bacon.js2
+      script(type="text/javascript", src="bower_components/bacon/dist/Bacon.min.js")
+      #up up
+      #down down
+      #counter
     
     //- bacon.js
       #clickable-block {

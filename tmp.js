@@ -1,14 +1,16 @@
 (function() {
   $(function() {
-    var counter, down, up;
-    $("#tmp").css("color", "#f00");
-    up = $("#up").asEventStream("click").map(1);
-    down = $("#down").asEventStream("click").map(-1);
-    counter = up.merge(down).scan(0, function(x, y) {
-      return x + y;
-    });
-    return counter.assign($("#counter"), "text");
+    return $("#tmp").css("color", "#f00");
   });
+
+
+  /*
+     * bacon.js2
+    up = $("#up").asEventStream("click").map(1)
+    down = $("#down").asEventStream("click").map(-1)
+    counter = up.merge(down).scan(0, (x, y) -> x + y)
+    counter.assign $("#counter"), "text"
+   */
 
 
   /*

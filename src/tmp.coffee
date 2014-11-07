@@ -3,12 +3,13 @@ $ ->
   
 
 
-
+###
+  # bacon.js2
   up = $("#up").asEventStream("click").map(1)
   down = $("#down").asEventStream("click").map(-1)
   counter = up.merge(down).scan(0, (x, y) -> x + y)
   counter.assign $("#counter"), "text"
-
+###
 
 
 
