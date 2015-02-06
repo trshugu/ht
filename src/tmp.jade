@@ -5,6 +5,7 @@ html
     title tmp
     script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
     script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
+    script(type="text/javascript", src="bower_components/vue/dist/vue.min.js")
     
     script(type="text/javascript", src="tmp.js")
     link(href="tmp.css", rel="stylesheet")
@@ -14,6 +15,21 @@ html
     script(type="text/coffeescript")
   body
     #tmp(onClick="add()") tmp
+    
+    
+    
+    
+    //-
+      #demo
+        h1 {{title | uppercase}}
+        ul
+          li(v-repeat="todos" v-on="click: done = !done" class="{{done ? 'done': ''}}") {{content}}
+    
+    //-
+      #demo
+        p {{message}}
+        input(v-model="message")
+    
     
     
     //- coderwall

@@ -5,6 +5,28 @@
 
 
   /*
+    demo = new Vue(
+      el: '#demo'
+      data:
+        title: "todos"
+        todos: [
+          {done: true, content: "heash"}
+          {done: false, content: "deash"}
+        ]
+    )
+   */
+
+
+  /*
+    demo = new Vue(
+      el: '#demo'
+      data:
+        message: 'hell'
+    )
+   */
+
+
+  /*
      * ractive
     name = "地獄"
     ractive = new Ractive(
