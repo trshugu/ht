@@ -17,15 +17,54 @@ html
     #tmp(onClick="add()") tmp
     
     
+    //- vueでtodoリスト
+      #todo
+        p
+          input(type="text" value="" placeholder="TODOを入力" v-model="todoInputValue")
+          button(v-on="click: addTodo")
+            | 追加
+
+        ul(v-repeat="todoList" v-with="i")
+          li
+            span {{$value}}
+              | Todo
+            |  - 
+            button(v-on="click: removeTodo($index)" )
+              | 削除
     
     
-    //-
+    //- vue5
+      #app
+        header-template
+        div(v-repeat="user" v-component="item-template")
+      
+      script#headerTemplate(type="text/template")
+        h3(v-on="click:hell") mytodo
+    
+    
+    //- vue4
+      #todo
+        h1 myto
+        div(v-repeat="t: todos | orderBy 'isDone'")
+          input(type="checkbox" v-model="t.isDone")
+          {{$index}}:{{t.title}}
+        input(type="button" v-on="click: addTodo" value="add todo")
+        div left {{lefts}} tasks.
+    
+    
+    
+    //- vue3
+      #simple
+        span(v-text="message" v-on="click: magnify" v-attr="style:font")
+    
+    
+    //- vue2
       #demo
         h1 {{title | uppercase}}
         ul
           li(v-repeat="todos" v-on="click: done = !done" class="{{done ? 'done': ''}}") {{content}}
     
-    //-
+    //- vue1
       #demo
         p {{message}}
         input(v-model="message")

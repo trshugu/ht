@@ -14,6 +14,19 @@
   </head>
   <body>
     <div id="tmp" onClick="add()">tmp</div>
+    <div id="todo">
+      <p>
+        <input type="text" value="" placeholder="TODOを入力" v-model="todoInputValue">
+        <button v-on="click: addTodo">追加</button>
+      </p>
+      <ul v-repeat="todoList" v-with="i">
+        <li><span>
+            {{$value}}
+            Todo</span> - 
+          <button v-on="click: removeTodo($index)">削除</button>
+        </li>
+      </ul>
+    </div>
     
     
   </body>

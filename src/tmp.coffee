@@ -7,6 +7,131 @@ $ ->
 
 
 
+
+
+
+
+
+
+
+
+
+###
+  # vueでtodoリスト2
+  new Vue(
+    el: "#todo"
+    data:
+      todoList:[]
+      todoInputValue:""
+    methods:
+      addTodo: ->
+        self = this
+        return unless self.todoInputValue  # 空文字の場合は処理しない
+        self.todoList.unshift self.todoInputValue
+        self.todoInputValue=""
+        console.log self.todoList[0]
+        return
+      removeTodo: (obj)->
+        self = this
+        self.todoList.splice(obj,1)
+        return
+  )
+###
+
+
+
+
+###
+  # vueでtodoリスト1
+  new Vue(
+    el: "#todo"
+    data:
+      todoList:[]
+      todoInputValue:""
+    methods:
+      addTodo: ->
+        self = this
+        return unless self.todoInputValue  # 空文字の場合は処理しない
+        self.todoList.unshift self.todoInputValue
+        self.todoInputValue=""
+        console.log self.todoList[0]
+        return
+      removeTodo: (obj)->
+        self = this # 番号でやる
+        self.todoList = self.todoList.filter (v)-> v != obj.path[0].value.toString()
+        return
+  )
+###
+
+
+
+
+###
+  Vue.component "header-template",
+    template: "#headerTemplate"
+    methods:
+      hell:(e)->
+        alert "hell!!!!"
+  
+  Vue.component "item-template",
+    template: "{{user_id}}:{{name}}"
+  
+  app = new Vue(
+    el: "#app"
+    data:
+      user:[
+        {user_id:"1", name:"sage man"},
+        {user_id:"2", name:"fatmen"}
+      ]
+  )
+  # console.log app.user[0].name
+###
+
+
+
+
+###
+  app = new Vue(
+    el: "#todo"
+    data:
+      todos: []
+    computed:
+      lefts: ->
+        this.todos.filter( (t)-> !t.isDone ).length
+    created:->
+      this.title = "mytod!"
+      for n in [0..4]
+        this.todos.push({
+          isDone: false,
+          title: "task-" + n
+        })
+    methods:
+      addTodo: ->
+        this.todos.push({
+          isDone:false,
+          title: "task-" + this.todos.length
+        })
+  )
+  
+  
+###
+
+
+
+###
+  app = new Vue(
+    el: "#simple"
+    data:
+      message:"death"
+      font:""
+    methods:
+      magnify: ->
+        this.font = "font-size:20px;color:red"
+  )
+###
+
+
+
 ###
   demo = new Vue(
     el: '#demo'
