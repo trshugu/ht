@@ -5,6 +5,149 @@
 
 
   /*
+     * vue event
+    vm=new Vue
+      el:"#app"
+      data:
+        t:""
+      methods:
+        fun:->
+          console.log "doij"
+          this.$emit "nanika"
+          this.$emit "bro"
+          this.$emit "nanik"
+    
+    vm.$on "nanika",->
+      console.log "kita"
+    
+    vm.$once "bro",->
+      console.log "oncekita"
+  
+    vm.$off "nanik",->
+      console.log "offkita"
+   */
+
+
+  /*
+    new Vue
+      el:"#app"
+      data:
+        s:""
+        u:[]
+        sel:null
+      created:->
+        this.u.push {name:"asdf", com:"ichi"}
+        this.u.push {name:"asdfe", com:"ni"}
+        this.u.push {name:"asdf", com:"san"}
+        this.u.push {name:"zizij", com:"shi"}
+      methods:
+        cu:(u)->
+          this.sel = u
+   */
+
+
+  /*
+     * vue フィルター
+    new Vue
+      el:"#app"
+      data:
+        t:"Ano"
+        c:12345678
+        j:{'sdfd':2}
+        l:[3,2,5,3,5,676,8,4,3]
+   */
+
+
+  /*
+     * vueサンプル2
+    vm = new Vue
+      el:".app"
+      data:
+        checked: true
+        picked: "on"
+        selected: "dodo"
+        sele: "nai"
+        seleList:[
+          {text:"moji",value:"baru"}
+          {text:"moji2",value:"baru2"}
+          {text:"moji2",value:"baru2"}
+          {text:"moji2",value:"baru2"}
+          {text:"moji5",value:"don"}
+        ]
+      methods:
+        submit:(m,e)->
+          console.log m
+          console.log e
+          e.stopPropagation()
+    
+    console.log vm
+   */
+
+
+  /*
+     * vueサンプル
+    d = a: "dead"
+    
+    vm = new Vue
+      el:"#app"
+      data: 
+        num: 2
+        message:""
+        m2:"moemo"
+        text: "通常の<br>テキスト"
+        unescapedText: "<div>HTMLを有効化して<br>表示したい時のテキスト</div>"
+        onetimeText: "一度だけバインディングされる文字列"
+        d:d
+        klass: ->true
+      methods:
+        mixin: ->
+          console.log "mixinnn"
+          console.log this.d.a
+      computed:
+        cmptd: ->
+          console.log "cmpppp"
+          -> ->"doi"
+        ggt:
+          get: -> -> this.m2
+          set: (v)-> console.log v
+      created:-> console.log "creatio!!"
+      beforeCompile:-> console.log "B.C."
+      compiled:-> console.log "konekone"
+      ready:-> console.log "let it"
+      attached:-> console.log "attache!"
+      detached:-> console.log "detachee!!!!!!!!!"
+      beforeDestroy:-> console.log "B.D!!!!!!!!!"
+      destroyed:-> console.log "vooiydd!!!!!!!!!"
+      watch:
+        "message":(n,o)->console.log n + o
+      
+      
+    
+    console.log "djiji"
+    console.log vm.$el
+    console.log vm
+    console.log vm.d == d
+    console.log vm.d
+    console.log vm.d.a
+    vm.$add("b",aaa:"den",ccc:"dsf")
+    console.log vm.b
+    console.log vm.b.aaa
+    console.log vm.b.ccc
+    vm.$delete("b")
+     * console.log vm.b.aaa
+    
+    vm.mixin()
+    fun = vm.cmptd()
+    console.log fun()
+    console.log vm.ggt()
+    vm.ggt = "death"
+    console.log vm.cmptd = "asf"
+     * vm.$remove()
+     * vm.$destroy()
+   */
+
+
+  /*
      * vueでtodoリスト2
     new Vue(
       el: "#todo"

@@ -16,6 +16,83 @@ html
   body
     #tmp(onClick="add()") tmp
     
+    //- vue event
+      #app
+        input(type="text" v-model="t")
+        div {{t}}
+        div(v-on="click: fun") aaa
+    
+    //- vue list select
+      #app
+        input(type="text" v-model="s")
+        div(v-repeat="u | filterBy s in name" v-on="click: cu(this)" v-class="done: this == sel")
+          | {{name}}
+        div(v-show="sel")
+          | {{sel.name}}
+          br
+          | {{sel.com}}
+    
+    //- vue フィルター
+      #app
+        div(v-text="t | lowercase")
+        div(v-text="t | uppercase")
+        div(v-text="c | currency")
+        div(v-text="j | json")
+        br
+        span(v-repeat="l") {{ $index==0 ? "" : ","}}{{$value}}
+        br
+        span(v-repeat="l | orderBy -1 ") {{ $index==0 ? "" : ","}}{{$value}}
+        br
+        span(v-repeat="l | orderBy 1 ") {{ $index==0 ? "" : ","}}{{$value}}
+        br
+        span(v-repeat="l | filterBy 5") {{ $index==0 ? "" : ","}}{{$value}}
+    
+    
+    
+    //- vueサンプル2
+      .app
+        button(v-on="click: submit('hell', $event)") sub
+        button(v-on="click: submit('mit')") sub
+        div
+          input(type="checkbox" v-model="checked")
+          | {{checked ? "t" : "f"}}
+        div
+          input(type="radio" name="picked" value="bon" v-model="picked")
+          input(type="radio" name="picked" value="dona" v-model="picked")
+          | {{picked}}
+        div
+          select(v-model="selected")
+            option sss
+            option ooo
+          | {{selected}}
+        div
+          select(v-model="sele" options="seleList")
+          | {{sele}}
+    
+    
+    
+    //- vueサンプル
+      #app
+        input(type="text" v-model="message")
+        input(type="text" v-text="m2")
+        div(v-show="message != 'none'") {{message}}
+        //- div {{m2}}
+        div(v-text="m2") [v-cloak]
+        // htmlエスケープされる通常の出力 v-textディレクティブと等価
+        | {{text}}
+        // htmlエスケープされない出力 v-htmlディレクティブと等価
+        | {{{unescapedText}}}
+        // 一度だけのバインディング
+        | {{* onetimeText}}
+        | {{* onetimeText}}
+        input(type="text" v-model="text")
+        input(type="text" v-model="onetimeText")
+        style [v-cloak] { display:none }
+        div(v-class="done: klass") nanigai
+        // コンパイル後のみ正しくsrcをセットするためにはv-attrディレクティブ
+        div(v-attr="value : 'd' + num") aaa {{num}}
+    
+    
     
     //- vueでtodoリスト
       #todo
@@ -23,7 +100,7 @@ html
           input(type="text" value="" placeholder="TODOを入力" v-model="todoInputValue")
           button(v-on="click: addTodo")
             | 追加
-
+        
         ul(v-repeat="todoList" v-with="i")
           li
             span {{$value}}
