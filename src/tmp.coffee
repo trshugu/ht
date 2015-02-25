@@ -1,7 +1,49 @@
 $ ->
   $("#tmp").css "color", "#f00"
   
+  # flotr2でkkbdb
+  d1 =[[]]
+  d2 =[[]]
+  serie = [
+    {
+      data: d1
+      label: "2012年"
+    }
+    {
+      data: d2
+      label: "2013年"
+    }
+  ]
   
+  render = -> Flotr.draw(
+    document.getElementById("graph")
+    serie
+    xaxis:
+      mode: "time"
+      timeMode: "local"
+      timeFormat: '%y/%m/%d'
+    legend:
+      position: "se"
+      labelFormatter: (label) -> label
+      backgroundColor: "#D2E8FF"
+    title: "tititi"
+    HtmlText: false
+  )
+  
+  t = 0
+  @add = ->
+    omega = Math.PI/7
+    d1.push([t++, Math.sin(omega * t)])
+    if (d1.length > 10)
+      d1.shift()
+    render()
+  
+  t2 = 2 
+  @add2 = ->
+    d2.push [new Date().getTime(), t2++]
+    render()
+  
+  render()
   
 
 

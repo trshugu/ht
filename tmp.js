@@ -1,6 +1,52 @@
 (function() {
   $(function() {
-    return $("#tmp").css("color", "#f00");
+    var d1, d2, render, serie, t, t2;
+    $("#tmp").css("color", "#f00");
+    d1 = [[]];
+    d2 = [[]];
+    serie = [
+      {
+        data: d1,
+        label: "2012年"
+      }, {
+        data: d2,
+        label: "2013年"
+      }
+    ];
+    render = function() {
+      return Flotr.draw(document.getElementById("graph"), serie, {
+        xaxis: {
+          mode: "time",
+          timeMode: "local",
+          timeFormat: '%y/%m/%d'
+        },
+        legend: {
+          position: "se",
+          labelFormatter: function(label) {
+            return label;
+          },
+          backgroundColor: "#D2E8FF"
+        },
+        title: "tititi",
+        HtmlText: false
+      });
+    };
+    t = 0;
+    this.add = function() {
+      var omega;
+      omega = Math.PI / 7;
+      d1.push([t++, Math.sin(omega * t)]);
+      if (d1.length > 10) {
+        d1.shift();
+      }
+      return render();
+    };
+    t2 = 2;
+    this.add2 = function() {
+      d2.push([new Date().getTime(), t2++]);
+      return render();
+    };
+    return render();
   });
 
 
