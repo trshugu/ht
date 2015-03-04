@@ -1,0 +1,20 @@
+{
+  "name": "statictemplate",
+  "version": "0.0.0",
+  "authors": [
+    "aaa"
+  ],
+  "license": "TRS",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "coffee-script": "*",
+    "jquery": "*",
+    "vue": "*"
+  }
+}
