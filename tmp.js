@@ -1,52 +1,103 @@
 (function() {
   $(function() {
-    var d1, d2, render, serie, t, t2;
+    var el1, el2, g, link, paper;
     $("#tmp").css("color", "#f00");
-    d1 = [[]];
-    d2 = [[]];
+    g = new joint.dia.Graph;
+    paper = new joint.dia.Paper({
+      el: $('#paper'),
+      width: 800,
+      height: 600,
+      gridSize: 1,
+      model: g
+    });
+    el1 = new joint.shapes.basic.Rect({
+      position: {
+        x: 50,
+        y: 50
+      },
+      size: {
+        width: 100,
+        height: 20
+      },
+      attrs: {
+        text: {
+          fill: "yellow",
+          text: "fefe"
+        }
+      }
+    });
+    el2 = new joint.shapes.basic.Rect({
+      position: {
+        x: 200,
+        y: 80
+      },
+      size: {
+        width: 70,
+        height: 25
+      },
+      attrs: {
+        text: {
+          fill: "blue",
+          text: "asdf"
+        }
+      }
+    });
+    link = new joint.dia.Link({
+      source: {
+        id: el1.id
+      },
+      target: {
+        id: el2.id
+      }
+    });
+    g.addCells([el1, el2, link]);
+    return console.log(g);
+
+    /*
+     * flotr2でkkbdb
+    d1 =[[]]
+    d2 =[[]]
     serie = [
       {
-        data: d1,
+        data: d1
         label: "2012年"
-      }, {
-        data: d2,
+      }
+      {
+        data: d2
         label: "2013年"
       }
-    ];
-    render = function() {
-      return Flotr.draw(document.getElementById("graph"), serie, {
-        xaxis: {
-          mode: "time",
-          timeMode: "local",
-          timeFormat: '%y/%m/%d'
-        },
-        legend: {
-          position: "se",
-          labelFormatter: function(label) {
-            return label;
-          },
-          backgroundColor: "#D2E8FF"
-        },
-        title: "tititi",
-        HtmlText: false
-      });
-    };
-    t = 0;
-    this.add = function() {
-      var omega;
-      omega = Math.PI / 7;
-      d1.push([t++, Math.sin(omega * t)]);
-      if (d1.length > 10) {
-        d1.shift();
-      }
-      return render();
-    };
-    t2 = 2;
-    this.add2 = function() {
-      d2.push([new Date().getTime(), t2++]);
-      return render();
-    };
-    return render();
+    ]
+    
+    render = -> Flotr.draw(
+      document.getElementById("graph")
+      serie
+      xaxis:
+        mode: "time"
+        timeMode: "local"
+        timeFormat: '%y/%m/%d'
+      legend:
+        position: "se"
+        labelFormatter: (label) -> label
+        backgroundColor: "#D2E8FF"
+      title: "tititi"
+      HtmlText: false
+    )
+    
+    t = 0
+    @add = ->
+      omega = Math.PI/7
+      d1.push([t++, Math.sin(omega * t)])
+      if (d1.length > 10)
+        d1.shift()
+      render()
+    
+    t2 = 2 
+    @add2 = ->
+      d2.push [new Date().getTime(), t2++]
+      render()
+    
+    render()
+     */
   });
 
 
