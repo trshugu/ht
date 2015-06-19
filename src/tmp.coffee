@@ -1,19 +1,322 @@
 $ ->
   $("#tmp").css "color", "#f00"
   
-  g = new joint.dia.Graph
-
-  paper = new joint.dia.Paper
+  
+  
+  
+  ###
+  # クラス図
+  jointjs = new joint.dia.Paper
     el: $('#paper')
     width: 800
     height: 600
-    gridSize: 1
-    model: g
+    gridSize: 20
+    model: new joint.dia.Graph
+  
+  uml = joint.shapes.uml
+  
+  classes =
+    nani: new uml.Class
+      position: x:100, y:10
+      size: width:100, height:200
+      name: "r-nanigasi"
+      attributes:[
+        "uid"
+        "date"
+      ]
+      methods:[
+        "nakami"
+        "iroiro"
+      ]
+    
+    gasi: new uml.Class
+      position: x:400, y:10
+      size: width:100, height:200
+      name: "r_riso-su"
+      attributes:[
+        "hashhash"
+      ]
+      methods:[
+        "naka"
+        "midesu"
+      ]
+  
+  _.each classes, (c)-> jointjs.model.addCell c
+  _.each [
+    # new joint.dia.Link
+    new uml.Generalization
+      source: id: classes.nani.id
+      target: id: classes.gasi.id
+  ], (c)-> jointjs.model.addCell c
+  ###
+  
+  ###
+  # petrinet
+  graph = new joint.dia.Graph;
+  paper = new joint.dia.Paper
+    el: $ '#paper'
+    width: 800
+    height: 350
+    gridSize: 10
+    perpendicularLinks: true
+    model: graph
+  
+  pn = joint.shapes.pn
+  
+  pReady = new pn.Place
+    position:
+      x: 140
+      y: 50
+    attrs:
+      '.label':
+        text: 'ready'
+    tokens: 1
+  
+  pIdle = new pn.Place
+    position:
+      x: 140
+      y: 260
+    attrs:
+      '.label':
+        text: 'idle'
+    tokens: 2
+  
+  buffer = new pn.Place
+    position:
+      x: 350
+      y: 160
+    attrs:
+      '.label':
+        text: 'buffer'
+    tokens: 12
+  
+  cAccepted = new pn.Place
+    position:
+      x: 550
+      y: 50
+    attrs:
+      '.label':
+        text: 'accepted'
+    tokens: 1
+  
+  cReady = new pn.Place
+    position:
+      x: 560
+      y: 260
+    attrs:
+      '.label':
+        text: 'ready'
+    tokens: 3
+
+
+  pProduce = new pn.Transition
+    position:
+      x: 50
+      y: 160
+    attrs:
+      '.label':
+        text: 'produce'
+  
+  pSend = new pn.Transition
+    position:
+      x: 270
+      y: 160
+    attrs:
+      '.label':
+        text: 'send'
+  
+  cAccept = new pn.Transition
+    position:
+      x: 470
+      y: 160
+    attrs:
+      '.label':
+        text: 'accept'
+  
+  cConsume = new pn.Transition
+    position:
+      x: 680
+      y: 160
+    attrs:
+      '.label':
+        text: 'consume'
+
+  graph.addCell [
+    pReady
+    pIdle
+    buffer
+    cAccepted
+    cReady
+    pProduce
+    pSend
+    cAccept
+    cConsume ]
+
+  link = (a, b) ->
+    return new pn.Link
+      source:
+        id: a.id
+        selector: '.root'
+      target:
+        id: b.id
+        selector: '.root'
+
+  graph.addCell [
+      link pProduce, pReady
+      link pReady, pSend
+      link pSend, pIdle
+      link pIdle, pProduce
+      link pSend, buffer
+      link buffer, cAccept
+      link cAccept, cAccepted
+      link cAccepted, cConsume
+      link cConsume, cReady
+      link cReady, cAccept
+  ] 
+
+  fireTransition = (t, sec) ->
+    inbound = graph.getConnectedLinks(t, inbound: true)
+    outbound = graph.getConnectedLinks(t, outbound: true)
+    
+    placesBefore = _.map inbound, (link) -> graph.getCell link.get('source').id
+    placesAfter = _.map outbound, (link) -> graph.getCell link.get('target').id
+    
+    isFirable = true
+    
+    _.each placesBefore, (p) ->
+      if p.get('tokens') == 0
+        isFirable = false
+    
+    if isFirable
+      _.each placesBefore, (p) ->
+        _.defer -> p.set 'tokens', p.get('tokens') - 1
+        
+        link = _.find inbound, (l) -> l.get('source').id == p.id
+        
+        paper.findViewByModel(link).sendToken V('circle', {r: 5, fill: 'red'}).node, sec * 1000
+      
+      _.each placesAfter, (p) ->
+        link = _.find outbound, (l) -> l.get('target').id == p.id
+        
+        paper.findViewByModel(link).sendToken V('circle', {r: 5, fill: 'red'}).node, sec * 1000, ->
+          p.set 'tokens', p.get('tokens') + 1
+
+  simulate = ->
+    transitions = [
+      pProduce
+      pSend
+      cAccept
+      cConsume
+    ]
+    
+    _.each transitions, (t) -> fireTransition t, 1 if Math.random() < 0.7
+    
+    setInterval ->
+      _.each transitions, (t) -> fireTransition t, 1 if Math.random() < 0.7
+    , 2000
+
+  simulationId = simulate()
+
+  stopSimulation = (simulationId) ->
+    clearInterval simulationId
+  ###
+
+  ###
+  # jointjs その3
+  jointjs = new joint.dia.Paper
+    el: $('#paper')
+    width: 800
+    height: 600
+    gridSize: 20
+    model: new joint.dia.Graph
+  
+  cells =
+    el1: new joint.shapes.basic.Rect
+      position: x: 55, y: 55
+      size: width: 100, height: 20
+      attrs:
+        text:
+          fill:"yellow"
+          text:"fefe"
+    
+    el2: new joint.shapes.basic.Rect
+      position: x:205, y: 85
+      size: width: 70, height: 25
+      attrs:
+        text:
+          fill:"blue"
+          text:"asdf"
+  
+  _.each cells, (c)-> jointjs.model.addCell (c)
+  
+  link = (a, b) ->
+    return new joint.dia.Link
+      source: id: a.id, selector: '.root'
+      target: id: b.id, selector: '.root'
+
+  jointjs.model.addCell [
+    link cells.el1, cells.el2
+  ]
+  ###
+  
+  # rs = [
+  #   new joint.dia.Link
+  #     source: id: cells.el1.id
+  #     target: id: cells.el2.id
+  # ]
+  # _.each rs, (c) -> jointjs.model.addCell (c)
+  
+  ###
+  # jointjs その2
+  jointjs = new joint.dia.Paper
+    el: $('#paper')
+    width: 800
+    height: 600
+    gridSize: 20
+    model: new joint.dia.Graph
+  
+  cells =
+    el1: new joint.shapes.basic.Rect
+      position: x: 55, y: 55
+      size: width: 100, height: 20
+      attrs:
+        text:
+          fill:"yellow"
+          text:"fefe"
+    
+    el2: new joint.shapes.basic.Rect
+      position: x:205, y: 85
+      size: width: 70, height: 25
+      attrs:
+        text:
+          fill:"blue"
+          text:"asdf"
+  
+  _.each cells, (c)-> jointjs.model.addCell (c)
+ 
+  
+  rs = [
+    new joint.dia.Link
+      source: id: cells.el1.id
+      target: id: cells.el2.id
+  ]
+  
+  _.each rs, (c) -> jointjs.model.addCell (c)
+  ###
+  
+  ###
+  # jointjs
+  jointjs = new joint.dia.Paper
+    el: $('#paper')
+    width: 800
+    height: 600
+    gridSize: 20
+    model: new joint.dia.Graph
   
   el1 = new joint.shapes.basic.Rect
     position:
-      x: 50
-      y: 50
+      x: 55
+      y: 55
     size:
       width: 100
       height: 20
@@ -21,11 +324,12 @@ $ ->
       text:
         fill:"yellow"
         text:"fefe"
-
+  jointjs.model.addCell el1
+  
   el2 = new joint.shapes.basic.Rect
     position:
-      x:200
-      y:80
+      x:205
+      y:85
     size:
       width: 70
       height: 25
@@ -33,6 +337,7 @@ $ ->
       text:
         fill:"blue"
         text:"asdf"
+  jointjs.model.addCell el2
   
   link = new joint.dia.Link
     source:
@@ -40,13 +345,8 @@ $ ->
     target:
       id: el2.id
 
-  g.addCells [
-    el1
-    el2
-    link
-  ]
-  
-  console.log g
+  jointjs.model.addCell link
+  ###
   
   ###
   # flotr2でkkbdb
