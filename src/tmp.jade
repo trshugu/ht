@@ -20,11 +20,27 @@ html
     style(type="text/css")
     script(type="text/javascript")
     script(type="text/coffeescript")
+    
+    //-
+      link(rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/default.min.css")
+      script(src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js")
+      script.
+        hljs.initHighlightingOnLoad();
   body
     #tmp(onClick="add()") tmp
     
     #paper
+    
+    //-
+      pre
+        code.
+          console.log "noi"
+          -> alert()
 
+      pre
+        code.
+          console.log("noi");
+          function() {alert();}
     
     //- flotr2でkkbdb
       #add(onclick="add()") add
