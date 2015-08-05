@@ -1,15 +1,46 @@
 $ ->
   $("#tmp").css "color", "#f00"
   
+  # svg保存
+  
+  # console.log "image.on"
+  @add = =>
+    console.log "oon"
+    width = $('#paper').width()
+    height = $('#paper').height()
+    $('body').append '<canvas id=\'canvas1\' width=' + width + ' height=' + height + '></canvas>'
+    canvas = $('#canvas1')[0]
+    ctx = canvas.getContext('2d')
+    
+    svg = $('#paper').children()
+    svg.attr 'viewBox', '0 0 ' + width + ' ' + height
+    data = (new XMLSerializer).serializeToString(svg[0])
+    # console.log data
+    imgsrc = 'data:image/svg+xml;charset=utf-8;base64,' + btoa(unescape(encodeURIComponent(data)))
+    image = new Image()
+    
+    image.src = imgsrc
+    
+    console.log "iimmaaggeeoonnllooaadd"
+    console.log image
+    ctx.drawImage image, 0, 0
+    # Optional: 自動でダウンロードさせる場合
+    $('body').append '<a id=\'image-file\' type=\'application/octet-stream\' href=\'' + canvas.toDataURL('image/png') + '\' download=\'graph.png\'>Download Image</a>'
+    $('#image-file')[0].click()
+    # 後処理
+    # $('#canvas1').remove()
+    # $('#image-file').remove()
+  
   
   
   
   ###
+  ###
   # クラス図
   jointjs = new joint.dia.Paper
     el: $('#paper')
-    width: 800
-    height: 600
+    width: 500
+    height: 250
     gridSize: 20
     model: new joint.dia.Graph
   
@@ -43,12 +74,16 @@ $ ->
   
   _.each classes, (c)-> jointjs.model.addCell c
   _.each [
-    # new joint.dia.Link
-    new uml.Generalization
+    new joint.dia.Link
+    # new uml.Generalization
       source: id: classes.nani.id
       target: id: classes.gasi.id
-  ], (c)-> jointjs.model.addCell c
-  ###
+  ], (c)->
+    jointjs.model.addCell c
+    console.log "owateru"
+  
+  
+  
   
   ###
   # petrinet

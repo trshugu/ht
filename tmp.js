@@ -1,52 +1,84 @@
 (function() {
   $(function() {
-    return $("#tmp").css("color", "#f00");
+    var classes, jointjs, uml;
+    $("#tmp").css("color", "#f00");
+    this.add = (function(_this) {
+      return function() {
+        var canvas, ctx, data, height, image, imgsrc, svg, width;
+        console.log("oon");
+        width = $('#paper').width();
+        height = $('#paper').height();
+        $('body').append('<canvas id=\'canvas1\' width=' + width + ' height=' + height + '></canvas>');
+        canvas = $('#canvas1')[0];
+        ctx = canvas.getContext('2d');
+        svg = $('#paper').children();
+        svg.attr('viewBox', '0 0 ' + width + ' ' + height);
+        data = (new XMLSerializer).serializeToString(svg[0]);
+        imgsrc = 'data:image/svg+xml;charset=utf-8;base64,' + btoa(unescape(encodeURIComponent(data)));
+        image = new Image();
+        image.src = imgsrc;
+        console.log("iimmaaggeeoonnllooaadd");
+        console.log(image);
+        ctx.drawImage(image, 0, 0);
+        $('body').append('<a id=\'image-file\' type=\'application/octet-stream\' href=\'' + canvas.toDataURL('image/png') + '\' download=\'graph.png\'>Download Image</a>');
+        return $('#image-file')[0].click();
+      };
+    })(this);
 
     /*
-     * クラス図
-    jointjs = new joint.dia.Paper
-      el: $('#paper')
-      width: 800
-      height: 600
-      gridSize: 20
-      model: new joint.dia.Graph
-    
-    uml = joint.shapes.uml
-    
-    classes =
-      nani: new uml.Class
-        position: x:100, y:10
-        size: width:100, height:200
-        name: "r-nanigasi"
-        attributes:[
-          "uid"
-          "date"
-        ]
-        methods:[
-          "nakami"
-          "iroiro"
-        ]
-      
-      gasi: new uml.Class
-        position: x:400, y:10
-        size: width:100, height:200
-        name: "r_riso-su"
-        attributes:[
-          "hashhash"
-        ]
-        methods:[
-          "naka"
-          "midesu"
-        ]
-    
-    _.each classes, (c)-> jointjs.model.addCell c
-    _.each [
-       * new joint.dia.Link
-      new uml.Generalization
-        source: id: classes.nani.id
-        target: id: classes.gasi.id
-    ], (c)-> jointjs.model.addCell c
      */
+    jointjs = new joint.dia.Paper({
+      el: $('#paper'),
+      width: 500,
+      height: 250,
+      gridSize: 20,
+      model: new joint.dia.Graph
+    });
+    uml = joint.shapes.uml;
+    classes = {
+      nani: new uml.Class({
+        position: {
+          x: 100,
+          y: 10
+        },
+        size: {
+          width: 100,
+          height: 200
+        },
+        name: "r-nanigasi",
+        attributes: ["uid", "date"],
+        methods: ["nakami", "iroiro"]
+      }),
+      gasi: new uml.Class({
+        position: {
+          x: 400,
+          y: 10
+        },
+        size: {
+          width: 100,
+          height: 200
+        },
+        name: "r_riso-su",
+        attributes: ["hashhash"],
+        methods: ["naka", "midesu"]
+      })
+    };
+    _.each(classes, function(c) {
+      return jointjs.model.addCell(c);
+    });
+    return _.each([
+      new joint.dia.Link({
+        source: {
+          id: classes.nani.id
+        },
+        target: {
+          id: classes.gasi.id
+        }
+      })
+    ], function(c) {
+      jointjs.model.addCell(c);
+      return console.log("owateru");
+    });
 
     /*
      * petrinet
