@@ -1,8 +1,13 @@
 $ ->
   $("#tmp").css "color", "#f00"
   
-  # svg保存
+  ###
+  $("#loadfile").text "doi"
+  console.log "./zaq.csv"
+  ###
   
+  ###
+  # svg保存
   # console.log "image.on"
   @add = =>
     console.log "oon"
@@ -30,11 +35,11 @@ $ ->
     # 後処理
     # $('#canvas1').remove()
     # $('#image-file').remove()
-  
-  
-  
-  
   ###
+  
+  
+  
+  
   ###
   # クラス図
   jointjs = new joint.dia.Paper
@@ -81,6 +86,7 @@ $ ->
   ], (c)->
     jointjs.model.addCell c
     console.log "owateru"
+  ###
   
   
   
