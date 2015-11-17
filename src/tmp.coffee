@@ -1,5 +1,69 @@
+document.addEventListener 'DOMContentLoaded', ->
+  btnClicks = Rx.Observable.fromEvent $('#btn'), "click"
+  
+  btnClicks
+    .filter (value) ->
+      value.altKey
+    
+    .subscribe ->
+      console.log('Alt push')
+
+###
+# FRP化
+document.addEventListener 'DOMContentLoaded', ->
+  slides = [].slice.call document.querySelectorAll('#slides section')
+  prev = Bacon.fromEventTarget document.getElementById('prev'), 'click'
+  next = Bacon.fromEventTarget document.getElementById('next'), 'click'
+  both = prev.map(-1).merge(next.map(1))
+  
+  current = both.scan 1, (current, v) -> Math.min(slides.length, Math.max(current + v, 1)) 
+  current.onValue (page) ->
+    slides.forEach (el) -> el.classList.remove('visible')
+    slides[page - 1].classList.add('visible')
+, false
+###
+
+
+###
+# 手続き型
+document.addEventListener 'DOMContentLoaded', ->
+  
+  getById('prev').addEventListener 'click', -> moveSlide(-1)
+  getById('next').addEventListener 'click', -> moveSlide(1)
+  
+  slides  = toArray document.querySelectorAll('#slides section')
+  start   = 1
+  end     = slides.length
+  current = 1
+  
+  moveSlide = (delta)->
+    next = current + delta
+    
+    current = Math.min(end, Math.max(next, start))
+    slides.forEach (el) -> el.classList.remove('visible')
+    slides[current - 1].classList.add('visible')
+
+, false
+
+getById = (ident)-> document.getElementById(ident)
+
+toArray = (list)-> Array.prototype.slice.call(list)
+###
+
 $ ->
-  $("#tmp").css "color", "#f00"
+  # $("#tmp").css "color", "#f00"
+  
+  
+  
+  ###
+  # FRP1
+  arr = [1,2,3,4,5,6,7,8,9]
+  Bacon.fromArray(arr).map((n)-> n * 2).log()
+  
+  arr.push 99
+  arr.push 100
+  Bacon.fromArray(arr).map((n)-> n * 2).log()
+  ###
   
   ###
   $("#loadfile").text "doi"

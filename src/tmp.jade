@@ -6,10 +6,14 @@ html
     script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
     script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
     script(type="text/javascript", src="bower_components/vue/dist/vue.min.js")
+    
+    script(type="text/javascript", src="bower_components/bacon/dist/Bacon.min.js")
+    script(type="text/javascript", src="bower_components/rxjs/dist/rx.all.min.js")
+    
     //-
       script(type="text/javascript", src="bower_components/jointjs/dist/joint.all.min.js")
       script(type="text/javascript", src="bower_components/jointjs/dist/joint.shapes.uml.min.js")
-
+    
     //-
       script(type="text/javascript", src="bower_components/flotr2/flotr2.min.js")
     
@@ -30,7 +34,26 @@ html
   body
     #tmp(onClick="add()") tmp
     
-    #loadfile
+    
+    
+    
+    button#btn cli
+    
+    //-
+      #slides
+        section.visible 1
+        section 2
+        section 3
+        section 4
+        section 5
+      
+      p#control
+        button#prev ←prev
+        button#next next→
+    
+    
+    //-
+      #loadfile
     
     //-
       #paper

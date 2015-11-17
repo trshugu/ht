@@ -1,22 +1,26 @@
-gulp = require("gulp")
-jade = require("gulp-jade")
-coffee = require("gulp-coffee")
-stylus = require("gulp-stylus")
+gulp = require "gulp"
+plumber = require "gulp-plumber"
+jade = require "gulp-jade"
+coffee = require "gulp-coffee"
+stylus = require "gulp-stylus"
 
 gulp.task 'jade', ->
   gulp.src("src/*.jade")
+    .pipe plumber()
     .pipe jade(pretty: true)
     .pipe gulp.dest("./")
   return
 
 gulp.task 'coffee', ->
   gulp.src("src/*.coffee")
+    .pipe plumber()
     .pipe coffee(pretty: true)
     .pipe gulp.dest("./")
   return
 
 gulp.task 'stylus', ->
   gulp.src("src/*.styl")
+    .pipe plumber()
     .pipe stylus(pretty: true)
     .pipe gulp.dest("./")
   return
