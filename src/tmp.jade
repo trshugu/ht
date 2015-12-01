@@ -36,8 +36,25 @@ html
     
     
     
+    //-
+      button#btn cli
     
-    button#btn cli
+    //-
+      | jade mix-in (blockが必要であった)
+      .a aaa
+      mixin wrap(bool)
+        if bool
+          span(style="color:#121")
+            block
+        else
+          span(style="color:#897")
+            block
+      .b bbb
+      p
+        +wrap(true): | qqqq
+          | mmmm
+        | dfkj
+      .c ccc
     
     //-
       #slides
