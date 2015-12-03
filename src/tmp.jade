@@ -42,14 +42,14 @@ html
     
     
     //- タグテンプレート NG 展開されない
-    mixin link
-      .lin
-        a.menu(attributes)
-          block
-    
-    +link.kurazz(href="#") sya-pu
-    +link#aide(href="b") a
-    +link(href="a") b
+      mixin link
+        .lin
+          a.menu(attributes)
+            block
+      
+      +link.kurazz(href="#") sya-pu
+      +link#aide(href="b") a
+      +link(href="a") b
     
     
     
