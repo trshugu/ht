@@ -36,6 +36,51 @@ html
     
     
     
+    
+    
+    
+    
+    
+    //- タグテンプレート NG 展開されない
+    mixin link
+      .lin
+        a.menu(attributes)
+          block
+    
+    +link.kurazz(href="#") sya-pu
+    +link#aide(href="b") a
+    +link(href="a") b
+    
+    
+    
+    //-
+      mixin atori
+        .tori(class=attributes.class)
+          block
+      
+      +atori.bold
+        .naka nakami
+      
+      +atori.red
+        .naka rednakami
+    
+    
+    //-
+      mixin mifunc(val)
+        if val == "vvaall"
+          .ifif ihubun
+          block
+        else
+          .elel erusu
+          block
+      
+      
+      +mifunc("vvaall")
+        p buronakami
+      
+      +mifunc("tigaumono")
+        p buronakami
+    
     //-
       button#btn cli
     
