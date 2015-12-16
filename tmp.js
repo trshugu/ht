@@ -1,13 +1,52 @@
 (function() {
+  console.time("tmp");
+
   document.addEventListener('DOMContentLoaded', function() {
-    var btnClicks;
-    btnClicks = Rx.Observable.fromEvent($('#btn'), "click");
-    return btnClicks.filter(function(value) {
-      return value.altKey;
-    }).subscribe(function() {
-      return console.log('Alt push');
+    var aspect, camera, directionalLight, far, fov, geometry, height, material, mesh, near, renderLoop, renderer, scene, width;
+    console.log("start");
+    scene = new THREE.Scene();
+    width = 600;
+    height = 400;
+    fov = 60;
+    aspect = width / height;
+    near = 1;
+    far = 1000;
+    camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera.position.set(0, 0, 50);
+    renderer = new THREE.WebGLRenderer();
+    renderer.setSize(width, height);
+    document.body.appendChild(renderer.domElement);
+    directionalLight = new THREE.DirectionalLight(0xffffff);
+    directionalLight.position.set(0, 0.7, 0.7);
+    scene.add(directionalLight);
+    geometry = new THREE.CubeGeometry(30, 30, 30);
+    material = new THREE.MeshPhongMaterial({
+      color: 0xff0000
     });
+    mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+    renderer.render(scene, camera);
+    renderLoop = function() {
+      requestAnimationFrame(renderLoop);
+      mesh.rotation.set(0, mesh.rotation.y + 0.01, mesh.rotation.z + 0.01);
+      return renderer.render(scene, camera);
+    };
+    renderLoop();
+    console.log("end");
+    return console.timeEnd("tmp");
   });
+
+
+  /*
+    btnClicks = Rx.Observable.fromEvent $('#btn'), "click"
+    
+    btnClicks
+      .filter (value) ->
+        value.altKey
+      
+      .subscribe ->
+        console.log('Alt push')
+   */
 
 
   /*
