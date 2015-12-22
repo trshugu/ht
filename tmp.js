@@ -2,38 +2,234 @@
   console.time("tmp");
 
   document.addEventListener('DOMContentLoaded', function() {
-    var aspect, camera, directionalLight, far, fov, geometry, height, material, mesh, near, renderLoop, renderer, scene, width;
-    console.log("start");
-    scene = new THREE.Scene();
-    width = 600;
-    height = 400;
-    fov = 60;
-    aspect = width / height;
-    near = 1;
-    far = 1000;
-    camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.set(0, 0, 50);
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(width, height);
-    document.body.appendChild(renderer.domElement);
-    directionalLight = new THREE.DirectionalLight(0xffffff);
-    directionalLight.position.set(0, 0.7, 0.7);
-    scene.add(directionalLight);
-    geometry = new THREE.CubeGeometry(30, 30, 30);
-    material = new THREE.MeshPhongMaterial({
-      color: 0xff0000
-    });
-    mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
-    renderer.render(scene, camera);
-    renderLoop = function() {
-      requestAnimationFrame(renderLoop);
-      mesh.rotation.set(0, mesh.rotation.y + 0.01, mesh.rotation.z + 0.01);
-      return renderer.render(scene, camera);
-    };
-    renderLoop();
-    console.log("end");
-    return console.timeEnd("tmp");
+    return $("#tmp").css("color", "#f00");
+
+    /*
+     * observer
+    source = Rx.Observable.create (o)->
+      num = 0
+      id = setInterval ->
+        o.onNext num++
+      , 500
+      
+      setTimeout ->
+        o.onCompleted()
+      , 10000
+      
+      return ->
+        console.log "dispo"
+        clearInterval id
+    
+    subsc = source.subscribe(
+      (d)-> console.log "onNext", d
+      (e)-> console.log "erre:", e.message
+      -> console.log "cmp"
+    )
+    
+    setTimeout ->
+      subsc.dispose()
+    , 20000
+     */
+
+    /*
+    observer = Rx.Observer.create (num) ->
+      console.log "onNext: " + num
+    , (error)->
+      console.log "onError: " + error
+    , ->
+      console.log 'onCompleted'
+     
+    Rx.Observable.from [1, 2, 3, 4, 5, 6, 7, 8]
+      .delay (num) ->
+        Rx.Observable.timer(num * 500)
+      .filter (num)->
+        num % 2
+      .map (num) ->
+        num * num
+      .subscribe(observer)
+     */
+
+    /*
+    Rx.Observable.from [1, 2, 3, 4, 5, 6, 7, 8]
+      .filter (num)->
+        num % 2
+      .map (num)->
+        num * num
+      .forEach (num)->
+        console.log(num)
+     */
+
+    /*
+    $btn = $('#btn')
+    $timeline = $('.timeline')
+    $progressbar = $timeline.find('.progressbar')
+    $marbles = $('#marbles')
+    btnClicks = Rx.Observable.fromEvent($btn, 'click')
+    shockwave = '<svg height="150" width="150" style="position: absolute;pointer-events:none;"> <circle cx="50%" cy="50%" r="0" fill-opacity="1"></circle> </svg>'
+    click_event_marker = '<svg class="event-marker" height="12" width="12"> <circle cx="50%" cy="50%" r="50%" fill="#69c2d8"></circle> </svg>'
+    click_alt_event_marker = '<svg class="event-marker" height="12" width="12"> <circle cx="50%" cy="50%" r="50%" fill="#ed145b"></circle> </svg>'
+    $all_event_markers = $()
+    
+    do ->
+        original_text_fn = $.fn.text
+        $.fn.text = ()->
+            @each ->
+                $this = $(@)
+                if $this.data('original_text') then return
+                $this.data('original_text', original_text_fn.apply(@))
+            return original_text_fn.apply(@, arguments)
+    
+        $.fn.reset_text = ()->
+            @each ()->
+                $this = $(@)
+                original_text = $this.data('original_text')
+                if(original_text) then $this.text(original_text)
+    
+     * ===== タイムラインのアニメーションの開始とリセットメソッド =====
+    $timeline.play = (duration, promise)->
+        (new TimelineLite())
+        .to($progressbar, duration / 1000, width: '100%', ease: Linear.easeNone)
+        .add ()->
+            $timeline.addClass('end')
+            promise.resolve()
+    
+    $timeline.rewind = ->
+        $progressbar.css(width: 0)
+        $timeline.removeClass('end')
+        $all_event_markers.remove()
+    
+    
+     * ====================== メインプログラム ======================
+    set_program = ->
+        btnClicks = Rx.Observable.fromEvent($btn, "click")
+        d = new $.Deferred
+    
+        animation = {
+            duration: 5000
+            start_time: null
+            get_percentage: ->
+                time = (new Date()).getTime()
+                return ((time - @start_time) / @duration) * 100
+    
+            click_alt: ()->
+                @drop_event_marker(click_alt_event_marker, 'go-down')
+    
+            click: ()->
+                @drop_event_marker(click_event_marker, 'fadeOut')
+    
+            shockwave: (coordinate)->
+                $shockwave = $(shockwave).appendTo('body')
+                $shockwave_circle = $shockwave.find('circle').attr('fill', coordinate.color)
+    
+                (new TimelineLite())
+                .set($shockwave, left: coordinate.x - 75, top: coordinate.y - 75)
+                .to($shockwave_circle, 0.5, attr: {'fill-opacity': 0, r: 75}, ease: Quad.easeOut)
+                .add ->$shockwave.remove()
+    
+            drop_event_marker: (pointer, class_name)->
+                left = @get_percentage() + '%'
+                $click_event = $(pointer).css('left': left)
+                $click_event[0].classList.add('scale-up')
+                $click_event_down = $(pointer).css('left': left)
+                $click_event_down[0].classList.add(class_name)
+                $marbles.append($click_event)
+                $marbles.append($click_event_down)
+                $all_event_markers = $all_event_markers.add($click_event).add($click_event_down)
+    
+            start: ->
+                @start_time = (new Date()).getTime()
+                $timeline.play(@duration, d)
+                $btn.text('click me')
+        }
+    
+        btnClicks
+        .take(1)# take the first event only
+        .subscribe -> # when user click the button then ...
+            $timeline.rewind() # init the animation of `time-line`
+            animation.start() # start animation
+    
+            btnClicks
+            .filter (event)->
+                return event.altKey
+            .takeUntil(d.promise())
+            .subscribe($.proxy(animation.click_alt, animation))
+    
+            btnClicks
+            .filter (event)->
+                return !event.altKey
+            .takeUntil(d.promise())
+            .subscribe($.proxy(animation.click, animation))
+    
+            btnClicks
+            .map (event)->
+                return {x: event.pageX, y: event.pageY, color: if event.altKey then '#ed145b' else '#69c2d8'}
+            .subscribe($.proxy(animation.shockwave, animation))
+    
+        return d.promise()
+    
+    
+    reset_program = ->
+        $btn.reset_text()
+        run_program()
+    
+    run_program = -> set_program().then(reset_program)
+    
+    run_program()
+     */
+
+    /*
+    Rx.Observable.fromEvent($('#btn'), "click")
+      .filter (value)->
+        value.altKey
+      .subscribe ->
+        console.log 'Altキーを押しながらクリックしたね！'
+     */
+
+    /*
+    console.log "start"
+    
+    scene = new THREE.Scene()
+    
+    width  = 600
+    height = 400
+    fov    = 60
+    aspect = width / height
+    near   = 1
+    far    = 1000
+    camera = new THREE.PerspectiveCamera( fov, aspect, near, far )
+    camera.position.set( 0, 0, 50 )
+    
+    renderer = new THREE.WebGLRenderer()
+    renderer.setSize( width, height )
+    document.body.appendChild( renderer.domElement )
+    
+    directionalLight = new THREE.DirectionalLight( 0xffffff )
+    directionalLight.position.set( 0, 0.7, 0.7 )
+    scene.add( directionalLight )
+    
+    geometry = new THREE.CubeGeometry( 30, 30, 30 )
+    material = new THREE.MeshPhongMaterial( { color: 0xff0000 } )
+    mesh = new THREE.Mesh( geometry, material )
+    scene.add( mesh );  
+    
+    renderer.render( scene, camera )
+    
+    renderLoop = ->
+      requestAnimationFrame( renderLoop )
+      mesh.rotation.set(
+        0,
+        mesh.rotation.y + 0.01,
+        mesh.rotation.z + 0.01
+      )
+      renderer.render( scene, camera )
+    
+    renderLoop()
+    
+    
+    
+    console.log "end"
+    console.timeEnd "tmp"
+     */
   });
 
 

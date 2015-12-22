@@ -3,13 +3,54 @@ html
   head
     meta(content="text/html" charset="utf-8")
     title tmp
-    script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
-    script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
-    script(type="text/javascript", src="bower_components/vue/dist/vue.min.js")
     
-    script(type="text/javascript", src="bower_components/bacon/dist/Bacon.min.js")
+    script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
+    script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
+    script(type="text/javascript", src="tmp.js")
+    link(href="tmp.css", rel="stylesheet")
+    
     script(type="text/javascript", src="bower_components/rxjs/dist/rx.all.min.js")
-    script(type="text/javascript", src="bower_components/three.js/build/three.min.js")
+    
+    style(type="text/css")
+    script(type="text/javascript")
+    script(type="text/coffeescript")
+    
+  body
+    #tmp(onClick="add()") tmp
+    
+    
+    
+    //-
+      .header
+        button#btn.left Try
+        .right
+          p: svg(height="12" width="12")
+            circle(cx="6" cy="6" r="6" fill="#69c2d8")> click
+          p: svg(height="12" width="12")
+            circle(cx="6" cy="6" r="6" fill="#ed145b") alt+click
+      .marbles
+        .timeline: .progressbar
+        .filter filter()
+        .timeline,progressbar
+      script(src="//code.jquery.com/jquery-2.1.1.min.js")
+      script(src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.11.7/TweenMax.min.js")
+    
+    
+    //-
+      button#btn click
+    
+    
+    
+    
+    
+    //-
+      script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
+      script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
+      script(type="text/javascript", src="bower_components/vue/dist/vue.min.js")
+      
+      script(type="text/javascript", src="bower_components/bacon/dist/Bacon.min.js")
+      script(type="text/javascript", src="bower_components/rxjs/dist/rx.all.min.js")
+      script(type="text/javascript", src="bower_components/three.js/build/three.min.js")
     
     //-
       script(type="text/javascript", src="bower_components/jointjs/dist/joint.all.min.js")
@@ -18,27 +59,15 @@ html
     //-
       script(type="text/javascript", src="bower_components/flotr2/flotr2.min.js")
     
-    script(type="text/javascript", src="tmp.js")
-    link(href="tmp.css", rel="stylesheet")
     //-
       link(href="bower_components/jointjs/dist/joint.all.min.css", rel="stylesheet")
     
-    style(type="text/css")
-    script(type="text/javascript")
-    script(type="text/coffeescript")
     
     //-
       link(rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/default.min.css")
       script(src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js")
       script.
         hljs.initHighlightingOnLoad();
-  body
-    #tmp(onClick="add()") tmp
-    
-    
-    
-    
-    
     
     
     
