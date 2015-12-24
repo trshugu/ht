@@ -2,7 +2,70 @@
   console.time("tmp");
 
   document.addEventListener('DOMContentLoaded', function() {
-    return $("#tmp").css("color", "#f00");
+    var subject, subscription;
+    $("#tmp").css("color", "#f00");
+    subject = new Rx.Subject();
+    subscription = subject.subscribe(function(x) {
+      return console.log('onNext: ' + x);
+    }, function(e) {
+      return console.log('onError: ' + e.message);
+    }, function() {
+      return console.log('onCompleted');
+    });
+    subject.onNext(1);
+    subject.onNext(2);
+    subject.onCompleted();
+    return subscription.dispose();
+
+    /*
+     * Cold Observable Hot Observable #
+    
+     * hot
+    source = Rx.Observable.interval 1000
+    
+     * Hot Observableに変換
+    hot = source.publish()
+    
+     * この時点ではまだ値はプッシュされない
+    subscription1 = hot.subscribe (x)->
+      console.log('Observer 1: onNext: %s', x)
+    
+    console.log('Current Time after 1st subscription: ' + Date.now())
+     
+     * 3秒後に……
+    setTimeout ->
+       * `connect()`を使って、`source`に接続する
+       * これで、source から受け取った値がhotのobserverたちにプッシュされるようになる。
+      hot.connect()
+      
+      console.log('Current Time after connect: ' + Date.now())
+      
+       * さらに3秒後に……
+      setTimeout ->
+        console.log('Current Time after 2nd subscription: ' + Date.now())
+        ubscription2 = hot.subscribe (x)->
+          console.log('Observer 2: onNext: %s', x)
+      , 3000
+    , 3000
+     */
+
+    /*
+     * cold
+    source = Rx.Observable.interval(1000)
+    subscription1 = source.subscribe (x)->
+      console.log 'Observer 1: onNext: ' + x
+    subscription2 = undefined
+    
+    setTimeout ->
+      subscription2 = source.subscribe (x)->
+        console.log 'Observer 2: onNext: ' + x
+    , 2000
+    
+    setTimeout ->
+      subscription1.dispose()
+      subscription2.dispose()
+    , 5000
+     */
 
     /*
      * observer
