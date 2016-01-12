@@ -6,10 +6,12 @@ html
     
     script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
     script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
+    script(type="text/javascript", src="bower_components/rxjs/dist/rx.all.min.js")
+    script(type="text/javascript", src="bower_components/rxjs/dist/rx.time.min.js")
+    
     script(type="text/javascript", src="tmp.js")
     link(href="tmp.css", rel="stylesheet")
     
-    script(type="text/javascript", src="bower_components/rxjs/dist/rx.all.min.js")
     
     style(type="text/css")
     script(type="text/javascript")
@@ -18,7 +20,19 @@ html
   body
     #tmp(onClick="add()") tmp
     
+    //-
+      .container
+        h1(contenteditable="true") TEXT
+        p.text: input(type="text" placeholder="Text" value="TEXT")
+        p.size: input(type="number" placeholder="Size" step="10" value="40")
+        p.color: input(title="color" type="color" placeholder="Color" value="#ffffff")
+        p#combined
     
+    
+    //-
+      .container
+        #box
+          span Drag Me
     
     //-
       .header

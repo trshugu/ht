@@ -2,20 +2,115 @@
   console.time("tmp");
 
   document.addEventListener('DOMContentLoaded', function() {
-    var subject, subscription;
-    $("#tmp").css("color", "#f00");
-    subject = new Rx.Subject();
-    subscription = subject.subscribe(function(x) {
-      return console.log('onNext: ' + x);
-    }, function(e) {
-      return console.log('onError: ' + e.message);
-    }, function() {
-      return console.log('onCompleted');
-    });
-    subject.onNext(1);
-    subject.onNext(2);
-    subject.onCompleted();
-    return subscription.dispose();
+    return $("#tmp").css("color", "#f00");
+
+    /*
+    $h1 = $('h1');
+    $text = $('.text>input');
+    $size = $('.size>input');
+    $color = $('.color>input');
+    $combined = $('#combined');
+    
+    text = new Rx.BehaviorSubject($text.val());
+    size = new Rx.BehaviorSubject($size.val());
+    color = new Rx.BehaviorSubject($color.val());
+    
+    text.subscribe  (val)->
+        $h1.text(val);
+    
+    size.subscribe (val)->
+        $h1.css('font-size', val + 'px');
+    
+    color.subscribe (val)->
+        $h1.css('color', val);
+    
+    bind = (eType, elem, subject) ->
+      Rx.Observable.fromEvent(elem, eType).subscribe (e) ->
+        subject.onNext(e.target.value);
+    
+    text.combineLatest(size, color, (text, size, color) ->
+      return "text: " + text + "<br>Size: " + size + "px<br>Color: " + color;
+    ).subscribe (val)->
+      return $combined.html(val);
+    
+    bind('keyup', $text, text);
+    bind('keyup change', $size, size);
+    bind('change', $color, color);
+     */
+
+    /*
+     * rx.allにはTweenLiteが存在しない模様
+    $box = $('#box')
+    mouseup_events = Rx.Observable.fromEvent($box, 'mouseup')
+    mousemove_events = Rx.Observable.fromEvent(document, 'mousemove')
+    mousedown_events = Rx.Observable.fromEvent($box, 'mousedown')
+    
+    source = mousedown_events.flatMap((event) ->
+      start_pageX = event.pageX
+      start_pageY = event.pageY
+      start_left = parseInt($box.css('left'))
+      start_top = parseInt($box.css('top'))
+      $box.addClass 'hovering'
+      
+      mousemove_events.map((e) ->
+        {
+          left: start_left + e.pageX - start_pageX
+          top: start_top + e.pageY - start_pageY
+        }
+      ).takeUntil mouseup_events
+    )
+    
+    mouseup_events.subscribe -> $box.removeClass 'hovering'
+    
+    source.subscribe (pos) ->
+      TweenLite.set $box,
+        left: pos.left
+        top: pos.top
+     */
+
+    /*
+     * rx.allにはscheduleが存在しない模様
+    source = Rx.Observable.create (o)->
+      console.log "s func"
+      i = 0
+      while (i++ < 3)
+        o.onNext i
+      
+      o.onCompleted()
+    
+     * source = source.subscribeOn(Rx.Scheduler.timeout);
+     * source = source.observeOn(Rx.Scheduler.timeout);
+    
+    console.log "aida"
+    
+    source.subscribe(
+      (n) -> console.log "onNext:", n
+      null
+      -> console.log "thend"
+    )
+    
+    console.log "eof"
+     */
+
+    /*
+    subject = new Rx.Subject()
+    
+    subscription = subject.subscribe(
+      (x)-> console.log 'onNext: ' + x
+      (e)-> console.log 'onError: ' + e.message
+      ()-> console.log 'onCompleted'
+    )
+    subject.onNext(1)
+     * => onNext: 1
+    
+    subject.onNext(2)
+     * => onNext: 2
+    
+    subject.onCompleted()
+     * => onCompleted
+    
+    subscription.dispose()
+     */
 
     /*
      * Cold Observable Hot Observable #
