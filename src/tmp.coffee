@@ -3,6 +3,15 @@ document.addEventListener 'DOMContentLoaded', ->
   $("#tmp").css "color", "#f00"
   
   ###
+  $.ajax
+    type: "get"
+    url: "http://yahoo.co.jp"
+  .done (r)->
+    console.log r
+  ###
+  
+  
+  ###
   $h1 = $('h1');
   $text = $('.text>input');
   $size = $('.size>input');
