@@ -11,10 +11,17 @@
     <link href="tmp.css" rel="stylesheet">
     <style type="text/css"></style>
     <script type="text/javascript"></script>
-    <script type="text/coffeescript"></script>
+    <script type="text/coffeescript">
+      console.log "don"
+      window.onload = ->
+        console.log "asdf"
+        $("#loc a").attr("href", encodeURIComponent(location.protocol + "//" + location.hostname))
+      
+    </script>
   </head>
   <body>
     <div id="tmp" onClick="add()">tmp</div>
+    <div id="loc"><a href="#">aa</a></div>
     
     
   </body>

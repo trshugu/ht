@@ -1,3 +1,5 @@
+- var soto = "asdf"
+
 doctype html
 html
   head
@@ -15,11 +17,31 @@ html
     
     style(type="text/css")
     script(type="text/javascript")
-    script(type="text/coffeescript")
+    script(type="text/coffeescript").
+      console.log "don"
+      window.onload = ->
+        console.log "#{soto}"
+        $("#loc a").attr("href", encodeURIComponent(location.protocol + "//" + location.hostname))
     
   body
     #tmp(onClick="add()") tmp
     
+    #loc
+      a(href="#") aa
+    
+    
+    //-
+      .loc
+        | asdf
+      .loc
+        - var u = "asdf/f/f<d>e"
+        | #{u}
+      .loc
+        | #{"sdf"[1]}
+      .loc
+        | this
+        - var c = "asdfasdf"
+      
     
     //-
       .1jk3jkl
