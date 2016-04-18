@@ -2,7 +2,15 @@
   console.time("tmp");
 
   document.addEventListener('DOMContentLoaded', function() {
-    return $("#tmp").css("color", "#f00");
+    $("#tmp").css("color", "#f00");
+    this.add = function() {
+      console.log("addd");
+      return localStorage.setItem(new Date().toString(), "krakkusu");
+    };
+    return window.addEventListener('storage', function(e) {
+      console.log("stragehakka");
+      return console.log(e, false);
+    });
 
     /*
     $.ajax

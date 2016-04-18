@@ -1,6 +1,19 @@
 console.time "tmp"
+
 document.addEventListener 'DOMContentLoaded', ->
   $("#tmp").css "color", "#f00"
+  
+  @add = ->
+    console.log "addd"
+    localStorage.setItem new Date().toString(), "krakkusu"
+    # localStorage.clear()
+  
+  window.addEventListener 'storage', (e)->
+    console.log "stragehakka"
+    console.log e
+    , false
+
+
   
   ###
   $.ajax
