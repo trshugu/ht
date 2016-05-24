@@ -1,8 +1,82 @@
 console.time "tmp"
 
+
+
 document.addEventListener 'DOMContentLoaded', ->
   $("#tmp").css "color", "#f00"
   
+  
+  ###
+  new p5 (p)->
+    p.setup = ->
+      p.createCanvas 640, 480
+    
+    p.draw = ->
+      if p.mouseIsPressed
+        p.fill 0
+      else
+        p.fill 255
+      
+      p.ellipse p.mouseX, p.mouseY, 80, 80
+  ###
+  
+  
+  ###
+  s = (p)->
+    p.setup = ->
+      console.log "s"
+    
+    p.draw = ->
+      console.log "d"
+      p.ellipse p.mouseX, p.mouseY, 80, 80
+  
+  new p5(s)
+  ###
+  
+  
+  
+  ###
+  window.onload = ->
+    p = new p5()
+    p.ellipse 50,50,80,80
+  ###
+  
+  ###
+  # ウィンドウサイズのリアルタイムな取得3
+  # 画面サイズを取得する
+  getScreenSize = ->
+    s = "横幅 = " + window.parent.screen.width + " / 高さ = " + window.parent.screen.height
+    document.querySelector("#ScrSize").innerHTML = s
+  
+  # ウィンドウサイズを取得する
+  getWindowSize = ->
+    sW = 0
+    sH = 0
+    s = 0
+    if document.all
+        # Internet Explorer
+        sW = document.body.clientWidth
+        sH = document.body.clientHeight
+    else
+        # Firefox等
+        sW = window.innerWidth
+        sH = window.innerHeight
+    
+    s = "横幅 = " + sW + " / 高さ = " + sH
+    document.querySelector("#WinSize").innerHTML = s
+  
+  window.onresize = ->
+    getScreenSize()
+    getWindowSize()
+  
+  getScreenSize() # 画面サイズの取得
+  getWindowSize() # ウィンドウサイズの取得
+  ###
+  
+  
+  
+  
+  ###
   @add = ->
     console.log "addd"
     localStorage.setItem new Date().toString(), "krakkusu"
@@ -12,8 +86,8 @@ document.addEventListener 'DOMContentLoaded', ->
     console.log "stragehakka"
     console.log e
     , false
-
-
+  ###
+  
   
   ###
   $.ajax
@@ -1847,4 +1921,38 @@ console.log _.without([1, 2, 1, 0, 3, 1, 4], 0, 1)
 console.log _.uniq([1, 2, 1, 3, 1, 4])
 ###
 
+
+###
+# ウィンドウサイズのリアルタイムな取得2
+$(document).ready ->
+  getScreenSize() # 画面サイズの取得
+  getWindowSize() # ウィンドウサイズの取得
+
+# 画面サイズを取得する
+getScreenSize = ->
+  s = "横幅 = " + window.parent.screen.width + " / 高さ = " + window.parent.screen.height
+  document.getElementById("ScrSize").innerHTML = s
+
+# ウィンドウサイズを取得する
+getWindowSize = ->
+  sW = 0
+  sH = 0
+  s = 0
+  if document.all
+      # Internet Explorer
+      sW = document.body.clientWidth
+      sH = document.body.clientHeight
+  else
+      # Firefox等
+      sW = window.innerWidth
+      sH = window.innerHeight
+  
+  s = "横幅 = " + sW + " / 高さ = " + sH
+  document.getElementById("WinSize").innerHTML = s
+
+window.onresize = ->
+  getScreenSize()
+  getWindowSize()
+# window.onresize = getWindowSize()
+###
 

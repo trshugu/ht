@@ -10,6 +10,8 @@ html
     script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
     script(type="text/javascript", src="bower_components/rxjs/dist/rx.all.min.js")
     script(type="text/javascript", src="bower_components/rxjs/dist/rx.time.min.js")
+
+    script(type="text/javascript", src="./p5.min.js")
     
     script(type="text/javascript", src="tmp.js")
     link(href="tmp.css", rel="stylesheet")
@@ -17,18 +19,25 @@ html
     
     style(type="text/css")
     script(type="text/javascript")
-    script(type="text/coffeescript").
-      console.log "don"
-      window.onload = ->
-        console.log "#{soto}"
-        $("#loc a").attr("href", encodeURIComponent(location.protocol + "//" + location.hostname))
+    script(type="text/coffeescript")
     
     
   body
     #tmp(onClick="add()") tmp
     
-    #loc
-      a(href="#") aa
+    
+    
+    //- ウィンドウサイズのリアルタイムな取得2
+      p 画面サイズ：
+        span#ScrSize
+      p ウィンドウサイズ：
+        span#WinSize
+    
+    
+    
+    //-
+      #loc
+        a(href="#") aa
     
     
     //-
