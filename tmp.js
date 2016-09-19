@@ -2,7 +2,46 @@
   console.time("tmp");
 
   document.addEventListener('DOMContentLoaded', function() {
-    return $("#tmp").css("color", "#f00");
+    $("#tmp").css("color", "#f00");
+    return html2canvas(document.getElementById("arearea"), {
+      onrendered: function(canvas) {
+        return document.getElementById("ss").href = canvas.toDataURL("image/png");
+      }
+    });
+
+    /*
+     * svg保存2
+     * console.log "image.on"
+    @add = =>
+      console.log "oon"
+      width = $('#paper').width()
+      height = $('#paper').height()
+      $('body').append '<canvas id=\'canvas1\' width=' + width + ' height=' + height + '></canvas>'
+      canvas = $('#canvas1')[0]
+      ctx = canvas.getContext('2d')
+      
+      svg = $('#paper')
+      svg.attr('viewBox', '0 0 ' + width + ' ' + height)
+      console.log svg
+      console.log svg[0]
+      
+      data = (new XMLSerializer).serializeToString(svg[0])
+       * console.log data
+      imgsrc = 'data:image/svg+xml;charset=utf-8;base64,' + btoa(unescape(encodeURIComponent(data)))
+      image = new Image()
+      
+      image.src = imgsrc
+      
+      console.log "iimmaaggeeoonnllooaadd"
+      console.log image
+      ctx.drawImage image, 0, 0
+       * Optional: 自動でダウンロードさせる場合
+      $('#dllink').append '<a id=\'image-file\' type=\'application/octet-stream\' href=\'' + canvas.toDataURL('image/png') + '\' download=\'graph.png\'>Download Image</a>'
+       * $('#image-file')[0].click()
+       * 後処理
+       * $('#canvas1').remove()
+       * $('#image-file').remove()
+     */
 
     /*
     new p5 (p)->
