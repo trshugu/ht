@@ -8,10 +8,14 @@ html
     
     script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
     script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
-    script(type="text/javascript", src="bower_components/rxjs/dist/rx.all.min.js")
-    script(type="text/javascript", src="bower_components/rxjs/dist/rx.time.min.js")
-
-    script(type="text/javascript", src="./p5.min.js")
+    //-
+      script(type="text/javascript", src="bower_components/rxjs/dist/rx.all.min.js")
+      script(type="text/javascript", src="bower_components/rxjs/dist/rx.time.min.js")
+      
+      script(type="text/javascript", src="./p5.min.js")
+    
+    script(src="http://cdn.jsdelivr.net/g/riot@2.0(riot.min.js+compiler.min.js)")
+    script(type="text/javascript", src="http://cdnjs.cloudflare.com/ajax/libs/jade/1.11.0/jade.js")
     
     script(type="text/javascript", src="tmp.js")
     link(href="tmp.css", rel="stylesheet")
@@ -25,13 +29,49 @@ html
   body
     #tmp(onClick="add()") tmp
     
+    //-
+      script(type="riot/tag" template='jade')
+        todo
+          h3 TODO
+          ul
+            li
+              each= { item, i in items } { item }
+          form(onsubmit={ handleSubmit })
+            input
+          
+          script(type='text/coffee').
+            this.items = []
+            handleSubmit= (e) ->
+              input = e.target[0]
+              this.items.push(input.value)
+              input.value = ''
+            
+      
+      todo
+      
+      
+      script.
+        riot.mount('todo')
     
+    //-
+      app(title="hell")
+      
+      
+      
+      script(type="riot/tag" template='jade')
+        app
+          h3{ opts.title }
+      
+      
+      script.
+        riot.mount("*")
     
     //- ウィンドウサイズのリアルタイムな取得2
       p 画面サイズ：
         span#ScrSize
       p ウィンドウサイズ：
         span#WinSize
+    
     
     
     
