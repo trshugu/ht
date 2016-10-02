@@ -2,12 +2,14 @@
   console.time("tmp");
 
   document.addEventListener('DOMContentLoaded', function() {
-    $("#tmp").css("color", "#f00");
-    return html2canvas(document.getElementById("arearea"), {
-      onrendered: function(canvas) {
-        return document.getElementById("ss").href = canvas.toDataURL("image/png");
-      }
-    });
+    return $("#tmp").css("color", "#f00");
+
+    /*
+    html2canvas document.getElementById("arearea"),
+      onrendered: (canvas)->
+         * aタグのhrefにキャプチャ画像のURLを設定
+        document.getElementById("ss").href = canvas.toDataURL("image/png")
+     */
 
     /*
      * svg保存2

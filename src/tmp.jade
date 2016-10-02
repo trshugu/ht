@@ -28,7 +28,11 @@ html
   body
     #tmp(onClick="add()") tmp
     
-    a#ss namihei
+    - var bai = "aa"
+    
+    .hensu #{bai}
+    
+    a#ss(attr="#{bai}") namihei
     .a ぼくのちょっか
     h1 へろあｃけびちょっか
     

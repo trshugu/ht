@@ -4,11 +4,13 @@ document.addEventListener 'DOMContentLoaded', ->
   $("#tmp").css "color", "#f00"
   
   
+  
+  ###
   html2canvas document.getElementById("arearea"),
     onrendered: (canvas)->
       # aタグのhrefにキャプチャ画像のURLを設定
       document.getElementById("ss").href = canvas.toDataURL("image/png")
-  
+  ###
   
   
   ###
