@@ -5,7 +5,7 @@
     <title>tmp</title>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="bower_components/coffee-script/extras/coffee-script.js"></script>
-    <script type="text/javascript" src="./html2canvas.js"></script>
+    
     <script type="text/javascript" src="tmp.js"></script>
     <link href="tmp.css" rel="stylesheet">
     <style type="text/css"></style>
@@ -14,19 +14,16 @@
   </head>
   <body>
     <div id="tmp" onClick="add()">tmp</div>
-    <div class="hensu">aa</div><a id="ss" attr="aa">namihei</a>
-    <div class="a">ぼくのちょっか</div>
-    <h1>へろあｃけびちょっか</h1>
-    <div id="area">
-      <div class="aaa">あああれあ</div>
-      <h1>へろあｃけびあれあ</h1>
-      <div class="iii">いいいいあれあ</div>
-    </div>
-    <div id="arearea">
-      <div class="a">ぼくasdfのれれれ</div>
-      <h1>へろあfｃけびれれれ</h1>
-      <div class="iii">いいdfdいいれれれｒ</div>
-    </div>
+    <script>
+      doSubmit = -> grecaptcha.execute()
+      onSubmit = -> form.submit()
+      
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?hl=ja" async defer></script>
+    <form method="POST" action="/">
+      <div data-sitekey="aaa" data-callback="onSubmit" data-size="invisible" class="g-recaptcha"></div>
+      <div class="regbtn_area btn01_off"><a href="javascript:void(0);" onclick="doSubmit()">設定</a></div>
+    </form>
     
     
   </body>

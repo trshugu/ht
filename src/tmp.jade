@@ -13,7 +13,7 @@ html
     //- script(type="text/javascript", src="bower_components/rxjs/dist/rx.time.min.js")
 
     //- script(type="text/javascript", src="./p5.min.js")
-    script(type="text/javascript", src="./html2canvas.js")
+    //- script(type="text/javascript", src="./html2canvas.js")
     
     
     script(type="text/javascript", src="tmp.js")
@@ -28,24 +28,51 @@ html
   body
     #tmp(onClick="add()") tmp
     
-    - var bai = "aa"
     
-    .hensu #{bai}
     
-    a#ss(attr="#{bai}") namihei
-    .a ぼくのちょっか
-    h1 へろあｃけびちょっか
     
-    #area
-      .aaa あああれあ
-      h1 へろあｃけびあれあ
-      .iii いいいいあれあ
     
-    #arearea
-      .a ぼくasdfのれれれ
-      h1 へろあfｃけびれれれ
-      .iii いいdfdいいれれれｒ
     
+    
+    
+    //-
+      script.
+        doSubmit = -> grecaptcha.execute()
+        onSubmit = -> form.submit()
+      
+      script(src="https://www.google.com/recaptcha/api.js?hl=ja" async defer)
+      
+      form(method="POST" action="/")
+        .g-recaptcha(
+           data-sitekey="aaa"
+           data-callback="onSubmit"
+           data-size="invisible")
+       
+        .regbtn_area.btn01_off
+          a(href="javascript:void(0);" onclick="doSubmit()") 設定
+    
+    
+    
+    
+    //-
+      - var bai = "aa"
+      
+      .hensu #{bai}
+      
+      a#ss(attr="#{bai}") namihei
+      .a ぼくのちょっか
+      h1 へろあｃけびちょっか
+      
+      #area
+        .aaa あああれあ
+        h1 へろあｃけびあれあ
+        .iii いいいいあれあ
+      
+      #arearea
+        .a ぼくasdfのれれれ
+        h1 へろあfｃけびれれれ
+        .iii いいdfdいいれれれｒ
+      
     
     
     
