@@ -14,16 +14,12 @@
   </head>
   <body>
     <div id="tmp" onClick="add()">tmp</div>
+    <div data-foe="nonioi" class="nanigasi"></div>
     <script>
-      doSubmit = -> grecaptcha.execute()
-      onSubmit = -> form.submit()
+      console.log(Element.dataset);
+      
       
     </script>
-    <script src="https://www.google.com/recaptcha/api.js?hl=ja" async defer></script>
-    <form method="POST" action="/">
-      <div data-sitekey="aaa" data-callback="onSubmit" data-size="invisible" class="g-recaptcha"></div>
-      <div class="regbtn_area btn01_off"><a href="javascript:void(0);" onclick="doSubmit()">設定</a></div>
-    </form>
     
     
   </body>
