@@ -13,5 +13,8 @@
     "gulp-stylus": "*",
     "tiny-lr": "^0.1.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "coffee-script": "^1.12.7",
+    "coffeescript": "^2.0.3"
+  }
 }

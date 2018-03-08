@@ -8,7 +8,8 @@ html
     
     script(src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous")
     //- script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
-    script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
+    //- script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
+    script(type="text/javascript", src="coffeescript.js")
     //- script(type="text/javascript", src="bower_components/rxjs/dist/rx.all.min.js")
     //- script(type="text/javascript", src="bower_components/rxjs/dist/rx.time.min.js")
 
@@ -22,8 +23,32 @@ html
     
     style(type="text/css")
     script(type="text/javascript")
-    script(type="text/coffeescript")
-    
+    script(type="text/coffeescript").
+      ###
+      @add = ->
+        console.log $("#fff")[0].files.item(0).name if $("#fff")[0]?.files?.item(0)?
+        console.log $("#fff")[0].files[0].name if $("#fff")[0]?.files[0]?
+      
+      
+      r = new FileReader()
+      r.onload = (e)->
+        # $("#res").text(r.result)
+        $("#res").attr("src", r.result)
+        console.log "end"
+      
+      # arr = new Uint8Array(buffer)
+      
+      @ccc = (event)->
+        f = event.target.files[0]
+        console.log f.name
+        console.log f.size
+        console.log f.type
+        
+        # r.readAsText f,"shift_jis"
+        # r.readAsDataURL f
+        $("#res").attr("src", URL.createObjectURL(f))
+      ###
+
     
   body
     #tmp(onClick="add()") tmp
@@ -31,9 +56,19 @@ html
     
     
     
-    .nanigasi(data-foe="nonioi")
-    script.
-      console.log(Element.dataset);
+    
+    
+    
+    //-
+      input#fff(type="file" onchange="ccc(event)")
+      img#res
+      textarea#res
+    
+    
+    //-
+      .nanigasi(data-foe="nonioi")
+      script.
+        console.log(document.getElementsByClassName("nanigasi")[0].dataset.foe);
     
     
     //-
