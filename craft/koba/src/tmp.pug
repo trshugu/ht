@@ -1,0 +1,70 @@
+doctype html
+html
+  head
+    meta(content="text/html" charset="utf-8")
+    title tmp
+    
+    script(src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous")
+    script(src='https://cdn.rawgit.com/jashkenas/coffeescript/571e9df3/docs/v2/browser-compiler/coffeescript.js')
+    
+    
+    style(type="text/css")
+    script(type="text/javascript")
+    script(type="text/coffeescript").
+      console.log "init"
+      $ ->
+        console.log "jqin"
+        $('#execute').click ->
+          access_key = $('#access_key').val()
+          secret_key = $('#secret_key').val()
+          
+          if access_key != '' && secret_key != ''
+            console.log "ajakusuhakks"
+            $.ajax
+              type: 'GET'
+              url: ''
+              data:
+                access_key: $('#access_key').val()
+                secret_key: $('#secret_key').val()
+              dataType: 'jsonp'
+              jsonp: 'callback'
+              jsonpCallback: 'callback'
+            .done (data)->
+              console.log "done", data.status
+              status = data.status
+              # OK
+              if status == 200
+                val = "http://XXXXXXXXXX/?token_key=" + (data.result.token)
+                $('#name').html("URL")
+                $('#warning').html("<p>参照URLを発行しました</p>" + "<p>※URLは再発行できません※</p>")
+                $('#error').html("<a href='" + val + "'>" + val + "</a>")
+                $('#execute').attr("disabled", "true")
+              else
+                $('#name').html("入力エラー")
+                $('#error').html("アクセスキーまたはシークレットキーが間違っています。もう一度入力してください")
+            .fail (data)->
+              console.log "data", data
+              console.log "rs", data.readyState
+              alert(data.message)
+          else
+            $('#name').html("入力エラー")
+            $('#error').html("アクセスキー、シークレットキーを入力してください")
+
+
+
+    
+    
+  body
+    form
+      div
+        input#access_key(type="text" required="required" placeholder="Access Key" value="")
+      div
+        input#secret_key(type="text" required="required" placeholder="Secret Key" value="")
+      div
+        input#execute(type="button" value="実行")
+    
+    div
+      h2#name
+      #warning
+      #error
+

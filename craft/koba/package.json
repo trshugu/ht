@@ -1,0 +1,19 @@
+{
+  "name": "grunt2gulp",
+  "version": "0.0.0",
+  "private": true,
+  "description": "aaa",
+  "main": "",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-coffee": "*",
+    "gulp-livereload": "*",
+    "gulp-plumber": "*",
+    "gulp-pug": "*",
+    "gulp-stylus": "*",
+    "tiny-lr": "^0.1.4"
+  },
+  "dependencies": {
+    "coffeescript": "^2.2.2"
+  }
+}
