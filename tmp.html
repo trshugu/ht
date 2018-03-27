@@ -3,45 +3,18 @@
   <head>
     <meta content="text/html" charset="utf-8">
     <title>tmp</title>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="coffeescript.js"></script>
-    
     <script type="text/javascript" src="tmp.js"></script>
     <link href="tmp.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/jashkenas/coffeescript/571e9df3/docs/v2/browser-compiler/coffeescript.js"></script>
     <style type="text/css"></style>
     <script type="text/javascript"></script>
     <script type="text/coffeescript">
-      ###
-      @add = ->
-        console.log $("#fff")[0].files.item(0).name if $("#fff")[0]?.files?.item(0)?
-        console.log $("#fff")[0].files[0].name if $("#fff")[0]?.files[0]?
-      
-      
-      r = new FileReader()
-      r.onload = (e)->
-        # $("#res").text(r.result)
-        $("#res").attr("src", r.result)
-        console.log "end"
-      
-      # arr = new Uint8Array(buffer)
-      
-      @ccc = (event)->
-        f = event.target.files[0]
-        console.log f.name
-        console.log f.size
-        console.log f.type
-        
-        # r.readAsText f,"shift_jis"
-        # r.readAsDataURL f
-        $("#res").attr("src", URL.createObjectURL(f))
-      ###
-      
+      console.log "OK"
       
     </script>
   </head>
   <body>
     <div id="tmp" onClick="add()">tmp</div>
-    
-    
+    <!-- script(type="text/javascript", src="coffeescript.js")-->
   </body>
 </html>

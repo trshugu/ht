@@ -2,7 +2,8 @@
   console.time("tmp");
 
   document.addEventListener('DOMContentLoaded', function() {
-    return $("#tmp").css("color", "#f00");
+    console.log("js done");
+    return console.timeEnd("tmp");
 
     /*
     html2canvas document.getElementById("arearea"),

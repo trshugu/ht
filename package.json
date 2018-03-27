@@ -7,14 +7,13 @@
   "devDependencies": {
     "gulp": "*",
     "gulp-coffee": "*",
-    "gulp-jade": "*",
+    "gulp-pug": "*",
     "gulp-livereload": "*",
     "gulp-plumber": "*",
     "gulp-stylus": "*",
     "tiny-lr": "^0.1.4"
   },
   "dependencies": {
-    "coffee-script": "^1.12.7",
-    "coffeescript": "^2.0.3"
+    "coffeescript": "^2.2.2"
   }
 }

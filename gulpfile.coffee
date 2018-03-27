@@ -1,13 +1,13 @@
 gulp = require "gulp"
 plumber = require "gulp-plumber"
-jade = require "gulp-jade"
+pug = require "gulp-pug"
 coffee = require "gulp-coffee"
 stylus = require "gulp-stylus"
 
-gulp.task 'jade', ->
-  gulp.src("src/*.jade")
+gulp.task 'pug', ->
+  gulp.src("src/*.pug")
     .pipe plumber()
-    .pipe jade(pretty: true)
+    .pipe pug(pretty: true)
     .pipe gulp.dest("./")
   return
 
@@ -26,13 +26,13 @@ gulp.task 'stylus', ->
   return
 
 gulp.task 'watch', ->
-  gulp.watch("src/*.jade", ['jade'])
+  gulp.watch("src/*.pug", ['pug'])
   gulp.watch("src/*.coffee", ['coffee'])
   gulp.watch("src/*.styl", ['stylus'])
   return
 
 gulp.task 'build', ->
-  gulp.run "jade"
+  gulp.run "pug"
   gulp.run "coffee"
   gulp.run "stylus"
 

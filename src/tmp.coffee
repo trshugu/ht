@@ -1,7 +1,9 @@
 console.time "tmp"
 
 document.addEventListener 'DOMContentLoaded', ->
-  $("#tmp").css "color", "#f00"
+  console.log "js done"
+  console.timeEnd "tmp"
+  # $("#tmp").css "color", "#f00"
   
   
   

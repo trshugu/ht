@@ -6,24 +6,25 @@ html
     meta(content="text/html" charset="utf-8")
     title tmp
     
-    script(src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous")
-    //- script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
-    //- script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
-    script(type="text/javascript", src="coffeescript.js")
-    //- script(type="text/javascript", src="bower_components/rxjs/dist/rx.all.min.js")
-    //- script(type="text/javascript", src="bower_components/rxjs/dist/rx.time.min.js")
-
-    //- script(type="text/javascript", src="./p5.min.js")
-    //- script(type="text/javascript", src="./html2canvas.js")
-    
-    
     script(type="text/javascript", src="tmp.js")
     link(href="tmp.css", rel="stylesheet")
+    script(src='https://cdn.rawgit.com/jashkenas/coffeescript/571e9df3/docs/v2/browser-compiler/coffeescript.js')
     
     
     style(type="text/css")
     script(type="text/javascript")
     script(type="text/coffeescript").
+      console.log "OK"
+    
+  body
+    #tmp(onClick="add()") tmp
+    
+    
+    
+    
+    
+    
+    //-
       ###
       @add = ->
         console.log $("#fff")[0].files.item(0).name if $("#fff")[0]?.files?.item(0)?
@@ -48,16 +49,16 @@ html
         # r.readAsDataURL f
         $("#res").attr("src", URL.createObjectURL(f))
       ###
-
     
-  body
-    #tmp(onClick="add()") tmp
+    //- script(src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous")
+    //- script(type="text/javascript", src="bower_components/jquery/dist/jquery.min.js")
+    //- script(type="text/javascript", src="bower_components/coffee-script/extras/coffee-script.js")
+    // script(type="text/javascript", src="coffeescript.js")
+    //- script(type="text/javascript", src="bower_components/rxjs/dist/rx.all.min.js")
+    //- script(type="text/javascript", src="bower_components/rxjs/dist/rx.time.min.js")
     
-    
-    
-    
-    
-    
+    //- script(type="text/javascript", src="./p5.min.js")
+    //- script(type="text/javascript", src="./html2canvas.js")
     
     //-
       input#fff(type="file" onchange="ccc(event)")
