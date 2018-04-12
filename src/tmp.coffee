@@ -6,6 +6,74 @@ document.addEventListener 'DOMContentLoaded', ->
   # $("#tmp").css "color", "#f00"
   
   
+  @changedurl = (ev)->
+    file = ev.target.files[0]
+    return false unless file
+    
+    reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = (e)->
+      img = document.createElement("img")
+      img.src = reader.result
+      document.body.appendChild(img)
+  
+  
+  @changebin = (ev)->
+    file = ev.target.files[0]
+    return false unless file
+    
+    reader = new FileReader()
+    reader.readAsArrayBuffer(file)
+    reader.onload = (e)->
+      div = document.createElement("div") # 新しい画像を作る
+      arr = new Uint8Array(reader.result)
+      console.log arr
+      div.innerText = arr
+      document.body.appendChild(div)
+    
+  
+  
+  @changetext = (ev)->
+    # evにはイベントオブジェクトが入っている
+    file = ev.target.files[0]
+    
+    # files = ev.target.files # FileList
+    # file=files[0] # 最初のファイル
+    
+    console.log 3
+    return false unless file
+    console.log 4
+    
+    reader = new FileReader()
+    reader.readAsText(file)
+    reader.onload = (e)->
+      div = document.createElement("div") # 新しい画像を作る
+      div.innerText = reader.result # URLなのでsrc属性に入れる
+      document.body.appendChild(div)
+  
+  
+  
+  @change = (ev)->
+    console.log ev.target.files
+    # evにはイベントオブジェクトが入っている
+    file = ev.target.files[0]
+    
+    # files = ev.target.files # FileList
+    # file=files[0] # 最初のファイル
+    
+    console.log 1
+    return false unless file
+    console.log 2
+    
+    # URL.createObjectURLはBlobを引数に取るので今回はFileReaderは不要
+    objurl = URL.createObjectURL(file);
+    console.log objurl
+    
+    img = document.createElement("img") # 新しい画像を作る
+    img.src = objurl # URLなのでsrc属性に入れる
+    document.body.appendChild(img)
+  
+  
   
   ###
   html2canvas document.getElementById("arearea"),
@@ -593,6 +661,8 @@ getById = (ident)-> document.getElementById(ident)
 
 toArray = (list)-> Array.prototype.slice.call(list)
 ###
+
+
 
 $ ->
   # $("#tmp").css "color", "#f00"

@@ -3,7 +3,71 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     console.log("js done");
-    return console.timeEnd("tmp");
+    console.timeEnd("tmp");
+    this.changedurl = function(ev) {
+      var file, reader;
+      file = ev.target.files[0];
+      if (!file) {
+        return false;
+      }
+      reader = new FileReader();
+      reader.readAsDataURL(file);
+      return reader.onload = function(e) {
+        var img;
+        img = document.createElement("img");
+        img.src = reader.result;
+        return document.body.appendChild(img);
+      };
+    };
+    this.changebin = function(ev) {
+      var file, reader;
+      file = ev.target.files[0];
+      if (!file) {
+        return false;
+      }
+      reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      return reader.onload = function(e) {
+        var arr, div;
+        div = document.createElement("div");
+        arr = new Uint8Array(reader.result);
+        console.log(arr);
+        div.innerText = arr;
+        return document.body.appendChild(div);
+      };
+    };
+    this.changetext = function(ev) {
+      var file, reader;
+      file = ev.target.files[0];
+      console.log(3);
+      if (!file) {
+        return false;
+      }
+      console.log(4);
+      reader = new FileReader();
+      reader.readAsText(file);
+      return reader.onload = function(e) {
+        var div;
+        div = document.createElement("div");
+        div.innerText = reader.result;
+        return document.body.appendChild(div);
+      };
+    };
+    return this.change = function(ev) {
+      var file, img, objurl;
+      console.log(ev.target.files);
+      file = ev.target.files[0];
+      console.log(1);
+      if (!file) {
+        return false;
+      }
+      console.log(2);
+      objurl = URL.createObjectURL(file);
+      console.log(objurl);
+      img = document.createElement("img");
+      img.src = objurl;
+      return document.body.appendChild(img);
+    };
 
     /*
     html2canvas document.getElementById("arearea"),
