@@ -6,7 +6,132 @@ document.addEventListener 'DOMContentLoaded', ->
   # $("#tmp").css "color", "#f00"
   
   
-  @changedurl = (ev)->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  ###
+  # 一番下にスクロールしたときに発火
+  # 全体の高さ + 16 <= 表示画面高さ + スクロールY
+  
+  
+  # 画面サイズを取得する
+  getScreenSize = ->
+    s = "横幅 = " + window.parent.screen.width + " / 高さ = " + window.parent.screen.height
+    document.getElementById("ScrSize").innerHTML = s
+
+  # ウィンドウサイズを取得する
+  getWindowSize = ->
+    sW = 0
+    sH = 0
+    s = 0
+    if document.all
+      # Internet Explorer
+      sW = document.body.clientWidth
+      sH = document.body.clientHeight
+    else
+      # Firefox等
+      sW = window.innerWidth
+      sH = window.innerHeight
+    
+    s = "横幅 = " + sW + " / 高さ = " + sH
+    document.getElementById("WinSize").innerHTML = s
+  
+  getHeight = ->
+    # document.getElementById("hei").innerHTML = window.outerHeight
+    # document.getElementById("offset").innerHTML = document.body.offsetHeight
+    # document.getElementById("client").innerHTML = document.body.clientHeight
+    # document.getElementById("scroll").innerHTML = document.body.scrollHeight
+  
+  getScrollY = ->
+    # document.getElementById("scy").innerHTML = window.scrollY
+  
+  checker = ->
+    # allt = document.body.scrollHeight + 16
+    allt = document.body.scrollHeight
+    point = window.innerHeight + window.scrollY
+    s = ""
+    if allt <= point
+      s = "最下層" + allt + "," + point
+    else
+      s = "" + allt + "," + point
+    
+    document.getElementById("checker").innerHTML = s
+  
+  window.onresize = ->
+    getScreenSize()
+    getWindowSize()
+    getHeight()
+    checker()
+  # window.onresize = getWindowSize()
+  
+  window.onscroll = ->
+    getScrollY()
+    checker()
+  
+  
+  getScreenSize() # 画面サイズの取得
+  getWindowSize() # ウィンドウサイズの取得
+  getHeight()
+  getScrollY()
+  checker()
+  ###
+  
+  
+  
+  ###
+  @echeck = (ev)->
+    file = ev.target.files[0]
+    return false unless file
+    
+    reader = new FileReader()
+    reader.readAsDataURL file
+    
+    reader.onload = (e)->
+      img = document.createElement "img"
+      img.src = reader.result
+      document.body.appendChild img
+    
+    reader.onabort = (e)-> console.log "ちゅうだん"
+    reader.onerror = (e)-> console.log e,"えらー"
+    reader.onloadstart = (e)-> console.log e,"はじまた"
+    reader.onloadend = (e)-> console.log e,"おわた"
+    i = 0
+    reader.onprogress = (e)->
+      console.log i, e,"しょりちゅう"
+      ++i
+      # reader.abort()
+    
+  ###
+  
+  ###
+  @changeblob = (ev)->
+    file = ev.target.files[0]
+    return false unless file
+    
+    reader = new FileReader()
+    reader.readAsDataURL file
+    objurl = URL.createObjectURL(file);
+    img2 = document.createElement "img"
+    img2.src = objurl
+    document.body.appendChild img2
+    
+    reader.onload = (e)->
+      img = document.createElement "img"
+      img.src = reader.result
+      document.body.appendChild img
+  
+  
+  @readAsDataURL = (ev)->
     file = ev.target.files[0]
     return false unless file
     
@@ -18,7 +143,7 @@ document.addEventListener 'DOMContentLoaded', ->
       document.body.appendChild(img)
   
   
-  @changebin = (ev)->
+  @readAsArrayBuffer = (ev)->
     file = ev.target.files[0]
     return false unless file
     
@@ -33,7 +158,7 @@ document.addEventListener 'DOMContentLoaded', ->
     
   
   
-  @changetext = (ev)->
+  @readAsText = (ev)->
     # evにはイベントオブジェクトが入っている
     file = ev.target.files[0]
     
@@ -45,7 +170,7 @@ document.addEventListener 'DOMContentLoaded', ->
     console.log 4
     
     reader = new FileReader()
-    reader.readAsText(file)
+    reader.readAsText(file, "sjis")
     reader.onload = (e)->
       div = document.createElement("div") # 新しい画像を作る
       div.innerText = reader.result # URLなのでsrc属性に入れる
@@ -53,7 +178,7 @@ document.addEventListener 'DOMContentLoaded', ->
   
   
   
-  @change = (ev)->
+  @createObjectURL = (ev)->
     console.log ev.target.files
     # evにはイベントオブジェクトが入っている
     file = ev.target.files[0]
@@ -72,7 +197,7 @@ document.addEventListener 'DOMContentLoaded', ->
     img = document.createElement("img") # 新しい画像を作る
     img.src = objurl # URLなのでsrc属性に入れる
     document.body.appendChild(img)
-  
+  ###
   
   
   ###

@@ -15,22 +15,132 @@ html
     script(type="text/javascript")
     script(type="text/coffeescript").
       console.log "OK"
-    
+
   body
     #tmp(onClick="add()") tmp
     
     
-    | ==
-    input(type="file" onchange="changedurl(event)")
-    br
-    | ==
-    input(type="file" onchange="change(event)")
-    br
-    | ==
-    input(type="file" onchange="changetext(event)")
-    br
-    | ==
-    input(type="file" onchange="changebin(event)")
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //-
+      | win :
+      #WinSize
+      br
+      | scr :
+      #ScrSize
+      br
+      | checker :
+      
+      
+      br
+      | bb
+      br
+      | bb
+      br
+      | bb
+      #checker
+      br
+    
+    
+    
+    //-
+      form(method="post" action="#")
+        | 年
+        input(type="text" name="y" maxlength="4" size="8" onchange="zeller(event, this.form)")
+        | 月
+        input(type="text" name="m" maxlength="2" size="4" onchange="zeller(event, this.form)")
+        | 日
+        input(type="text" name="d" maxlength="2" size="4" onchange="zeller(event, this.form)")
+      #dow
+    
+      convert_dow = (i)->
+        switch i
+          when 0 then return "日"
+          when 1 then return "月"
+          when 2 then return "火"
+          when 3 then return "水"
+          when 4 then return "木"
+          when 5 then return "金"
+          when 6 then return "土"
+      
+      @zeller = (ev, self)->
+        if self.y.value != "" && self.m.value && self.d.value
+          y = parseInt self.y.value
+          m = parseInt self.m.value
+          d = parseInt self.d.value
+          
+          if m == 1 || m == 2 
+            m = 13 if m == 1
+            m = 14 if m == 2
+            y = y - 1
+          
+          dow = (y + Math.floor(y / 4) - Math.floor(y / 100) +  Math.floor(y / 400) + Math.floor((m * 13 + 8) / 5) + d) % 7
+          
+          document.getElementById("dow").innerText = "あなたの誕生日は" + convert_dow(dow) + "曜日でした"
+        
+        ev.preventDefault()
+
+    
+    //-
+      .dotted dotted
+      br
+      .dashed dashed
+      br
+      .outset outset
+      br
+      .inset inset
+      br
+      .ridge ridge
+      br
+      .groove groove
+      br
+      .double double
+      br
+      .solid solid
+      br
+      
+    
+    
+    //-
+      .wrap.right cc
+        .red a
+        .blue b
+    
+    
+    //-
+      | ==
+      input(type="file" onchange="echeck(event)")
+      br
+    
+    
+    
+    //-
+      | ==
+      input(type="file" onchange="changeblob(event)")
+      br
+      | =readAsDataURL=
+      input(type="file" onchange="readAsDataURL(event)")
+      br
+      | =readAsArrayBuffer=
+      input(type="file" onchange="readAsArrayBuffer(event)")
+      br
+      | =readAsText=
+      input(type="file" onchange="readAsText(event)")
+      br
+      | =createObjectURL=
+      input(type="file" onchange="createObjectURL(event)")
     
     
     
