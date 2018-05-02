@@ -6,6 +6,27 @@
     return console.timeEnd("tmp");
 
     /*
+    @chimg = (e)->
+      console.log "death"
+      chdiv = document.getElementsByClassName("change")
+      console.log chdiv[0].children[0]
+      
+       * 全消しパターン
+       * chdiv[0].removeChild chdiv[0].children[0]
+       * div = document.createElement "div"
+       * div.className = "image-on"
+       * chdiv[0].appendChild div
+      
+       * replaceパターン
+       * div = document.createElement "div"
+       * div.className = "image-on"
+       * chdiv[0].replaceChild div, chdiv[0].children[0]
+      
+       * classNameかえるだけ
+       * chdiv[0].children[0].className = "image-on"
+     */
+
+    /*
      * 一番下にスクロールしたときに発火
      * 全体の高さ + 16 <= 表示画面高さ + スクロールY
     

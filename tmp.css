@@ -2,6 +2,25 @@ body {
   padding: 0px;
 }
 /*
+.image-on
+  background-image: url("https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png")
+  width: auto
+  height: 70px
+  background-size: contain
+  background-repeat: no-repeat
+
+.image-off
+  background-image: url("https://s.yimg.jp/images/top/sp2/cmn/logo-170307.png")
+  width: auto
+  height: 40px
+  background-size: contain
+  background-repeat: no-repeat
+
+.image img
+  width: auto
+  height: 70px
+*/
+/*
 .dotted
   border-style: dotted
 .dashed
