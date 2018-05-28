@@ -6,8 +6,10 @@ html
     meta(content="text/html" charset="utf-8")
     title tmp
     
+    script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous")
     script(type="text/javascript", src="tmp.js")
     link(href="tmp.css", rel="stylesheet")
+
     script(src='https://cdn.rawgit.com/jashkenas/coffeescript/571e9df3/docs/v2/browser-compiler/coffeescript.js')
     
     
@@ -27,6 +29,37 @@ html
     
     
     
+    
+    
+    //-
+      script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(src="https://unpkg.com/vue-router/dist/vue-router.js")
+      
+      #app
+        router-view
+        router-link(to="/user/1") link
+      
+      script(type="text/coffeescript").
+        app = new Vue
+          el: "#app"
+          router: new VueRouter
+            routes: [
+              path: "/user/:id", component:
+                template: "<div>User {{ $route.params.id }}</div>"
+            ]
+    
+    
+    
+    
+    
+    //-
+      #app {{ message }}
+      
+      script(type="text/coffeescript").
+        app = new Vue
+          el: '#app'
+          data:
+            message: 'Hello Vue!'
     
     
     
