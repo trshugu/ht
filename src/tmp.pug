@@ -6,20 +6,20 @@ html
     meta(content="text/html" charset="utf-8")
     title tmp
     
-    script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous")
+    //- script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous")
     //- script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
-    //- script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
+    script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
     script(type="text/javascript", src="tmp.js")
     link(href="tmp.css", rel="stylesheet")
-
+    
     script(src='https://cdn.rawgit.com/jashkenas/coffeescript/571e9df3/docs/v2/browser-compiler/coffeescript.js')
     
-    
+    script(type="text/javascript" src="https://rawgit.com/padolsey-archive/jquery.fn/master/cross-domain-ajax/jquery.xdomainajax.js")
     style(type="text/css")
     script(type="text/javascript")
     script(type="text/coffeescript").
       console.log "OK"
-
+    
   body
     #tmp(onClick="add()") tmp
     
@@ -32,15 +32,17 @@ html
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    //-
+      link(rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css")
+      script(src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js")
+      script(type="text/coffeescript").
+        # $('pre code').each (i, block) -> hljs.highlightBlock(block)
+        hljs.initHighlightingOnLoad()
+      
+      pre
+        code
+          | console.log "dasdf"
+          | asdf = (noi)-> true
     
     
     
