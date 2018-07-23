@@ -6,15 +6,14 @@ html
     meta(content="text/html" charset="utf-8")
     title tmp
     
-    //- script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous")
+    script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous")
     //- script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
-    script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
+    //- script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
     script(type="text/javascript", src="tmp.js")
     link(href="tmp.css", rel="stylesheet")
     
     script(src='https://cdn.rawgit.com/jashkenas/coffeescript/571e9df3/docs/v2/browser-compiler/coffeescript.js')
     
-    script(type="text/javascript" src="https://rawgit.com/padolsey-archive/jquery.fn/master/cross-domain-ajax/jquery.xdomainajax.js")
     style(type="text/css")
     script(type="text/javascript")
     script(type="text/coffeescript").
@@ -28,6 +27,265 @@ html
     
     
     
+    
+    
+    
+    
+    
+    
+    //-
+      script(type="text/coffeescript").
+        getCellSize = ->
+          cW = 0
+          cH = 0
+          s = 0
+          
+          
+          if document.getElementById("cell")
+            cW = document.getElementById("cell").clientWidth
+            cH = document.getElementById("cell").clientHeight
+          
+          s = "横幅 = " + cW + " / 高さ = " + cH
+          document.getElementById("CellSize").innerHTML = s
+        
+        document.getElementById("cell").addEventListener "change", -> getCellSize()
+        document.getElementById("cell").addEventListener "input", -> getCellSize()
+        document.getElementById("cell").addEventListener "resize ", -> getCellSize()
+        
+        window.onresize = ->
+          getCellSize()
+        
+        
+        getCellSize()
+      
+      
+      #cell
+        textarea cellチェック
+      
+      #CellSize
+      
+    
+    
+    //-
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(type="text/coffeescript").
+        console.log "log"
+        tmp = '''
+          <div :class="divClass">
+            <button :class="btnClass" :disabled="disabled" @click="add()">
+              <i :class="iClass" aria-hidden="true"></i>{{label}}
+            </button>
+            <ul class="autocomplete">
+              <li v-for="row in result" :key="row" @click="remove(row)">{{row}}</li>
+            </ul>
+          </div>
+        '''
+        
+        Vue.component "input_autocomplete",
+          template: tmp
+          props:
+            label: { type: String },
+            divClass: { type: String, default: 'width100'},
+            btnClass: { type: String, default: 'btn-normal green' },
+            iClass: { type: String, default: '' },
+          data: ->
+            console.log @label
+            if (true==true)
+              return
+                result: [1,2]
+                rabel: @label
+            else
+              return result: [1,2]
+          template: tmp
+          methods:
+            add: ->
+              console.log "death"
+              console.log @mess
+              console.log this.mess
+              console.log @vvv
+              console.log @rabel
+              # console.log mess
+              @result.push new Date().getTime()
+              # this.$set(this.arr, 4, 98)
+            remove: (item_id)->
+              index = null
+              $.each @result, (i, obj)->
+                if (obj.id == item_id)
+                  return index = i
+              
+              return @result.splice(index, 1)
+
+          computed: 
+            disabled: ->
+              @result.length >= 10
+          
+
+
+        new Vue
+          el: '#app'
+          data:
+            label: "メッセージ"
+        
+        
+      #app
+        input_autocomplete(:label="label")
+
+
+    
+    //-
+      script(type="text/coffeescript").
+        tmp = '''
+          <div>
+            <button v-on:click="count++">
+              You clicked me {{ count }} times.
+            </button>
+            <div v-for="(v,k,i) in result">
+              {{v}}
+              {{k}}
+              {{i}}
+              <br>
+            </div>
+            <button v-on:click="add">aaa</button>
+          </div>
+        '''
+
+        Vue.component "input_autocomplete",
+          props:
+            mess: String
+            vvv: String
+          data: ->
+            count: 0
+            result: [1,2,4,5,3,@mess]
+          template: tmp
+          methods:
+            add: ->
+              console.log "death"
+              console.log @mess
+              console.log this.mess
+              console.log @vvv
+              # console.log mess
+              @result.push 99
+              # this.$set(this.arr, 4, 98)
+        
+        
+        
+        new Vue
+          el: '#app'
+          data: ->
+            myMes: "メッセージ"
+            vvv: "セージ"
+            mmm: ["メッセ"]
+        
+        
+        Vue.component 'child-component',
+          props: 
+            aaa: String
+          template: '<span>{{aaa}}</span>'
+        
+        new Vue
+          el: '#appri',
+          data: ->
+            myMessage: '親が持つメッセージデータ',
+        
+    
+    
+    
+    //-
+      #appri
+        child-component(:aaa="myMessage")
+      
+      #app
+        input_autocomplete(:mess="myMes" v-bind:em="mmm" :vvv="vvv")
+    
+    
+    
+    
+    //-
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(src="https://unpkg.com/vue-router/dist/vue-router.js")
+      script(type="text/coffeescript").
+        app = new Vue
+          el: "#app"
+          data:
+            vv: 1
+          router: new VueRouter
+            routes: [
+              path: "/user/:id", component:
+                template: "<div>User {{ $route.params.id }}<br><router-link to='/muser/9'>Muser</router-link></div>"
+            ,
+              path: "/muser/:id", component:
+                template: "<div>Muser {{ $route.params.id }}</div>"
+            ]
+        console.log app.vv
+      
+      
+      .cc a {{vv}} b
+      #app
+        router-view
+        router-link(to="/user/1") link
+    
+    
+    
+    
+    
+    //-
+      script(type="text/javascript" src="http://knockoutjs.com/downloads/knockout-3.4.2.js")
+      script(type="text/coffeescript").
+        VM = ->
+          @text = ko.observable("")
+          @val = ko.computed(->
+            return @text()
+          , this)
+          return
+        
+        ko.applyBindings new VM()
+      
+      input(data-bind="value: text, valueUpdate: 'afterkeydown'")
+      div(data-bind="text: val")
+
+    //-
+      script(type="text/coffeescript").
+        console.log "OK2"
+        # Modelを定義
+        M = (value) ->
+          self = this
+          self.text = ko.observable(value)
+          return
+        
+        # ViewModelを定義
+        VM = ->
+          self = this
+          self.list = ko.observableArray() # todoリスト
+          self.inputValue = ko.observable("") # 追加todoテキスト
+          
+          # 追加
+          self.add = (obj, e) ->
+            return  unless self.inputValue() # 空文字の場合は処理しない
+            
+            # 入力されたテキストでModelを作りリストに挿入
+            self.list.unshift new M(self.inputValue())
+            self.inputValue ""
+            return
+          
+          # 削除
+          self.remove = (obj, e) ->
+            # イベントバインディングで実行される関数の第1引数にはModel、第2引数にはイベントオブジェクトが渡される
+            self.list.remove obj
+            return
+          
+          return
+        
+        # bindingスタート
+        ko.applyBindings new VM()
+      
+      
+      input(type="text" value="" data-bind="value: inputValue")
+      button(data-bind="click: add") add
+      
+      .list(data-bind="foreach: list, visible: list().length > 0")
+        .sep
+          span(data-bind="text: text") Todo
+          button(data-bind="click: $root.remove") delete
     
     
     
