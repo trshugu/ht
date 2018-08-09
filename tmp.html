@@ -16,6 +16,24 @@
   </head>
   <body>
     <div id="tmp" onClick="add()">tmp</div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/coffeescript">
+      Vue.component "comp",
+        template: "#gai"
+      
+      new Vue
+        el: '#app'
+      
+    </script>
+    <script type="text/javascript" src="./tmp.vue"></script>
+    <script id="hell" type="text/x-template">
+      <div id="hell">
+        <p id="naniya">Hello hello hello</p><br><a href="sdf">korehadoud</a>
+      </div>
+    </script>
+    <div id="app">
+      <comp></comp>
+    </div>
     <!-- script(type="text/javascript", src="coffeescript.js")-->
   </body>
 </html>

@@ -27,6 +27,76 @@ html
     
     
     
+    script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+    script(type="text/coffeescript").
+      Vue.component "comp",
+        template: "#gai"
+      
+      new Vue
+        el: '#app'
+    
+    script(type="text/javascript" src="./tmp.vue")
+    
+    script#hell(type="text/x-template")
+      #hell
+        p#naniya Hello hello hello
+        br
+        a(href="sdf") korehadoud
+        
+    
+    
+    #app
+      comp
+    
+    
+    //-
+      //- script(type="text/coffeescript" src="https://s3.ap-south-1.amazonaws.com/test-suzuki/presen/test.coffee")
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      
+      script(type="text/coffeescript").
+        tmp = '''
+          <p>test</p>
+        '''
+        
+        Vue.component "comp",
+          template: tmp
+          # template: "#hell"
+          # template: "#tem"
+        
+        new Vue
+          el: '#app'
+      
+      
+      //- template#tem(src="./tmp.vue")
+      
+      
+      script#hell(type="text/x-template")
+        #hell
+          p#naniya Hello hello hello
+          br
+          a(href="sdf") korehadoud
+          
+      
+      
+      #app: comp
+
+
+
+    //-
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(type="text/coffeescript").
+        new Vue
+          el: '#app'
+          data:
+            label: "メッセージ"
+
+        
+      #app
+        input(v-model="label")
+        p {{label}}
+
+    
+    
     //-
       script(type="text/coffeescript").
         getCellSize = ->
