@@ -27,26 +27,267 @@ html
     
     
     
+    
+    
+    style(type="text/css").
+      .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+      }
+      .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+      }
+      
+      
+      .no-mode-translate-demo-wrapper {
+        position: relative;
+        height: 18px;
+      }
+      .no-mode-translate-demo-wrapper button {
+        position: absolute;
+      }
+      .no-mode-translate-demo-wrapper span {
+        position: absolute;
+      }
+      .no-mode-translate-demo-wrapper div {
+        position: absolute;
+      }
+      .no-mode-translate-fade-enter-active, .no-mode-translate-fade-leave-active {
+        transition: all 1s;
+      }
+      .no-mode-translate-fade-enter, .no-mode-translate-fade-leave-active {
+        opacity: 0.5;
+      }
+      .no-mode-translate-fade-enter {
+        transform: translateX(31px);
+      }
+      .no-mode-translate-fade-leave-active {
+        transform: translateX(-31px);
+      }
+    
+    
+    
     script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
     script(type="text/coffeescript").
-      Vue.component "comp",
-        template: "#gai"
+      
+      Vue.component 'one',
+        template: "<div>ichi</div>"
+      Vue.component 'two',
+        template: "<div>nii</div>"
+      Vue.component 'thr',
+        template: "<div>san</div>"
       
       new Vue
         el: '#app'
-    
-    script(type="text/javascript" src="./tmp.vue")
-    
-    script#hell(type="text/x-template")
-      #hell
-        p#naniya Hello hello hello
-        br
-        a(href="sdf") korehadoud
-        
-    
+        data:
+         show: true
+         on: false
+         view: "one"
+         namae: "one"
+      
     
     #app
-      comp
+      .a ==========
+      .a {{one}}
+      one
+      .a {{namae}}
+      .a {{namae}}
+      span(v-html="namae")
+      .a ==========
+      
+      button(v-on:click="show = !show") Toggle
+      transition(name="fade")
+        p(v-if="show")
+          | hell
+          one
+      
+      button(v-if="on" key="on" @click="on = false") on
+      button(v-else="" key="off" @click="on = true") off
+      
+      .no-mode-translate-demo-wrapper
+        transition(name="no-mode-translate-fade")
+          one(v-if="on" key="on") on
+          two(v-else="" key="off") off
+      
+      
+      input#a(v-model="view" type="radio" value="two" name="view")
+      label(for="a") A
+      
+      input#b(v-model="view" type="radio" value="thr" name="view")
+      label(for="b") B
+      
+      .no-mode-translate-demo-wrapper
+        transition(name="no-mode-translate-fade" mode="out-in")
+          component(v-bind:is="view")
+
+      .aaa aaadesu
+      .aaa(v-bind:is="view")
+      
+      
+    
+    
+    
+    //-
+      style(type="text/css").
+        .tab-button {
+          padding: 6px 10px;
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px;
+          border: 1px solid #ccc;
+          cursor: pointer;
+          background: #f0f0f0;
+          margin-bottom: -1px;
+          margin-right: -1px;
+        }
+        .tab-button:hover {
+          background: #e0e0e0;
+        }
+        .tab-button.active {
+          background: #e0e0e0;
+        }
+        .tab {
+          border: 1px solid #ccc;
+          padding: 10px;
+        }
+      
+      
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(type="text/coffeescript").
+        Vue.component 'tab-home', 
+          template: '<div>Home component</div>' 
+        
+        Vue.component 'tab-posts', 
+          template: "#tab-posts" 
+          data: ->
+            posts: [
+              id:1
+              tit:"aaa"
+              nai:"absvbd"
+            ,
+              id:2
+              tit:"bbb"
+              nai:"yousyosoys"
+            ]
+            selectedPost: null
+        
+        Vue.component 'tab-archive',
+          template: '<div>Archive component</div>' 
+        
+        Vue.component 'tab-hidoki', (f,r)->
+          setTimeout ->
+            f template: '<div>hodoki component</div>' 
+          , 1000
+        
+        
+        
+        Vue.component "pos",
+          template: "#pos"
+        
+        new Vue
+          el: '#dynamic-component-demo',
+          data:
+            currentTab: 'Home',
+            tabs: ['Home', 'Posts', 'Archive', "hidoki"]
+          computed:
+            currentTabComponent: ->
+              'tab-' + @currentTab.toLowerCase()
+      
+      script#load(type="text/x-template")
+        #load loooooo
+      
+      script#tab-posts(type="text/x-template")
+        #tab-posts
+          ul.sidebar
+            li(v-for="item in posts" :key="item.id" v-on:click="selectedPost = item") {{item.tit}}
+          .container
+            .item(v-if="selectedPost")
+              h4 {{selectedPost.tit}} {{selectedPost.nai}}
+            strong(v-else) CLICK
+      
+      script#pos(type="text/x-template")
+        #pos
+          .aa a {{id}} {{tit}}
+      
+      
+      
+      
+      #dynamic-component-demo.demo
+        button(v-for="tab in tabs" :key="tab" :class="['tab-button', { active: currentTab === tab }]" v-on:click="currentTab = tab") {{tab}}
+        
+        keep-alive
+          component.tab(:is="currentTabComponent")
+    
+    
+    
+    //-
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(type="text/coffeescript").
+        Vue.component "comp",
+          template: "#hell"
+
+        Vue.component "gai",
+          template: "#gai"
+          props: [
+            "kotei"
+            # "val"
+            # "id"
+            "item"
+            "fs"
+          ]
+          data: ->
+            count: 0
+            ind: 10
+        
+        vm = new Vue
+          el: '#app'
+          data:
+            master: "atai"
+            fs: 1
+            arr:[
+                id:1,val:"idhi"
+              ,
+                id:2,val:"niii"
+              ,
+                id:3,val:"zannn"
+            ]
+        
+        setTimeout ->
+          vm.arr.push id:99, val: "void"
+          # vm.fs += 1
+        , 1000
+        
+      
+      script#gai(type="text/x-template")
+        #gai
+          p#naniya Hello hello hello {{count}}
+          a(href="sdf") gaigai {{ind}}
+          button(v-on:click="count++") osu
+          button(v-on:click="ind--") osu
+          button(v-on:click="$emit('enlarge')") fs
+          .ff(:style="{fontSize: fs + 'em'}") fsffs
+          .kote koko {{kotei}} desu
+          .item itemm {{item.id}}:{{item.val}}
+          .slo slottto
+          slot
+      
+      script#hell(type="text/x-template")
+        #hell
+          p#naniya Hell hell hell
+          br
+          a(href="jigoku") jigoku
+          //- gai
+      
+      
+      #app
+        comp
+        gai(v-for="item in arr" :key="item.id" :item="item" :fs="fs" v-on:enlarge="fs += 0.1")
+          .slot fkinggay
+        .sep ◆◆◆◆◆◆◆◆seeeeeeeeeeeeeeep
+        //- gai(v-for="item in arr" :key="item.id" :id="item.id" :val="item.val")
+        .sep ◆◆◆◆◆◆◆◆seeeeeeeeeeeeeeep
+        //- 
+          gai(kotei="koteee")
+          gai(kotei="teitouwa")
+          gai
     
     
     //-
