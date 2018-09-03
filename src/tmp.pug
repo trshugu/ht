@@ -29,100 +29,305 @@ html
     
     
     
-    style(type="text/css").
-      .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
-      }
-      .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-        opacity: 0;
-      }
-      
-      
-      .no-mode-translate-demo-wrapper {
-        position: relative;
-        height: 18px;
-      }
-      .no-mode-translate-demo-wrapper button {
-        position: absolute;
-      }
-      .no-mode-translate-demo-wrapper span {
-        position: absolute;
-      }
-      .no-mode-translate-demo-wrapper div {
-        position: absolute;
-      }
-      .no-mode-translate-fade-enter-active, .no-mode-translate-fade-leave-active {
-        transition: all 1s;
-      }
-      .no-mode-translate-fade-enter, .no-mode-translate-fade-leave-active {
-        opacity: 0.5;
-      }
-      .no-mode-translate-fade-enter {
-        transform: translateX(31px);
-      }
-      .no-mode-translate-fade-leave-active {
-        transform: translateX(-31px);
-      }
     
     
     
     script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
     script(type="text/coffeescript").
-      
-      Vue.component 'one',
-        template: "<div>ichi</div>"
-      Vue.component 'two',
-        template: "<div>nii</div>"
-      Vue.component 'thr',
-        template: "<div>san</div>"
+      Vue.component "comp",
+        template: tmp
       
       new Vue
-        el: '#app'
-        data:
-         show: true
-         on: false
-         view: "one"
-         namae: "one"
+        el: '#ccc'
+        components:
+          "cmp":
+            template:"#comp"
+    
+    
+    script#comp(type="text/x-template")
+      #comp
+        div コンポーネントです
+    
+    #ccc
+      cmp
+    
+    
+    
+    
+    //-
+      style(type="text/css").
+        .tab-button {
+          padding: 6px 10px;
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px;
+          border: 1px solid #ccc;
+          cursor: pointer;
+          background: #f0f0f0;
+          margin-bottom: -1px;
+          margin-right: -1px;
+        }
+        .tab-button:hover { background: #e0e0e0;}
+        .tab-button.active { background: #e0e0e0;}
+        .tab {border: 1px solid #ccc; padding: 10px;}
+      
+      
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(type="text/coffeescript").
+        Vue.component 'tab-one',  template: '<div>ひとつめ</div>' 
+        Vue.component 'tab-two',  template: '<div>ふたつめ</div>' 
+        Vue.component 'tab-three', template: '<div>三つ目</div>' 
+        Vue.component 'tab-hidoki', (f,r)->
+          setTimeout ->
+            f template: '<div>非同期で取得</div>' 
+          , 1000
+        
+        new Vue
+          el: '#dy',
+          data:
+            currentTab: 'one',
+            tabs: ['one', 'two', 'three', "hidoki"]
+          computed:
+            currentTabComponent: ->
+              'tab-' + @currentTab.toLowerCase()
+      
+      #dy.demo
+        button(v-for="tab in tabs" :key="tab" :class="['tab-button', { active: currentTab === tab }]" v-on:click="currentTab = tab") {{tab}}
+        component.tab(:is="currentTabComponent")
+    
+    
+    //-
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(type="text/javascript" src="https://cdn.rawgit.com/Caligatio/jsSHA/766f8ff7/src/sha256.js")
+      script(type="text/coffeescript").
+        Vue.component "other", (f,r)->
+          fetch "https://s3.ap-south-1.amazonaws.com/test-suzuki/dropbox/gaibu.json"
+          .then (f)->
+            f.text()
+          .then (v)->
+            return
+              template: "#gaibu"
+              data: ->
+                arr: JSON.parse v
+          .catch (e)->
+            console.log "e",e
+        
+        ctemp = (f,r)->
+          fetch "https://s3.ap-south-1.amazonaws.com/test-suzuki/dropbox/gaibu.json"
+          .then (f)->
+            f.text()
+          .then (v)->
+            return
+              template: "#gaibu"
+              data: ->
+                arr: JSON.parse v
+          .catch (e)->
+            console.log "e",e
+        
+        vm = new Vue
+          el: '#app'
+          components:
+            "gai": ctemp
+      
+      script#gaibu(type="text/x-template")
+        table(style="border:4px")
+          tr
+            th key
+            th value
+          tr(v-for="item in arr")
+            td {{item.id}}
+            td {{item.value}}
+      
+      #app
+        gai
+        other
+    
+    
+    //-
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(type="text/javascript" src="https://cdn.rawgit.com/Caligatio/jsSHA/766f8ff7/src/sha256.js")
+      script(type="text/coffeescript").
+        new Vue
+          el: '#app'
+          data:
+            inhash: ""
+            hash: ""
+          watch:
+            "inhash": (n,o)->
+              console.log n
+              shaObj = new jsSHA "SHA-256", "TEXT"
+              shaObj.update n
+              @hash = shaObj.getHash "HEX"
+      
+      
+      #app
+        input(v-model="inhash")
+        p {{hash}}
       
     
-    #app
-      .a ==========
-      .a {{one}}
-      one
-      .a {{namae}}
-      .a {{namae}}
-      span(v-html="namae")
-      .a ==========
+    
+    
+    //-
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(type="text/javascript" src="https://cdn.rawgit.com/Caligatio/jsSHA/766f8ff7/src/sha256.js")
+      script(type="text/coffeescript").
+        shaObj = new jsSHA "SHA-256", "TEXT"
+        shaObj.update "This is a "
+        shaObj.update "test"
+        hash = shaObj.getHash "HEX"
+        
+        ctemp = (f,r)->
+          fetch "https://s3.ap-south-1.amazonaws.com/test-suzuki/dropbox/divpart.html"
+          .then (f)->
+            f.text()
+          .then (v)->
+            template: v
+            data: ->
+              proPro: "==SHA-256:" + hash
+            # props:["proPro"]
+          .catch (e)->
+            console.log "e",e
+        
+        new Vue
+          el: '#app'
+          components:
+            "temp": ctemp
       
-      button(v-on:click="show = !show") Toggle
-      transition(name="fade")
-        p(v-if="show")
-          | hell
-          one
+      #app
+        temp(pro-pro="nakami")
+    
+    //-
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(type="text/coffeescript").
+        aaaa="""
+          <div>aaaa component{{proPro}}</div>
+        """
+        
+        opt =
+          template: aaaa
+          props:["proPro"]
+          method:
+            void: -> console.log "vooii"
+        
+        Vue.component 'temp', (f,r)->
+          fetch "https://s3.ap-south-1.amazonaws.com/test-suzuki/dropbox/divpart.html"
+          .then (f)->
+            f.text().then (v)->
+              console.log v
+              template: v
+              props:["proPro"]
+          .catch (e)->
+            console.log "e",e
+        
+        new Vue
+          el: '#app'
+          loaders:
+            html: 'pug'
+          components:
+            "com": opt
       
-      button(v-if="on" key="on" @click="on = false") on
-      button(v-else="" key="off" @click="on = true") off
+      script#bbbb(type="text/x-template")
+        .aaa pug component
       
-      .no-mode-translate-demo-wrapper
-        transition(name="no-mode-translate-fade")
-          one(v-if="on" key="on") on
-          two(v-else="" key="off") off
+      #app
+        temp(pro-pro="ppap")
+        com(pro-pro="pppap")
+    
+    
+    //-
+      style(type="text/css").
+        .fade-enter-active, .fade-leave-active {
+          transition: opacity .5s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+          opacity: 0;
+        }
+        
+        
+        .no-mode-translate-demo-wrapper {
+          position: relative;
+          height: 18px;
+        }
+        .no-mode-translate-demo-wrapper button {
+          position: absolute;
+        }
+        .no-mode-translate-demo-wrapper span {
+          position: absolute;
+        }
+        .no-mode-translate-demo-wrapper div {
+          position: absolute;
+        }
+        .no-mode-translate-fade-enter-active, .no-mode-translate-fade-leave-active {
+          transition: all 1s;
+        }
+        .no-mode-translate-fade-enter, .no-mode-translate-fade-leave-active {
+          opacity: 0.5;
+        }
+        .no-mode-translate-fade-enter {
+          transform: translateX(31px);
+        }
+        .no-mode-translate-fade-leave-active {
+          transform: translateX(-31px);
+        }
       
       
-      input#a(v-model="view" type="radio" value="two" name="view")
-      label(for="a") A
       
-      input#b(v-model="view" type="radio" value="thr" name="view")
-      label(for="b") B
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(type="text/coffeescript").
+        
+        Vue.component 'one',
+          template: "<div>ichi</div>"
+        Vue.component 'two',
+          template: "<div>nii</div>"
+        Vue.component 'thr',
+          template: "<div>san</div>"
+        
+        new Vue
+          el: '#app'
+          data:
+           show: true
+           on: false
+           view: "one"
+           namae: "one"
+        
       
-      .no-mode-translate-demo-wrapper
-        transition(name="no-mode-translate-fade" mode="out-in")
-          component(v-bind:is="view")
-
-      .aaa aaadesu
-      .aaa(v-bind:is="view")
-      
-      
+      #app
+        .a ==========
+        .a {{one}}
+        one
+        .a {{namae}}
+        .a {{namae}}
+        span(v-html="namae")
+        .a ==========
+        
+        button(v-on:click="show = !show") Toggle
+        transition(name="fade")
+          p(v-if="show")
+            | hell
+            one
+        
+        button(v-if="on" key="on" @click="on = false") on
+        button(v-else="" key="off" @click="on = true") off
+        
+        .no-mode-translate-demo-wrapper
+          transition(name="no-mode-translate-fade")
+            one(v-if="on" key="on") on
+            two(v-else="" key="off") off
+        
+        
+        input#a(v-model="view" type="radio" value="two" name="view")
+        label(for="a") A
+        
+        input#b(v-model="view" type="radio" value="thr" name="view")
+        label(for="b") B
+        
+        .no-mode-translate-demo-wrapper
+          transition(name="no-mode-translate-fade" mode="out-in")
+            component(v-bind:is="view")
+        
+        .aaa aaadesu
+        .aaa(v-bind:is="view")
+        
+        
     
     
     

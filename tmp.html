@@ -16,95 +16,26 @@
   </head>
   <body>
     <div id="tmp" onClick="add()">tmp</div>
-    <style type="text/css">
-      .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
-      }
-      .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-        opacity: 0;
-      }
-      
-      
-      .no-mode-translate-demo-wrapper {
-        position: relative;
-        height: 18px;
-      }
-      .no-mode-translate-demo-wrapper button {
-        position: absolute;
-      }
-      .no-mode-translate-demo-wrapper span {
-        position: absolute;
-      }
-      .no-mode-translate-demo-wrapper div {
-        position: absolute;
-      }
-      .no-mode-translate-fade-enter-active, .no-mode-translate-fade-leave-active {
-        transition: all 1s;
-      }
-      .no-mode-translate-fade-enter, .no-mode-translate-fade-leave-active {
-        opacity: 0.5;
-      }
-      .no-mode-translate-fade-enter {
-        transform: translateX(31px);
-      }
-      .no-mode-translate-fade-leave-active {
-        transform: translateX(-31px);
-      }
-      
-      
-      
-    </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/coffeescript">
-      Vue.component 'one',
-        template: "<div>ichi</div>"
-      Vue.component 'two',
-        template: "<div>nii</div>"
-      Vue.component 'thr',
-        template: "<div>san</div>"
+      Vue.component "comp",
+        template: tmp
       
       new Vue
-        el: '#app'
-        data:
-         show: true
-         on: false
-         view: "one"
-         namae: "one"
+        el: '#ccc'
+        components:
+          "cmp":
+            template:"#comp"
       
       
     </script>
-    <div id="app">
-      <div class="a">==========</div>
-      <div class="a">{{one}}</div>
-      <one></one>
-      <div class="a">{{namae}}</div>
-      <div class="a">{{namae}}</div><span v-html="namae"></span>
-      <div class="a">==========</div>
-      <button v-on:click="show = !show">Toggle</button>
-      <transition name="fade">
-        <p v-if="show">hell
-          <one></one>
-        </p>
-      </transition>
-      <button v-if="on" key="on" @click="on = false">on</button>
-      <button v-else="" key="off" @click="on = true">off</button>
-      <div class="no-mode-translate-demo-wrapper">
-        <transition name="no-mode-translate-fade">
-          <one v-if="on" key="on">on</one>
-          <two v-else="" key="off">off</two>
-        </transition>
+    <script id="comp" type="text/x-template">
+      <div id="comp">
+        <div>コンポーネントです</div>
       </div>
-      <input id="a" v-model="view" type="radio" value="two" name="view">
-      <label for="a">A</label>
-      <input id="b" v-model="view" type="radio" value="thr" name="view">
-      <label for="b">B</label>
-      <div class="no-mode-translate-demo-wrapper">
-        <transition name="no-mode-translate-fade" mode="out-in">
-          <component v-bind:is="view"></component>
-        </transition>
-      </div>
-      <div class="aaa">aaadesu</div>
-      <div class="aaa" v-bind:is="view"></div>
+    </script>
+    <div id="ccc">
+      <cmp></cmp>
     </div>
     <!-- script(type="text/javascript", src="coffeescript.js")-->
   </body>
