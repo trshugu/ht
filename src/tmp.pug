@@ -14,42 +14,235 @@ html
     
     script(src='https://cdn.rawgit.com/jashkenas/coffeescript/571e9df3/docs/v2/browser-compiler/coffeescript.js')
     
-    style(type="text/css")
+    style(type="text/css").
+      marquee{font-weight: bold;}
+      .ni{position: absolute}
+      
+      #fff{position:fixed; top:10px; left:10px}
+    
     script(type="text/javascript")
     script(type="text/coffeescript").
       console.log "OK"
-    
+      
+      
+      b0 = document.getElementsByTagName('body')[0]
+      nArea = document.createElement("div")
+      mArea = document.createElement("div")
+      mArea.className = "ni"
+      nArea.appendChild mArea
+      b0.parentNode.insertBefore(nArea, b0)
+      
+      ncom = (com)->
+        return if com == ""
+        
+        mNew = document.createElement("marquee")
+        sNew = document.createElement("span")
+        sNew.innerText = com
+        mNew.appendChild sNew
+        
+        lane = (nArea.childElementCount-1) * 24
+        mArea.parentNode.insertBefore(mNew, mArea)
+        
+        mNew.loop = "1"
+        mNew.scrollDelay = "4000"
+        mNew.scrollAmount = b0.offsetWidth + sNew.offsetWidth
+        mNew.style = "position:fixed; top:" + lane + "px"
+        
+        ntext.value = ""
+        
+        setTimeout ->
+          mNew.remove()
+        , 4300
+      
+      
+      
+      # データがあったら流す
+      aQueue = []
+      poller = ->
+        if aQueue.length != 0
+          ncom aQueue.shift()
+          
+          setTimeout ->
+            poller()
+          , 1000
+        else
+          setTimeout ->
+            poller()
+          , 2000
+      
+      poller()
+      
+      sender = ()->
+        return if ntext.value == ""
+        aQueue.push ntext.value
+        ntext.value = ""
+      
+      nbutton.addEventListener  "click", sender
+      ntext.addEventListener  "keypress", (e)->
+        key = e.which || e.keyCode
+        sender() if key == 13
+      
+      
+      
+      
   body
     #tmp(onClick="add()") tmp
     
+    #fff
+      input(type="text")#ntext
+      button#nbutton コメント
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
-    script(type="text/coffeescript").
-      Vue.component "comp",
-        template: tmp
+    //-
+      # コメントシステムv3
+      b0 = document.getElementsByTagName('body')[0]
+      nArea = document.createElement("div")
+      mArea = document.createElement("div")
+      mArea.className = "ni"
+      nArea.appendChild mArea
+      b0.parentNode.insertBefore(nArea, b0)
       
-      new Vue
-        el: '#ccc'
-        components:
-          "cmp":
-            template:"#comp"
+      ncom = ->
+        return if ntext.value == ""
+        
+        mNew = document.createElement("marquee")
+        sNew = document.createElement("span")
+        sNew.innerText = ntext.value
+        mNew.appendChild sNew
+        
+        lane = (nArea.childElementCount-1) * 24
+        mArea.parentNode.insertBefore(mNew, mArea)
+        
+        mNew.loop = "1"
+        mNew.scrollDelay = "4000"
+        mNew.scrollAmount = b0.offsetWidth + sNew.offsetWidth
+        console.log mNew.offsetTop
+        console.log mNew.clientTop
+        console.log mNew.offsetHeight
+        console.log mNew.clientHeight
+        console.log nArea.childElementCount
+        console.log "lane", lane
+        mNew.style = "position:fixed; top:" + lane + "px"
+        
+        ntext.value = ""
+        
+        setTimeout ->
+          mNew.remove()
+        , 4300
+      
+      nbutton.addEventListener  "click", ncom
+      ntext.addEventListener  "keypress", (e)->
+        key = e.which || e.keyCode
+        ncom() if key == 13
     
     
-    script#comp(type="text/x-template")
-      #comp
-        div コンポーネントです
     
-    #ccc
-      cmp
+    
+    //-
+      # コメントシステムv2
+      b0 = document.getElementsByTagName('body')[0]
+      nArea = document.createElement("div")
+      nArea.className = "ni"
+      b0.parentNode.insertBefore(nArea, b0)
+      
+      ncom = ->
+        return if ntext.value == ""
+        
+        mNew = document.createElement("marquee")
+        sNew = document.createElement("span")
+        sNew.innerText = ntext.value
+        mNew.appendChild sNew
+        
+        nArea.parentNode.insertBefore(mNew, nArea)
+        
+        mNew.loop = "1"
+        mNew.scrollDelay = "4000"
+        mNew.scrollAmount = b0.offsetWidth + sNew.offsetWidth
+        
+        ntext.value = ""
+        
+        setTimeout ->
+          mNew.remove()
+        , 4300
+    
+      nbutton.addEventListener  "click", ncom
+      ntext.addEventListener  "keypress", (e)->
+        key = e.which || e.keyCode
+        ncom() if key == 13
+    
+    //-
+      # コメントシステムv1
+      b0 = document.getElementsByTagName('body')[0]
+      nArea = document.createElement("div")
+      nArea.className = "ni"
+      b0.parentNode.insertBefore(nArea, b0)
+      
+      ncom = ->
+        console.log "kiteru"
+        return if ntext.value == ""
+        
+        mNew = document.createElement("marquee")
+        mNew.innerText = ntext.value
+        mNew.className = "nicom"
+        
+        mNew.loop = "1"
+        mNew.scrollDelay = "85"
+        mNew.scrollAmount = "20"
+        
+        # b0.parentNode.insertBefore(nArea, b0)
+        nArea.parentNode.insertBefore(mNew, nArea)
+        
+        # b0.parentNode.insertBefore(mNew, b0)
+        
+        ntext.value = ""
+        
+        setTimeout ->
+          mNew.remove()
+        , 4000
+    
+    
+    //-
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(type="text/coffeescript").
+        Vue.component "cpm",
+          render: (ce)->
+            console.log "kiteruyo--", ce
+            ce "h1", {}, [ce("h2", "hell")]
+        
+        vm = new Vue
+          el: "#app"
+          data:
+            hello: 'hello'
+      
+      #app
+        p
+          | {{ hello }}
+          cpm
+    
+    
+    
+    
+    
+    //-
+      script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+      script(type="text/coffeescript").
+        Vue.component "comp",
+          template: tmp
+        
+        new Vue
+          el: '#ccc'
+          components:
+            "cmp":
+              template:"#comp"
+      
+      
+      script#comp(type="text/x-template")
+        #comp
+          div コンポーネントです
+      
+      #ccc
+        cmp
     
     
     

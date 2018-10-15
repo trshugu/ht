@@ -7,35 +7,85 @@
     <script type="text/javascript" src="tmp.js"></script>
     <link href="tmp.css" rel="stylesheet">
     <script src="https://cdn.rawgit.com/jashkenas/coffeescript/571e9df3/docs/v2/browser-compiler/coffeescript.js"></script>
-    <style type="text/css"></style>
+    <style type="text/css">
+      marquee{font-weight: bold;}
+      .ni{position: absolute}
+      
+      #fff{position:fixed; top:10px; left:10px}
+      
+    </style>
     <script type="text/javascript"></script>
     <script type="text/coffeescript">
       console.log "OK"
+      
+      
+      b0 = document.getElementsByTagName('body')[0]
+      nArea = document.createElement("div")
+      mArea = document.createElement("div")
+      mArea.className = "ni"
+      nArea.appendChild mArea
+      b0.parentNode.insertBefore(nArea, b0)
+      
+      ncom = (com)->
+        return if com == ""
+        
+        mNew = document.createElement("marquee")
+        sNew = document.createElement("span")
+        sNew.innerText = com
+        mNew.appendChild sNew
+        
+        lane = (nArea.childElementCount-1) * 24
+        mArea.parentNode.insertBefore(mNew, mArea)
+        
+        mNew.loop = "1"
+        mNew.scrollDelay = "4000"
+        mNew.scrollAmount = b0.offsetWidth + sNew.offsetWidth
+        mNew.style = "position:fixed; top:" + lane + "px"
+        
+        ntext.value = ""
+        
+        setTimeout ->
+          mNew.remove()
+        , 4300
+      
+      
+      
+      # データがあったら流す
+      aQueue = []
+      poller = ->
+        if aQueue.length != 0
+          ncom aQueue.shift()
+          
+          setTimeout ->
+            poller()
+          , 1000
+        else
+          setTimeout ->
+            poller()
+          , 2000
+      
+      poller()
+      
+      sender = ()->
+        return if ntext.value == ""
+        aQueue.push ntext.value
+        ntext.value = ""
+      
+      nbutton.addEventListener  "click", sender
+      ntext.addEventListener  "keypress", (e)->
+        key = e.which || e.keyCode
+        sender() if key == 13
+      
+      
+      
       
     </script>
   </head>
   <body>
     <div id="tmp" onClick="add()">tmp</div>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script type="text/coffeescript">
-      Vue.component "comp",
-        template: tmp
-      
-      new Vue
-        el: '#ccc'
-        components:
-          "cmp":
-            template:"#comp"
-      
-      
-    </script>
-    <script id="comp" type="text/x-template">
-      <div id="comp">
-        <div>コンポーネントです</div>
-      </div>
-    </script>
-    <div id="ccc">
-      <cmp></cmp>
+    <div id="fff">
+      <input type="text" id="ntext">
+      <button id="nbutton">コメント</button>
     </div>
     <!-- script(type="text/javascript", src="coffeescript.js")-->
   </body>
