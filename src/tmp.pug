@@ -24,7 +24,33 @@ html
     script(type="text/coffeescript").
       console.log "OK"
       
+      ids = []
+      tws = []
+      setInterval ->
+        console.log "gettw", ids.length
+        # fetch "http://.com/gettw/" + "%E3%82%A6%E3%82%B5%E3%82%AE"
+        fetch "http://.com/gettw/" + "紅白司会"
+        .then (v)->
+          # console.log "done", v
+          v.json().then (list)->
+            list.forEach (i)->
+              if (ids.some (j)-> j == i._id)
+                # あった
+                # console.log "atta"
+              else
+                # なかった
+                # console.log "nakatta"
+                ids.push i._id
+                tws.push i.value
+            
+            while tws.length > 0
+              console.log tws
+              aQueue.push tws.shift()
+        .catch (e)-> console.log "e", e
+      , 2000
       
+      
+      # 全体の設定
       b0 = document.getElementsByTagName('body')[0]
       nArea = document.createElement("div")
       mArea = document.createElement("div")
@@ -64,7 +90,7 @@ html
           
           setTimeout ->
             poller()
-          , 1000
+          , 100
         else
           setTimeout ->
             poller()
@@ -72,11 +98,13 @@ html
       
       poller()
       
+      # aQueueに送る関数
       sender = ()->
         return if ntext.value == ""
         aQueue.push ntext.value
         ntext.value = ""
       
+      # viewから
       nbutton.addEventListener  "click", sender
       ntext.addEventListener  "keypress", (e)->
         key = e.which || e.keyCode
@@ -92,7 +120,7 @@ html
       input(type="text")#ntext
       button#nbutton コメント
     
-    
+    canvas#pjs
     
     //-
       # コメントシステムv3
@@ -137,6 +165,155 @@ html
         ncom() if key == 13
     
     
+    
+    
+    
+    //-
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js')
+      MAX_LEVEL = 6
+      VERT_NUM = 3
+      k = 0.5
+      alpha = 120
+      
+      @setup = ->
+        console.log "skiteru"
+        createCanvas(windowWidth, windowHeight)
+        ellipse(100, 100, 80, 50)
+        x = width / 2
+        y = height / 2
+        r = 200
+        fractalLoop(r, x, y, 0)
+        # console.log beginShape
+      
+      fractalLoop = (_r, _x, _y, level)->
+        return if (level > MAX_LEVEL)
+        
+        stroke(12 + 30 * level, 30 * level, 12 + 50 * level, alpha);
+        
+        drawShape(_r, _x, _y);
+        
+        [0..VERT_NUM].forEach (i)->
+          x = _r * cos(TWO_PI / VERT_NUM * (i+0.5)) + _x;
+          y = _r * sin(TWO_PI / VERT_NUM * (i+0.5)) + _y;
+          
+          fractalLoop(_r * k, x, y, level + 1);
+        
+      
+      drawShape= (_r, _x, _y)->
+        beginShape()
+        [0..VERT_NUM].forEach (i)->
+          x = _r * cos(TWO_PI / VERT_NUM * i) + _x
+          y = _r * sin(TWO_PI / VERT_NUM * i) + _y
+          
+          vertex(x, y)
+        
+        endShape(CLOSE)
+      
+      
+      
+      
+      
+      
+    
+    
+    
+    
+    
+    //-
+      new p5 ->
+        @setup = ->
+          console.log "skiteru"
+          createCanvas(windowWidth, windowHeight)
+          ellipse(100, 100, 80, 50)
+          background("#aaaaff")
+          @createSprite(100, 100, 50, 50)
+
+        ###
+        @draw = ->
+          console.log "dkiteru"
+          ellipse(100, 100, 80, 50)
+        ###
+    
+    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js')
+    //-
+      new Processing document.getElementById("pjs"), (processing)->
+        processing.setup = ->
+          processing.size(400,400)
+          # processing.size(innerWidth,innerHeight)
+          # processing.stroke(255)
+          # processing.frameRate(30)
+        
+        a = 0
+        
+        processing.draw = ->
+          processing.fill("#021050", 5);
+          processing.rect(0, 0, processing.width, processing.height);
+          processing.translate(200+a*10, 200+a*10);
+          processing.rotate(a);
+          processing.scale(a/15);
+          a += 0.05;
+          processing.kao(0, -50);
+          processing.kao(1, 50);
+          if (a>30)
+            a -= 50;
+        
+        processing.kao = (don, b)->
+          processing.stroke(0);
+          processing.strokeWeight(2);
+          processing.fill("#e7eedd");
+          processing.ellipse(b, 0, 50, 50);
+          processing.noStroke();
+          processing.fill("#68c0c0" + "#8f8768" * don);
+          processing.ellipse(b, 0, 38, 38);
+          
+          processing.stroke(0);
+          processing.strokeWeight(1.4);
+          processing.arc(b + 4.26, 5, 8.5, 7.3, 0.3, processing.PI, processing.OPEN);
+          processing.arc(b - 4.26, 5, 8.5, 7.3, 0.3, processing.PI - 0.3, processing.OPEN);
+          processing.fill(0);
+          processing.ellipse(b - 11, -2, 6.56, 7);
+          processing.ellipse(b + 11, -2, 6.56, 7);
+      
+    
+    
+    //- processing.js
+      script(type="application/processing" data-processing-target="pjs").
+        void setup(){
+          size(400,400);
+        }
+        
+        float a = 0;
+        
+        void draw(){
+          fill(#021050, 5);
+          rect(0, 0, width, height);
+          translate(200+a*10, 200+a*10);
+          rotate(a);
+          scale(a/15);
+          a += 0.05;
+          kao(0, -50);
+          kao(1, 50);
+          if (a>30) a -= 50;
+        }
+        
+        // 魔法の筆 呪文で絵描くよ 君も描こう！
+        void kao(int don, float b){
+          stroke(0);
+          strokeWeight(2);
+          fill(#e7eedd);
+          ellipse(b, 0, 50, 50);
+          noStroke();
+          fill(#68c0c0 + #8f8768 * don);
+          ellipse(b, 0, 38, 38);
+          
+          stroke(0);
+          strokeWeight(1.4);
+          arc(b + 4.26, 5, 8.5, 7.3, 0.3, PI, OPEN);
+          arc(b - 4.26, 5, 8.5, 7.3, 0.3, PI - 0.3, OPEN);
+          fill(0);
+          ellipse(b - 11, -2, 6.56, 7);
+          ellipse(b + 11, -2, 6.56, 7);
+        }
     
     
     //-

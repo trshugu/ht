@@ -18,7 +18,33 @@
     <script type="text/coffeescript">
       console.log "OK"
       
+      ids = []
+      tws = []
+      setInterval ->
+        console.log "gettw", ids.length
+        # fetch "http://.com/gettw/" + "%E3%82%A6%E3%82%B5%E3%82%AE"
+        fetch "http://.com/gettw/" + "紅白司会"
+        .then (v)->
+          # console.log "done", v
+          v.json().then (list)->
+            list.forEach (i)->
+              if (ids.some (j)-> j == i._id)
+                # あった
+                # console.log "atta"
+              else
+                # なかった
+                # console.log "nakatta"
+                ids.push i._id
+                tws.push i.value
+            
+            while tws.length > 0
+              console.log tws
+              aQueue.push tws.shift()
+        .catch (e)-> console.log "e", e
+      , 2000
       
+      
+      # 全体の設定
       b0 = document.getElementsByTagName('body')[0]
       nArea = document.createElement("div")
       mArea = document.createElement("div")
@@ -58,7 +84,7 @@
           
           setTimeout ->
             poller()
-          , 1000
+          , 100
         else
           setTimeout ->
             poller()
@@ -66,11 +92,13 @@
       
       poller()
       
+      # aQueueに送る関数
       sender = ()->
         return if ntext.value == ""
         aQueue.push ntext.value
         ntext.value = ""
       
+      # viewから
       nbutton.addEventListener  "click", sender
       ntext.addEventListener  "keypress", (e)->
         key = e.which || e.keyCode
@@ -87,6 +115,7 @@
       <input type="text" id="ntext">
       <button id="nbutton">コメント</button>
     </div>
+    <canvas id="pjs"></canvas>
     <!-- script(type="text/javascript", src="coffeescript.js")-->
   </body>
 </html>
