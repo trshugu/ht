@@ -7,115 +7,133 @@
     <script type="text/javascript" src="tmp.js"></script>
     <link href="tmp.css" rel="stylesheet">
     <script src="https://cdn.rawgit.com/jashkenas/coffeescript/571e9df3/docs/v2/browser-compiler/coffeescript.js"></script>
-    <style type="text/css">
-      marquee{font-weight: bold;}
-      .ni{position: absolute}
-      
-      #fff{position:fixed; top:10px; left:10px}
-      
-    </style>
+    <style type="text/css"></style>
     <script type="text/javascript"></script>
     <script type="text/coffeescript">
       console.log "OK"
-      
-      ids = []
-      tws = []
-      setInterval ->
-        console.log "gettw", ids.length
-        # fetch "http://.com/gettw/" + "%E3%82%A6%E3%82%B5%E3%82%AE"
-        fetch "http://.com/gettw/" + "紅白司会"
-        .then (v)->
-          # console.log "done", v
-          v.json().then (list)->
-            list.forEach (i)->
-              if (ids.some (j)-> j == i._id)
-                # あった
-                # console.log "atta"
-              else
-                # なかった
-                # console.log "nakatta"
-                ids.push i._id
-                tws.push i.value
-            
-            while tws.length > 0
-              console.log tws
-              aQueue.push tws.shift()
-        .catch (e)-> console.log "e", e
-      , 2000
-      
-      
-      # 全体の設定
-      b0 = document.getElementsByTagName('body')[0]
-      nArea = document.createElement("div")
-      mArea = document.createElement("div")
-      mArea.className = "ni"
-      nArea.appendChild mArea
-      b0.parentNode.insertBefore(nArea, b0)
-      
-      ncom = (com)->
-        return if com == ""
-        
-        mNew = document.createElement("marquee")
-        sNew = document.createElement("span")
-        sNew.innerText = com
-        mNew.appendChild sNew
-        
-        lane = (nArea.childElementCount-1) * 24
-        mArea.parentNode.insertBefore(mNew, mArea)
-        
-        mNew.loop = "1"
-        mNew.scrollDelay = "4000"
-        mNew.scrollAmount = b0.offsetWidth + sNew.offsetWidth
-        mNew.style = "position:fixed; top:" + lane + "px"
-        
-        ntext.value = ""
-        
-        setTimeout ->
-          mNew.remove()
-        , 4300
-      
-      
-      
-      # データがあったら流す
-      aQueue = []
-      poller = ->
-        if aQueue.length != 0
-          ncom aQueue.shift()
-          
-          setTimeout ->
-            poller()
-          , 100
-        else
-          setTimeout ->
-            poller()
-          , 2000
-      
-      poller()
-      
-      # aQueueに送る関数
-      sender = ()->
-        return if ntext.value == ""
-        aQueue.push ntext.value
-        ntext.value = ""
-      
-      # viewから
-      nbutton.addEventListener  "click", sender
-      ntext.addEventListener  "keypress", (e)->
-        key = e.which || e.keyCode
-        sender() if key == 13
-      
-      
       
       
     </script>
   </head>
   <body>
     <div id="tmp" onClick="add()">tmp</div>
-    <div id="fff">
-      <input type="text" id="ntext">
-      <button id="nbutton">コメント</button>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/coffeescript">
+      vm = new Vue
+        el: "#rsa"
+        data:
+          rsapt: ""
+          rsae: 65537
+          rsap: 601
+          rsaq: 607
+          pub: ""
+          pri: ""
+          cry: ""
+        methods:
+          modular_exp: (a, b, n)->
+            self = this
+            res = 1
+            while b != 0
+              if (b & 1) != 0
+                res = (res * a) % n
+              
+              a = (a * a) % n
+              b = b >> 1
+            
+            res
+          xeuclid: (aa, bb)->
+            self = this
+            if bb == 0
+              uu = 1
+              vv = 0
+            else
+              qq = Math.floor(aa / bb)
+              rr = aa % bb
+              res = self.xeuclid(bb, rr)
+              uu = res[1]
+              vv = res[0] - (qq * res[1])
+            return [uu, vv]
+          gen_d: (e, l)->
+            self = this
+            x = self.xeuclid(e, l)[0]
+            if x < 0
+              return x + l
+            else
+              return x % l
+          gen_rsa: ->
+            self = this
+            e = self.rsae
+            p = self.rsap
+            q = self.rsaq
+            self.pub = p * q
+            self.pri = self.gen_d e, (p-1) * (q-1)
+          encrypto: ->
+            self = this
+            self.cry = self.modular_exp(self.rsapt, self.rsae, self.pub)
+          decrypto: ->
+            self = this
+            self.rsapt = self.modular_exp(self.cry, self.pri, self.pub)
+          gen_prime: ->
+            self = this
+            while true
+              ret = self.gen_rand(8)
+              if self.mr_primary_test(ret)
+                break
+            
+            return ret
+          mr_primary_test: (n, k=100)->
+            self = this
+            return false if n == 1
+            return true if n == 2
+            return false if (n % 2) == 0
+            
+            d = n-1
+            s = 0
+            while (d % 2) != 0
+              d = d/2
+              s = s+1
+            
+            r = [0...k].map -> Math.floor(Math.random() * (n-1)) + 1
+            res = r.some (a)->
+              if self.modular_exp(a, d, n) != 1
+                pl = [0...s].map (rr)-> 
+                  (2 ** rr) *d
+                
+                flg = true
+                
+                pl.forEach (p)->
+                  if self.modular_exp(a, p, n) == 1
+                    flg = false
+                    return
+                
+                if flg
+                  return true
+              
+            return res == false
+          gen_rand: (bit_length)->
+            bits = [0...bit_length - 2].map -> Math.floor(Math.random() * 2)
+            ret = 1
+            bits.forEach (b)->
+              ret = ret * 2 + b
+            
+            ret * 2 + 1
+          gen_prime_button: ->
+            self = this
+            # self.rsae = self.gen_prime()
+            self.rsap = self.gen_prime()
+            self.rsaq = self.gen_prime()
+      
+    </script>
+    <div id="rsa"><span>素数p</span>
+      <input id="rsap" type="text" v-model="rsap" value="rsap"><br><span>素数q</span>
+      <input id="rsaq" type="text" v-model="rsaq" value="rsaq"><br>
+      <button v-on:click="gen_rsa">keygen</button>
+      <button v-on:click="gen_prime_button">素数gen</button><br><span>公開鍵 {{pub}}</span><br><span>秘密鍵 {{pri}}</span><br><span>平文入力(数字)</span>
+      <input id="rsapt" type="text" v-model="rsapt" value="rsapt"><br><span>暗号文</span>
+      <input id="cry" type="text" v-model="cry" value="cry"><br>
+      <button v-on:click="encrypto">暗号化</button><br>
+      <button v-on:click="decrypto">複合化</button>
     </div>
-    <canvas id="pjs"></canvas>
     <!-- script(type="text/javascript", src="coffeescript.js")-->
   </body>
 </html>
