@@ -144,9 +144,11 @@ html
       button(v-on:click="gen_rsa") keygen
       button(v-on:click="gen_prime_button") 素数gen
       br
-      span 公開鍵 {{pub}}
+      span 公開鍵
+      input#pub(type="text" v-model="pub" value="pub")
       br
-      span 秘密鍵 {{pri}}
+      span 秘密鍵
+      input#pri(type="text" v-model="pri" value="pri")
       br
       span 平文入力(数字)
       input#rsapt(type="text" v-model="rsapt" value="rsapt")

@@ -128,7 +128,9 @@
       <input id="rsap" type="text" v-model="rsap" value="rsap"><br><span>素数q</span>
       <input id="rsaq" type="text" v-model="rsaq" value="rsaq"><br>
       <button v-on:click="gen_rsa">keygen</button>
-      <button v-on:click="gen_prime_button">素数gen</button><br><span>公開鍵 {{pub}}</span><br><span>秘密鍵 {{pri}}</span><br><span>平文入力(数字)</span>
+      <button v-on:click="gen_prime_button">素数gen</button><br><span>公開鍵</span>
+      <input id="pub" type="text" v-model="pub" value="pub"><br><span>秘密鍵</span>
+      <input id="pri" type="text" v-model="pri" value="pri"><br><span>平文入力(数字)</span>
       <input id="rsapt" type="text" v-model="rsapt" value="rsapt"><br><span>暗号文</span>
       <input id="cry" type="text" v-model="cry" value="cry"><br>
       <button v-on:click="encrypto">暗号化</button><br>
