@@ -6,10 +6,10 @@ html
     meta(content="text/html" charset="utf-8")
     title tmp
     
-    script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous")
+    //- script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous")
     //- script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
     //- script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
-    script(type="text/javascript", src="tmp.js")
+    //- script(type="text/javascript", src="tmp.js")
     link(href="tmp.css", rel="stylesheet")
     
     script(src='https://cdn.rawgit.com/jashkenas/coffeescript/571e9df3/docs/v2/browser-compiler/coffeescript.js')
@@ -19,12 +19,149 @@ html
     script(type="text/coffeescript").
       console.log "OK"
       
+      
   body
-    #tmp(onClick="add()") tmp
+    #tmp(onClick="add()" draggable="true") tmp
+    
+    
+    //-
+      script(type="text/coffeescript").
+        db = indexedDB.open "test", 7
+        console.log db
+        
+        db.addEventListener "success", (ev)->
+          console.log "success", ev, db.result
+          
+          console.log db.result.objectStoreNames
+          console.log db.result.version
+        
+        db.addEventListener "upgradeneeded", (ev)->
+          console.log "upgradeneeded!!!", ev
+          
+          db.result.createObjectStore "foobaa",
+            keyPath: "hoge"
+            autoIncrement: true
+          
+          console.log db.result
+        
+        
+        db.addEventListener "error", (ev)->
+          console.log ev, db.error
+          
+    
+    
+    //- slackのコメントを下からニコニコ風に流すのをsessionStorageで
+      style(type="text/css").
+        /* ニコメスタイル */
+        marquee{font-weight: bold;}
+        .ni{position: absolute}
+        
+      
+      script(type="text/coffeescript").
+        # ニコメ
+        tws = []
+        setInterval ->
+          fetch ".ap-northeast-1.compute.amazonaws.com/getsl/" + ""
+          .then (v)->
+            v.json().then (list)->
+              list.forEach (i)->
+                if sessionStorage.getItem(i._id) == null
+                  tws.push i.value
+                  sessionStorage.setItem i._id, i.value
+                
+              while tws.length > 0
+                aQueue.push tws.shift()
+          .catch (e)-> console.log "e", e
+        , 2000
+        
+        
+        # 全体の設定
+        b0 = document.getElementsByTagName('body')[0]
+        nArea = document.createElement("div")
+        mArea = document.createElement("div")
+        mArea.className = "ni"
+        nArea.appendChild mArea
+        b0.parentNode.insertBefore(nArea, b0)
+        
+        ncomflg = false
+        ncom = (com)->
+          return if com == "" or ncomflg
+          # ncomflg = true
+          ncomflg = false # 制限しない
+          mNew = document.createElement("marquee")
+          sNew = document.createElement("span")
+          sNew.innerText = com
+          mNew.appendChild sNew
+          
+          lane = (nArea.childElementCount-1) * 24
+          mArea.parentNode.insertBefore(mNew, mArea)
+          
+          mNew.loop = "1"
+          mNew.scrollDelay = "4000"
+          mNew.scrollAmount = b0.offsetWidth + sNew.offsetWidth
+          mNew.style = "position:fixed; bottom:" + lane + "px"
+          
+          setTimeout ->
+            mNew.remove()
+            ncomflg = false
+          , 4300
+        
+        # データがあったら流す
+        aQueue = []
+        poller = ->
+          if aQueue.length != 0 and ncomflg == false
+            ncom aQueue.shift()
+            
+            setTimeout ->
+              poller()
+            , 100
+          else
+            setTimeout ->
+              poller()
+            , 2000
+        
+        poller()
     
     
     
     
+    //-
+      window.addEventListener "message",(e)->
+        console.log e
+      
+      postMessage "death", "/"
+      
+      channel=new MessageChannel()
+      console.log channel.port1
+      console.log channel.port2
+    
+    //-
+      #ell(ondrop="drop(event)") ell
+      input(type="button" value="戻る" onclick="history.pushState(null, 'テスト', './tmp.js')")
+    
+      document.addEventListener "dragstart", (ev)->
+        ev.dataTransfer.setData "text/plain", ev.target.textContent
+      
+      
+      document.getElementById("ell").addEventListener "dragover", (e)->
+        e.dataTransfer.dropEffect = "copy"
+        e.preventDefault()
+      
+      @drop = (ev)->
+        # ev.target.textContent = ev.dataTransfer.getData("text/plain")
+        console.log ev.dataTransfer
+        
+        # data = ev.dataTransfer.getData("text/uri-list")
+        # if data
+        #   data.split(/\r\n+/).forEach (url)->
+        #     img = document.createElement "img"
+        #     img.src = url
+        #     ev.target.appendChild img
+        
+      stream= new EventSource("http://localhost")
+      console.log stream
+      stream.addEventListener "message", (e)->
+        console.log "e",e
     
     
     
