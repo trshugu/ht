@@ -24,6 +24,188 @@ html
     #tmp(onClick="add()" draggable="true") tmp
     
     
+    
+    //-
+      script(type="text/coffeescript").
+        window.AudioContext = window.AudioContext || window.webkitAudioContext
+        
+        # pitch
+        mtof = (midi)-> 440 * Math.pow(2, (midi - 69) / 12)
+        si = mtof(83) # →  987.7666025122483 「シ」の音
+        mi = mtof(88) # → 1318.5102276514797 「ミ」の音
+        
+        # duration
+        tdur = (tempo, length)-> (60 / tempo) * (4 / length)
+        t1 = tdur(180, 16) # → 0.08333333333333333 「テンポ180 16分音符」
+        t2 = tdur(180,  4) * 3 # → 1 「テンポ180  4分音符 x 3
+        
+        coin = (destination, playbackTime)->
+          audioContext = destination.context
+          oscillator = audioContext.createOscillator()
+          gain = audioContext.createGain()
+          
+          t0 = playbackTime
+          t1 = t0 + tdur(180, 16)
+          t2 = t0 + tdur(180, 4) * 3
+          si = mtof(83)
+          mi = mtof(88)
+          
+          oscillator.type = "square"
+          oscillator.frequency.setValueAtTime(si, t0)
+          oscillator.frequency.setValueAtTime(mi, t1)
+          oscillator.start(t0)
+          oscillator.stop(t2)
+          oscillator.connect(gain)
+          
+          gain.gain.setValueAtTime(0.5, t0)
+          gain.gain.setValueAtTime(0.5, t1)
+          gain.gain.linearRampToValueAtTime(0, t2)
+          gain.connect(destination)
+        
+        AudioContext = window.AudioContext
+        ac = new AudioContext()
+        document.getElementById("coin").onclick = -> coin(ac.destination, ac.currentTime)
+      
+      button#coin coin
+    
+    
+    
+    //- そもそもsafariが対応してないから音がでないという
+      style(type="text/css").
+        .flet{
+          width:80px; /*幅*/
+          height: 80px; /*高さ*/
+          border: 2px;
+          border-radius: 50%; /*角丸*/
+          display: inline-block;
+          text-align:center;
+          line-height: 80px;
+          background: skyblue;
+        }
+      
+      script(type="text/coffeescript").
+        
+        supportTouch = (window.ontouchstart == null)
+        # document.getElementById('state').innerHTML = supportTouch
+        
+        # if supportTouch
+        #   document.getElementById('state').innerHTML = "zero"
+        # else
+        #   document.getElementById('state').innerHTML = "one"
+        
+        document.getElementById('state').innerHTML = if supportTouch then "ttt" else "fff"
+        
+        pluck = if supportTouch then "touchstart" else "mousedown"
+        
+        notea = document.getElementById('notea')
+        
+        notea.addEventListener pluck, (event)->
+          console.log event
+          document.getElementById('playnow').innerHTML = event
+          key(55)
+        
+        # touchstart touchmove touchend
+        # event.preventDefault() # スクロール停止
+        # event.changedTouches[0].pageX # 複数の指向け
+        
+        AudioContext = window.AudioContext
+        ac = new AudioContext()
+        
+        masterGain = ac.createGain()
+        masterGain.gain.value = 0.05
+        masterGain.connect(ac.destination)
+        
+        note = (time, nn, dur)->
+          acgain = ac.createGain()
+          acgain.gain.value = 0.5
+          
+          osc = ac.createOscillator()
+          # osc.type = document.getElementById("osctype").selectedOptions[0].text
+          osc.type = "sawtooth"
+          
+          freq = 440 * Math.pow(2, (nn - 69) / 12)
+          osc.frequency.setValueAtTime freq, time
+          
+          osc.connect acgain
+          acgain.connect masterGain
+          
+          osc.start time
+          osc.stop  time + dur
+        
+        key = (root)->
+          document.getElementById("playnow").innerText = document.getElementById("playnow").innerText + root.toString()
+          note(ac.currentTime, root, 0.2)
+        
+      
+      
+      #playnow
+      #state
+      #notea.flet A
+    
+    
+    
+    //-
+      script(type="text/coffeescript").
+        el_hitarea = document.getElementById('hitarea')
+        el_eventname = document.getElementById('eventname')
+        el_x = document.getElementById('x')
+        el_y = document.getElementById('y')
+        
+        updateXY = (event)->
+          el_x.innerHTML = event.changedTouches[0].pageX
+          el_y.innerHTML = event.changedTouches[0].pageY
+        
+        updateEventname = (eventname)->
+          el_eventname.innerHTML = eventname
+        
+        
+        starte = (event)->
+          updateEventname('touchstart')
+          updateXY(event)
+          el_hitarea.style.backgroundColor = 'red'
+        
+        el_hitarea.addEventListener 'touchstart', starte
+        el_hitarea.addEventListener 'click', starte
+
+        notea = document.getElementById('notea')
+        notea.addEventListener 'touchstart', starte
+        notea.addEventListener 'click', starte
+
+        
+        el_hitarea.addEventListener 'touchmove', (event)->
+          event.preventDefault() # タッチによる画面スクロールを止める
+          updateEventname('touchmove')
+          updateXY(event)
+         
+        el_hitarea.addEventListener 'touchend', (event)->
+          updateEventname('touchend')
+          updateXY(event)
+          el_hitarea.style.backgroundColor = 'blue'
+      
+      #hitarea touuch
+      #eventname
+      #coords
+        | X:
+        span#x
+        | Y:
+        span#y
+      
+      style(type="text/css").
+        .flet{
+          width:80px; /*幅*/
+          height: 80px; /*高さ*/
+          border: 2px;
+          border-radius: 50%; /*角丸*/
+          display: inline-block;
+          text-align:center;
+          line-height: 80px;
+          background: skyblue;
+        }
+      
+      #notea.flet A
+    
+    
+    
     //- fiddle
       .div
         select#osctype
