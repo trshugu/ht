@@ -24,6 +24,70 @@ html
     #tmp(onClick="add()" draggable="true") tmp
     
     
+    //- 波形を得る
+      script(type="text/coffeescript").
+        AudioContext = window.AudioContext || window.webkitAudioContext
+        audioCtx = new AudioContext()
+        
+        analyser = audioCtx.createAnalyser()
+        analyser.fftSize = 2048
+        
+        canvas = document.getElementById('canvas')
+        canvas.width = 512
+        canvas.height = 288
+        
+        canvasCtx = canvas.getContext('2d')
+        canvasCtx.fillStyle = 'rgb(16, 16, 24)'
+        canvasCtx.lineWidth = 2
+        canvasCtx.strokeStyle = 'rgb(124, 224, 255)'
+        canvasCtx.fillRect(0, 0, canvas.width, canvas.height)
+        canvasCtx.beginPath()
+        canvasCtx.moveTo(0, canvas.height / 2)
+        canvasCtx.lineTo(canvas.width, canvas.height / 2)
+        canvasCtx.stroke()
+        
+        input = document.getElementById('file')
+        input.addEventListener 'change', ->
+          file = input.files[0]
+          fr = new FileReader()
+          fr.onload = ->
+            arrayBuffer = fr.result
+            decode(arrayBuffer)
+          
+          fr.readAsArrayBuffer(file)
+        
+        decode = (arrayBuffer)->
+          audioCtx.decodeAudioData arrayBuffer, (audioBuffer)->
+            source = audioCtx.createBufferSource()
+            source.buffer = audioBuffer
+            source.connect(audioCtx.destination)
+            source.connect(analyser)
+            source.start(0)
+            draw()
+        
+        draw = ->
+          dataArray = new Uint8Array(analyser.fftSize)
+          analyser.getByteTimeDomainData(dataArray)
+          sliceWidth = canvas.width / analyser.fftSize
+          canvasCtx.fillRect(0, 0, canvas.width, canvas.height)
+          canvasCtx.beginPath()
+          canvasCtx.moveTo(0, canvas.height / 2)
+          
+          [0...analyser.fftSize].forEach (i)->
+            x = sliceWidth * i
+            # dataArrayの中身は0から255の数値
+            v = dataArray[i] / 128
+            y = v * canvas.height / 2
+            canvasCtx.lineTo(x, y)
+          
+          canvasCtx.lineTo(canvas.width, canvas.height / 2)
+          canvasCtx.stroke()
+          
+          requestAnimationFrame(draw)
+      
+      input#file(type="file")
+      canvas#canvas
+    
     
     //-
       script(type="text/coffeescript").
