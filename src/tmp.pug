@@ -12,16 +12,62 @@ html
     //- script(type="text/javascript", src="tmp.js")
     link(href="tmp.css", rel="stylesheet")
     
-    script(src='https://cdn.rawgit.com/jashkenas/coffeescript/571e9df3/docs/v2/browser-compiler/coffeescript.js')
+    //- script(src='https://cdn.jsdelivr.net/npm/coffeescript@2.4.1/lib/coffeescript-browser-compiler-modern/coffeescript.js')
+    script(src='https://cdn.jsdelivr.net/npm/coffeescript@2.4.1/lib/coffeescript-browser-compiler-legacy/coffeescript.js')
     style(type="text/css")
     
     script(type="text/javascript")
     script(type="text/coffeescript").
       console.log "OK"
-      
-      
+    
+    
   body
-    #tmp(onClick="add()" draggable="true") tmp
+    #tmp(onClick="add()" draggable="true") 
+    
+    .div 今日の将軍 
+    
+    
+    
+    
+    
+    
+    
+    
+    //-
+      .battery.icon {
+        color: #000;
+        position: absolute;
+        margin-left: 2px;
+        margin-top: 6px;
+        width: 13px;
+        height: 7px;
+        border-radius: 2px;
+        border: solid 1px currentColor;
+      }
+
+      .battery.icon:before {
+        content: '';
+        position: absolute;
+        right: -3px;
+        top: 1px;
+        width: 2px;
+        height: 3px;
+        border-radius: 0 2px 2px 0;
+        border-top: solid 1px currentColor;
+        border-right: solid 1px currentColor;
+        border-bottom: solid 1px currentColor;
+      }
+
+      .battery.icon:after {
+        content: '';
+        position: absolute;
+        left: 1px;
+        top: 1px;
+        width: 8px;
+        height: 5px;
+        background-color: currentColor;
+      }
+      span.battery.icon
     
     
     //- 波形を得る
