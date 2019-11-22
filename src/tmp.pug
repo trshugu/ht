@@ -22,13 +22,155 @@ html
     
     
   body
-    #tmp(onClick="add()" draggable="true") 
+    #tmp(onClick="add()" draggable="true") tmp
     
-    .div 今日の将軍 
+    //-
+      script(type="text/coffeescript").
+        console.log "graph"
+        fun1 = (x)-> Math.sin(x)
+        fun2 = (x)-> Math.cos(3*x)
+        fun3 = (x)-> Math.sqrt(x*x*x+7)
+
+        draw = ->
+          canvas = document.getElementById "mathfun"
+          return if (null==canvas || !canvas.getContext)
+          
+          axes={}
+          ctx=canvas.getContext("2d");
+          axes.x0 = .5 + .5*canvas.width;  # x0 pixels from left to x=0
+          axes.y0 = .5 + .5*canvas.height; # y0 pixels from top to y=0
+          axes.scale = 40;                 # 40 pixels from x=0 to x=1
+          axes.doNegativeX = true;
+          
+          showAxes(ctx,axes)
+          funGraph(ctx,axes,fun1,"rgb(11,153,11)",1); 
+          funGraph(ctx,axes,fun2,"rgb(66,44,255)",2);
+          funGraph(ctx,axes,fun3,"rgb(66,255,44)",3);
+
+        funGraph = (ctx,axes,func,color,thick)->
+          xx = null
+          yy = null
+          dx=4
+          x0=axes.x0
+          y0=axes.y0
+          scale=axes.scale
+          iMax = Math.round((ctx.canvas.width-x0)/dx);
+          iMin = if axes.doNegativeX then Math.round(-x0/dx) else 0;
+          ctx.beginPath();
+          ctx.lineWidth = thick;
+          ctx.strokeStyle = color;
+          
+          [iMin..iMax].forEach (i)->
+            xx = dx*i; yy = scale*func(xx/scale);
+            if (i==iMin)
+              ctx.moveTo(x0+xx,y0-yy)
+            else
+              ctx.lineTo(x0+xx,y0-yy)
+          
+          ctx.stroke();
+        
+        showAxes = (ctx,axes)->
+          x0=axes.x0
+          w=ctx.canvas.width;
+          y0=axes.y0
+          h=ctx.canvas.height;
+          xmin = if axes.doNegativeX then 0 else x0
+          ctx.beginPath();
+          ctx.strokeStyle = "rgb(128,128,128)"; 
+          ctx.moveTo(xmin,y0)
+          ctx.lineTo(w,y0);  # X axis
+          ctx.moveTo(x0,0);  
+          ctx.lineTo(x0,h);  # Y axis
+          ctx.stroke();
+      
+        draw()
+      canvas#mathfun(width="502" height="308")
+    
+    
+    
+    //-
+      script(src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0")
+      canvas#chart
+      ds = []
+      test =
+        label: "テスト"
+        borderColor: "#800"
+        backgroundColor: "#800"
+        data:[
+          x:1, y:4
+        ,
+          x:2, y:5
+        ,
+          x:3, y:6
+        ]
+      
+      # ds.push test
+      
+      genfunc = -> [-4..4].map (x)-> {x:x, y:x*2}
+      func =
+        label: "func"
+        borderColor: "#880"
+        backgroundColor: "#880"
+        data: genfunc()
+      ds.push func
+      
+      secp256k1 = (x)-> Math.sqrt(x**3+7)
+      genecc = ->
+        res = []
+        [0..100].forEach (i)->
+          res.push
+            x: (i * 0.1)+(-2)
+            y: secp256k1((i * 0.1)+(-2))
+          res.push
+            x: (i * 0.1)+(-2)
+            y: -1 * (secp256k1((i * 0.1)+(-2)))
+        res
+
+
+      ecc =
+        label: "ecc"
+        borderColor: "#088"
+        backgroundColor: "#088"
+        data: genecc()
+      ds.push ecc
+      
+      new Chart document.getElementById('chart').getContext('2d'),
+        type: "scatter"
+        data:
+          datasets: ds
+        options: 
+          scales: 
+            xAxes: [
+              type: 'linear',
+              position: 'bottom'
+            ]
     
     
     
     
+    //-
+      canvas#stage
+      canvas = document.getElementById('stage').getContext('2d')
+      
+      mydata =
+        labels: ["１月", "２月", "３月", "４月", "５月", "６月", "７月"]
+        datasets: [
+          label: '数量'
+          hoverBackgroundColor: "rgba(255,99,132,0.3)"
+          data: [65, 59, 80, 81, 56, 55, 48]
+        ]
+      
+      options =
+        title:    
+          display: true
+          text: 'サンプルチャート'
+      
+      config =
+        type: 'line'
+        data: mydata
+        options: options
+      
+      chart = new Chart canvas, config
     
     
     
