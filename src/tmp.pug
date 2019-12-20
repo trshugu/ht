@@ -31,6 +31,16 @@ html
     
     
     
+    //-
+      script(src="https://www.biwascheme.org/release/biwascheme-0.6.9-min.js")
+      script(type="text/scheme").
+        (console-log "hell, world")
+      #bs-console
+      script(src="./biwascheme-0.6.9-min.js").
+        (print "hell print")
+        (console-log "hell, world")
+        (display "hell")
+    
     
     
     //- ●マテリアルデザイン
