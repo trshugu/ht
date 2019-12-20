@@ -24,22 +24,192 @@ html
   body
     #tmp(onClick="add()" draggable="true") tmp
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //- ●マテリアルデザイン
-    //- ・ボタンは影でうかせる
-    //- ・FABを配置する
+      style(type="text/css").
+        .fab {
+          width: 25px;
+          background-color: #888;
+          border: 10px solid;
+          border-color: #777;
+          border-radius: 25px;
+          display: inline-block;
+        }
+    
     //- ・FABを浮かせる
+      style(type="text/css").
+        .fab {
+          width: 25px;
+          background-color: #888;
+          border: 10px solid;
+          border-color: #777;
+          border-radius: 25px;
+          display: inline-block;
+          filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.4));
+        }
+    
+    //- ・FABを配置する
+      style(type="text/css").
+        .fab {
+          width: 25px;
+          background-color: #888;
+          border: 10px solid;
+          border-color: #777;
+          border-radius: 25px;
+          display: inline-block;
+          filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.4));
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+        }
+    
     //- ・FABはアクセントカラーで
-    //- ・顕色系カラーランダム選択
+      style(type="text/css").
+        .fab {
+          width: 25px;
+          background-color: #edf;
+          border: 10px solid;
+          border-color: #edf;
+          border-radius: 25px;
+          display: inline-block;
+          filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.4));
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+        }
+
+    //- ・画像
+      style(type="text/css").
+        .fab {
+          width: 25px;
+          height: 25px;
+          background-color: #edf;
+          border: 10px solid;
+          border-color: #edf;
+          border-radius: 25px;
+          display: inline-block;
+          filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.4));
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+          background-image: url(./pen.png);
+          background-repeat: no-repeat;
+          background-size: 20px;
+          background-position: center center;
+        }
     //- ・文字は黒系
     //- ・アクションを3～5つ
     //- ・ホバー/タップ時に影を大きく
+      meta(name="viewport" content="width=device-width,initial-scale=1")
+      style(type="text/css").
+        .fab {
+          width: 25px;
+          height: 25px;
+          background-color: #edf;
+          border: 10px solid;
+          border-color: #edf;
+          border-radius: 25px;
+          display: inline-block;
+          filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.4));
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+          background-image: url(./pen.png);
+          background-repeat: no-repeat;
+          background-size: 20px;
+          background-position: center center;
+          transition-duration:0.1s;
+        }
+
+        .fab:hover {
+          right: 11px;
+          bottom: 11px;
+          filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.4));
+        }
+
+        .fab:active {
+          right: 10px;
+          bottom: 10px;
+          filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.4));
+        }
+      
+        .fab:action {
+          right: 11px;
+          bottom: 11px;
+          filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.4));
+        }
+    
+    //- うめこみ
+      meta(name="viewport" content="width=device-width,initial-scale=1")
+      style(type="text/css").
+        .fab {
+          width: 25px;
+          height: 25px;
+          background-color: #edf;
+          border: 10px solid;
+          border-color: #edf;
+          border-radius: 25px;
+          display: inline-block;
+          filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.4));
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+          background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABs0lEQVQ4T5WTv4sTURRGz32ZhOD4E1GwEAQrjaBYKAjqYELiZBAtYifYCWrjn2BnIyKLWAl2NoJNimyyqGFZFcFSe/sVsXFJJPM+mTBZYths1tteznn3u3PH+I+q1+tHgyC4BVwC3jnnXtlO+DiODwEnnXPHgfPAVWAo6eFCQQY7524C9/LHloE9mUTSy20FM3AlF3wDlr3365I+zxVEUbQ/DMPrwAPgzEzUTPLce/96S0EURbvDMLySj30R2LVjQRzHe4G6md0FLphZeR7c6XTW/5mgVqvtK5VKTTPLFnYOKG0HZ71NQZIkB7z313L4rJkVJ7Ck38AH7/2LwWCw0u/3f016Y0G1Wj1YLpdv5JlPA4WplzckrZrZM+fc+3a7vTE9leVH0soznzKzzakkDYA1SUtBELydhccRGo1GJQiC+0ALyC5uUn+Aj5KeFgqFla3gsSCO42zjt82sIumImR0GUuBTmqZPisVidx48FiRJcifP/EPSZTNrSfou6XGapp1er5ctcG5Zs9l8BIyccyckHQO+Am9Go9Fat9v9uehnywSr2U1777vD4fDL9CdaBGf9v70GtJ6aYYqtAAAAAElFTkSuQmCC);
+          background-repeat: no-repeat;
+          background-size: 20px;
+          background-position: center center;
+          transition-duration:0.1s;
+        }
+
+        .fab:hover {
+          right: 11px;
+          bottom: 11px;
+          filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.4));
+        }
+
+        .fab:active {
+          right: 10px;
+          bottom: 10px;
+          filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.4));
+        }
+      
+        .fab:action {
+          right: 11px;
+          bottom: 11px;
+          filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.4));
+        }
+    
+      .fab
     
     
-    
-    
-    
-    
-    
+    //- dp
+      style(type="text/css").
+        .rem {
+          background-color:#efd;
+          width: 2rem;
+        }
+        
+        .em {
+          background-color:#fed;
+          width: 2em;
+        }
+        
+        .px {
+          background-color:#edf;
+          width: 32px;
+        }
+
+      .px sadf8pxで1emくらい
+      .em sadf
+      .rem sadf
     
     
     //-
