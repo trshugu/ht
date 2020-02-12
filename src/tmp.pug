@@ -26,10 +26,50 @@ html
     
     
     
-    
-    
-    
-    
+    //-
+      script(src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js")
+      script(type="text/coffeescript").
+        # delete Web3 if (window.web3 && window.web3.currentProvider && window.web3.currentProvider.isDapper)
+        # console.log "2", Web3
+        # web3 = new Web3 'http://localhost:8545'
+        # console.log "cp", new window.Web3()
+        # web3 = new window.Web3 'http://localhost:8545'
+        
+        # console.log web3
+        # web3.eth.personal.sign "datatosignnn", "0x3fc", "ppp", (e,d)->
+        #   console.log "e", e
+        #   console.log "res", d
+        # web3.eth.sign web3.utils.sha3("tessst"), "0x3fc"
+        # console.log "1", window.Web3.providers.HttpProvider
+        # web3 = new Web3(window.Web3.providers.HttpProvider)
+        # console.log "2", web3
+        # web3.eth.getAccounts()
+        # console.log web3.eth.getAccount()
+        
+        # web3.eth.getAccounts()
+        # .then (v)->
+        #   console.log v[2]
+        
+        ###
+        web3.eth.personal.sign("datatosignnn", "0x3fc", "ppp")
+        .then (sig)->
+          console.log sig
+          r = "0x" + sig.slice(2, 66)
+          s = "0x" + sig.slice(66, 130)
+          v = parseInt(sig.slice(130, 132), 16)
+          v += 27 if (v < 27)
+          v = "0x" + v.toString(16)
+          console.log "r",r
+          console.log "s",s
+          console.log "v",v
+        ###
+        
+        # web3 = new Web3 'http://localhost:8545'
+        # console.log web3.eth.accounts
+        console.log Web3
+      
+      
+      
     
     //-
       script(src="https://www.biwascheme.org/release/biwascheme-0.6.9-min.js")
@@ -656,109 +696,109 @@ html
     
 
     //- bass
-    .div
-      select#osctype
-        option sine
-        option square
-        option sawtooth
-        option triangle
-      span ←ctrlでもきりかえ
-    
-    #playnow
-    
-    
-    script(type="text/coffeescript").
-      AudioContext = window.AudioContext
-      ac = new AudioContext()
+      .div
+        select#osctype
+          option sine
+          option square
+          option sawtooth
+          option triangle
+        span ←ctrlでもきりかえ
       
-      masterGain = ac.createGain()
-      masterGain.gain.value = 0.05
-      masterGain.connect(ac.destination)
+      #playnow
       
-      note = (time, nn, dur)->
-        acgain = ac.createGain()
-        acgain.gain.value = 0.5
+      
+      script(type="text/coffeescript").
+        AudioContext = window.AudioContext
+        ac = new AudioContext()
         
-        osc = ac.createOscillator()
-        osc.type = document.getElementById("osctype").selectedOptions[0].text
+        masterGain = ac.createGain()
+        masterGain.gain.value = 0.05
+        masterGain.connect(ac.destination)
         
-        freq = 440 * Math.pow(2, (nn - 69) / 12)
-        osc.frequency.setValueAtTime freq, time
+        note = (time, nn, dur)->
+          acgain = ac.createGain()
+          acgain.gain.value = 0.5
+          
+          osc = ac.createOscillator()
+          osc.type = document.getElementById("osctype").selectedOptions[0].text
+          
+          freq = 440 * Math.pow(2, (nn - 69) / 12)
+          osc.frequency.setValueAtTime freq, time
+          
+          osc.connect acgain
+          acgain.connect masterGain
+          
+          osc.start time
+          osc.stop  time + dur
         
-        osc.connect acgain
-        acgain.connect masterGain
+        key = (root)->
+          document.getElementById("playnow").innerText = document.getElementById("playnow").innerText + root.toString()
+          note(ac.currentTime, root, 0.2)
         
-        osc.start time
-        osc.stop  time + dur
-      
-      key = (root)->
-        document.getElementById("playnow").innerText = document.getElementById("playnow").innerText + root.toString()
-        note(ac.currentTime, root, 0.2)
-      
-      
-      window.onkeydown = (e)->
-        console.log e
-        document.getElementById("playnow").innerText = e.key + ":" + e.code + ":" + e.keyCode + ":" + e.charCode + ":" + e.shiftKey
-        switch e.code
-          when "KeyZ" then key(49) # z e
-          when "KeyX" then key(50) # x f
-          when "KeyC" then key(51) # c f
-          when "KeyV" then key(52) # v g
-          when "KeyB" then key(53) # b g
-          when "KeyN" then key(54) # n a
-          when "KeyM" then key(55) # m a
-          when "Comma" then key(56) # , b
-          when "Period" then key(57) # . c
-          when "Slash" then key(58) # / c
-          when "IntlRo" then key(59) # \ d
-          when "ShiftRight" then key(60) # shiftR d
+        
+        window.onkeydown = (e)->
+          console.log e
+          document.getElementById("playnow").innerText = e.key + ":" + e.code + ":" + e.keyCode + ":" + e.charCode + ":" + e.shiftKey
+          switch e.code
+            when "KeyZ" then key(49) # z e
+            when "KeyX" then key(50) # x f
+            when "KeyC" then key(51) # c f
+            when "KeyV" then key(52) # v g
+            when "KeyB" then key(53) # b g
+            when "KeyN" then key(54) # n a
+            when "KeyM" then key(55) # m a
+            when "Comma" then key(56) # , b
+            when "Period" then key(57) # . c
+            when "Slash" then key(58) # / c
+            when "IntlRo" then key(59) # \ d
+            when "ShiftRight" then key(60) # shiftR d
 
-          when "KeyA" then key(54) # a a
-          when "KeyS" then key(55) # s a
-          when "KeyD" then key(56) # d b
-          when "KeyF" then key(57) # f c
-          when "KeyG" then key(58) # g c
-          when "KeyH" then key(59) # h d
-          when "KeyJ" then key(60) # j d
-          when "KeyK" then key(61) # k e
-          when "KeyL" then key(62) # l f
-          when "Semicolon" then key(63) # ; f
-          when "Quote" then key(64) # : g
-          when "Backslash" then key(65) # ] g
+            when "KeyA" then key(54) # a a
+            when "KeyS" then key(55) # s a
+            when "KeyD" then key(56) # d b
+            when "KeyF" then key(57) # f c
+            when "KeyG" then key(58) # g c
+            when "KeyH" then key(59) # h d
+            when "KeyJ" then key(60) # j d
+            when "KeyK" then key(61) # k e
+            when "KeyL" then key(62) # l f
+            when "Semicolon" then key(63) # ; f
+            when "Quote" then key(64) # : g
+            when "Backslash" then key(65) # ] g
 
-          when "KeyQ" then key(59) # q d
-          when "KeyW" then key(60) # w d
-          when "KeyE" then key(61) # e e
-          when "KeyR" then key(62) # r f
-          when "KeyT" then key(63) # t f
-          when "KeyY" then key(64) # y g
-          when "KeyU" then key(65) # u g
-          when "KeyI" then key(66) # i
-          when "KeyO" then key(67) # o
-          when "KeyP" then key(68) # p
-          when "BracketLeft" then key(69) # @
-          when "BracketRight" then key(70) # [
+            when "KeyQ" then key(59) # q d
+            when "KeyW" then key(60) # w d
+            when "KeyE" then key(61) # e e
+            when "KeyR" then key(62) # r f
+            when "KeyT" then key(63) # t f
+            when "KeyY" then key(64) # y g
+            when "KeyU" then key(65) # u g
+            when "KeyI" then key(66) # i
+            when "KeyO" then key(67) # o
+            when "KeyP" then key(68) # p
+            when "BracketLeft" then key(69) # @
+            when "BracketRight" then key(70) # [
 
-          when "Digit1" then key(64) # 1 g
-          when "Digit2" then key(65) # 2
-          when "Digit3" then key(66) # 3
-          when "Digit4" then key(67) # 4
-          when "Digit5" then key(68) # 5
-          when "Digit6" then key(69) # 6
-          when "Digit7" then key(70) # 7
-          when "Digit8" then key(71) # 8
-          when "Digit9" then key(72) # 9
-          when "Digit0" then key(73) # 0
-          when "Minus" then key(74) # -
-          when "Equal" then key(75) # ^
-          when "IntlYen" then key(76) # \
+            when "Digit1" then key(64) # 1 g
+            when "Digit2" then key(65) # 2
+            when "Digit3" then key(66) # 3
+            when "Digit4" then key(67) # 4
+            when "Digit5" then key(68) # 5
+            when "Digit6" then key(69) # 6
+            when "Digit7" then key(70) # 7
+            when "Digit8" then key(71) # 8
+            when "Digit9" then key(72) # 9
+            when "Digit0" then key(73) # 0
+            when "Minus" then key(74) # -
+            when "Equal" then key(75) # ^
+            when "IntlYen" then key(76) # \
 
-          when "ControlLeft"
-            console.log document.getElementById("osctype").selectedIndex
-            if document.getElementById("osctype").length  - 1 <= document.getElementById("osctype").selectedIndex
-              document.getElementById("osctype").selectedIndex = 0
-            else
-              document.getElementById("osctype").selectedIndex = document.getElementById("osctype").selectedIndex + 1
+            when "ControlLeft"
+              console.log document.getElementById("osctype").selectedIndex
+              if document.getElementById("osctype").length  - 1 <= document.getElementById("osctype").selectedIndex
+                document.getElementById("osctype").selectedIndex = 0
+              else
+                document.getElementById("osctype").selectedIndex = document.getElementById("osctype").selectedIndex + 1
     
     
     //- fiddle
