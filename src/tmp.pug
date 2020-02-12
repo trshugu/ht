@@ -27,6 +27,16 @@ html
     
     
     //-
+      script(type="text/coffeescript").
+        window.ethereum.enable()
+        .then (v)->
+          console.log v
+        .catch (e)->
+         console.log "e",e
+      
+    
+    
+    //-
       script(src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js")
       script(type="text/coffeescript").
         # delete Web3 if (window.web3 && window.web3.currentProvider && window.web3.currentProvider.isDapper)
