@@ -15,6 +15,6 @@
   },
   "dependencies": {
     "coffeescript": "^2.2.2",
-    "yarn": "^1.19.1"
+    "yarn": "^1.22.0"
   }
 }
